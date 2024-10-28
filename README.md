@@ -8,7 +8,7 @@ Team Members:
 GitHub Usernames:
 | Member  | GitHub usernames |
 | ------------- | ------------- |
-| Tanaya Datar  |@tanaya2026|
+| Tanaya Datar  |tanaya2026|
 | Cooper Bolinius  |cbolinius|
 | Alexander Pascalev  |a1exp4sc|
 | Jinbo Chang  |JinboChang|
