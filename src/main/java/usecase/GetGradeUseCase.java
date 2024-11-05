@@ -1,7 +1,7 @@
 package usecase;
 
 import api.GradeDataBase;
-import entity.Grade;
+import entity.User;
 
 /**
  * The class for the get grade usecase.
@@ -19,7 +19,7 @@ public final class GetGradeUseCase {
      * @param course The course (i.e., CSC207).
      * @return a grade object if successful.
      */
-    public Grade getGrade(String username, String course) {
+    public User getGrade(String username, String course) {
         return gradeDatabase.getGrade(username, course);
     }
 }
