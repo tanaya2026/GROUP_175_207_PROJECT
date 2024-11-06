@@ -2,7 +2,7 @@ package usecase;
 
 import api.GradeDataBase;
 import entity.Grade;
-import entity.Team;
+import entity.Availability;
 
 /**
  * GetTopGradeUseCase class.
@@ -22,7 +22,7 @@ public final class GetTopGradeUseCase {
     public float getTopGrade(String course) {
         // Call the API to get the usernames of all your team members
         float max = 0;
-        final Team team = gradeDataBase.getMyTeam();
+        final Availability team = gradeDataBase.getMyTeam();
         // Call the API to get all the grades for the course for all your team members
         for (String username : team.getMembers()) {
             // Call the API to get the grade for the course for the username

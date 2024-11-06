@@ -1,6 +1,6 @@
 import api.GradeDataBase;
 import entity.Grade;
-import entity.Team;
+import entity.Availability;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -63,7 +63,7 @@ public class GetAverageGradeUseCaseMockitoTest {
                 .grade(89)
                 .build();
 
-        Team expectedTeam = Team.builder()
+        Availability expectedTeam = Availability.builder()
                 .name("team1")
                 .members(new String[]{"t1chenpa", "t2chenpa"})
                 .build();
