@@ -46,12 +46,14 @@ public class User {
             lstCourses = sb.toString();
         }
 
-        return "User {\n"
-                + "  username: " + username + ",\n"
-                + "  email: " + email + ",\n"
-                + "  courses: " + lstCourses + ",\n"
-                + "  program: " + program + ",\n"
-                + "  bio: " + bio + ",\n"
+        final String newLine = "," + System.lineSeparator();
+
+        return "User {" + System.lineSeparator()
+                + "  username: " + username + newLine
+                + "  email: " + email + newLine
+                + "  courses: " + lstCourses + newLine
+                + "  program: " + program + newLine
+                + "  bio: " + bio + newLine
                 + "  availability: " + availability.toString() + '}';
     }
 
