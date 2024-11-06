@@ -1,7 +1,8 @@
 package entity;
 
-import javax.management.relation.Role;
 import java.util.List;
+
+// import javax.management.relation.Role;
 
 /**
  * Represents a user - a student looking for study buddies.
@@ -10,20 +11,22 @@ public class User {
 
     // Refer to the API documentation for the meaning of these fields.
     private final String username;
-    private final String email;
-    private final String password;
-    private final List<String> courses;
-    private final String program;
-    private final String bio;
+    private String email;
+    private String password;
+    private List<Course> courses;
+    private String program;
+    private String bio;
+    private Availability availability;
 
-
-    public User(String username, String email, String password, List<String> courses, String program, String bio) {
+    public User(String username, String email, String password, List<Course> courses,
+                String program, String bio, Availability availability) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.courses = courses;
         this.program = program;
         this.bio = bio;
+        this.availability = availability;
     }
 
     @Override
@@ -35,10 +38,10 @@ public class User {
         else {
             StringBuilder sb = new StringBuilder();
             String prefix = "";
-            for (String course : courses) {
+            for (Course course : courses) {
                 sb.append(prefix);
                 prefix = ", ";
-                sb.append(course);
+                sb.append(course.getCourseCode());
             }
             lstCourses = sb.toString();
         }
@@ -48,7 +51,8 @@ public class User {
                 + "  email: " + email + ",\n"
                 + "  courses: " + lstCourses + ",\n"
                 + "  program: " + program + ",\n"
-                + "  bio: " + bio + '}';
+                + "  bio: " + bio + ",\n"
+                + "  availability: " + availability.toString() + '}';
     }
 
     /**
@@ -60,70 +64,116 @@ public class User {
     }
 
     /**
-     * Returns the course of the grade.
-     * @return the course of the grade.
+     * Returns the email of the user.
+     * @return the email of the user.
      */
-    public String getCourse() {
-        return course;
-    }
-
-
-    /**
-     * Returns a new GradeBuilder instance.
-     * @return a new GradeBuilder instance.
-     */
-    public static GradeBuilder builder() {
-        return new GradeBuilder();
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Represents a builder for creating instances of a Grade.
+     * Sets the email of the user.
+     * @param email the email of the user.
      */
-    public static class GradeBuilder {
-        private String username;
-        private String course;
-        private int grade;
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        GradeBuilder() {
-        }
+    // TO BE REMOVED AFTER USER DB IMPLEMENTED
+    /**
+     * Returns the password of the user.
+     * @return the password of the user.
+     */
+    public String getPassword() {
+        return password;
+    }
 
-        /**
-         * Sets the username of the student.
-         * @param usernameInput the username of the student.
-         * @return the GradeBuilder instance.
-         */
-        public GradeBuilder username(String usernameInput) {
-            this.username = usernameInput;
-            return this;
-        }
+    /**
+     * Sets the password of the user.
+     * @param password the email of the user.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        /**
-         * Sets the course of the grade.
-         * @param courseInput the course of the grade.
-         * @return the GradeBuilder instance.
-         */
-        public GradeBuilder course(String courseInput) {
-            this.course = courseInput;
-            return this;
-        }
+    /**
+     * Returns the courses the user is enrolled in.
+     * @return the list of Courses.
+     */
+    public List<Course> getCourses() {
+        return courses;
+    }
 
-        /**
-         * Sets the grade of the student.
-         * @param gradeInput the grade of the student.
-         * @return the GradeBuilder instance.
-         */
-        public GradeBuilder grade(int gradeInput) {
-            this.grade = gradeInput;
-            return this;
+    /**
+     * Adds the course to the user's courses if it is not already added.
+     * @param course the course being added to the user.
+     */
+    public void addCourse(Course course) {
+        if (!courses.contains(course)) {
+            courses.add(course);
         }
+    }
 
-        /**
-         * Builds a new Grade instance.
-         * @return a new Grade instance.
-         */
-        public Grade build() {
-            return new Grade(username, course, grade);
+    /**
+     * Adds these courses to the user's courses if they are not already added.
+     * @param coursesToAdd the list of courses being added to the user.
+     */
+    public void addCourses(List<Course> coursesToAdd) {
+        for (Course course : coursesToAdd) {
+            addCourse(course);
         }
+    }
+
+    /**
+     * Removes the course from the user's courses if the user has this course.
+     * @param course the course being added to the user.
+     */
+    public void removeCourse(Course course) {
+        if (courses.contains(course)) {
+            courses.remove(course);
+        }
+    }
+
+    /**
+     * Removes these courses from the user's courses if the user has these courses.
+     * @param coursesToRemove the list of courses being added to the user.
+     */
+    public void removeCourses(List<Course> coursesToRemove) {
+        for (Course course : coursesToRemove) {
+            removeCourse(course);
+        }
+    }
+
+    /**
+     * Returns the program of the user.
+     * @return the program of the user.
+     */
+    public String getProgram() {
+        return program;
+    }
+
+    /**
+     * Sets the program of the user.
+     * @param program the bio of the user.
+     */
+    public void setProgram(String program) {
+        this.program = program;
+    }
+
+    /**
+     * Returns the bio of the user.
+     * @return the bio of the user.
+     */
+    public String getBio() {
+        return bio;
+    }
+
+    /**
+     * Sets the bio of the user.
+     * @param bio the bio of the user.
+     */
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
 }
