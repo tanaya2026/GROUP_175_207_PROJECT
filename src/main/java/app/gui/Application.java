@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 
 import api.MongoGradeDataBase;
 import app.Config;
-import entity.Grade;
+import entity.User;
 import usecase.*;
 
 /**
@@ -130,7 +130,7 @@ public class Application {
             final String username = usernameField.getText();
             final String course = courseField.getText();
             try {
-                final Grade grade = getGradeUseCase.getGrade(username, course);
+                // final Grade grade = getGradeUseCase.getGrade(username, course);
                 JOptionPane.showMessageDialog(jFrame, String.format("Grade: %d", grade.getGrade()));
             }
             catch (Exception ex) {

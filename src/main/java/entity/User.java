@@ -1,26 +1,54 @@
 package entity;
 
+import javax.management.relation.Role;
+import java.util.List;
+
 /**
- * Represents a grade for a student in a course.
+ * Represents a user - a student looking for study buddies.
  */
-public class Grade {
+public class User {
 
     // Refer to the API documentation for the meaning of these fields.
     private final String username;
-    private final String course;
-    private final int grade;
+    private final String email;
+    private final String password;
+    private final List<String> courses;
+    private final String program;
+    private final String bio;
 
-    public Grade(String username, String course, int grade) {
+
+    public User(String username, String email, String password, List<String> courses, String program, String bio) {
         this.username = username;
-        this.course = course;
-        this.grade = grade;
+        this.email = email;
+        this.password = password;
+        this.courses = courses;
+        this.program = program;
+        this.bio = bio;
     }
 
     @Override
     public String toString() {
-        return "Grade{" + "username='" + username + '\''
-                + ", course='" + course + '\''
-                + ", grade=" + grade + '}';
+        String lstCourses;
+        if (courses.isEmpty()) {
+            lstCourses = "No courses added";
+        }
+        else {
+            StringBuilder sb = new StringBuilder();
+            String prefix = "";
+            for (String course : courses) {
+                sb.append(prefix);
+                prefix = ", ";
+                sb.append(course);
+            }
+            lstCourses = sb.toString();
+        }
+
+        return "User {\n"
+                + "  username: " + username + ",\n"
+                + "  email: " + email + ",\n"
+                + "  courses: " + lstCourses + ",\n"
+                + "  program: " + program + ",\n"
+                + "  bio: " + bio + '}';
     }
 
     /**
@@ -39,13 +67,6 @@ public class Grade {
         return course;
     }
 
-    /**
-     * Returns the grade of the student.
-     * @return the grade of the student.
-     */
-    public int getGrade() {
-        return grade;
-    }
 
     /**
      * Returns a new GradeBuilder instance.
