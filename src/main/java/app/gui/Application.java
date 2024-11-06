@@ -84,7 +84,7 @@ public class Application {
             final JButton joinTeamButton = new JButton("Join a team");
             joinTeamButton.addActionListener(event -> cardLayout.show(cardPanel, "JoinTeamCard"));
 
-            final JButton manageTeamButton = new JButton("My Team");
+            final JButton manageTeamButton = new JButton("My Availability");
             manageTeamButton.addActionListener(event -> cardLayout.show(cardPanel, "ManageTeamCard"));
 
             final JPanel buttonPanel = new JPanel();
@@ -193,7 +193,7 @@ public class Application {
 
             try {
                 formTeamUseCase.formTeam(name);
-                JOptionPane.showMessageDialog(jFrame, "Team formed!");
+                JOptionPane.showMessageDialog(jFrame, "Availability formed!");
                 nameField.setText("");
             }
             catch (RuntimeException ex) {
@@ -244,7 +244,7 @@ public class Application {
         final JButton getAverageButton = new JButton("Get Average Grade");
         final JButton getTopButton = new JButton("Get Top Grade");
 
-        final JButton leaveTeamButton = new JButton("Leave Team");
+        final JButton leaveTeamButton = new JButton("Leave Availability");
         final JLabel resultLabel = new JLabel();
 
         getAverageButton.addActionListener(event -> {

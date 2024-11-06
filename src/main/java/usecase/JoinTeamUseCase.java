@@ -1,7 +1,7 @@
 package usecase;
 
 import api.GradeDataBase;
-import entity.Team;
+import entity.Availability;
 
 /**
  * JoinTeamUseCase class.
@@ -18,7 +18,7 @@ public final class JoinTeamUseCase {
      * @param name The name of the team.
      * @return The team that the student joined.
      */
-    public Team joinTeam(String name) {
+    public Availability joinTeam(String name) {
         return gradeDataBase.joinTeam(name);
     }
 }

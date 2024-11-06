@@ -1,19 +1,5 @@
 package api;
 
-import java.io.IOException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import entity.User;
-import entity.Team;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 /**
  * MongoGradeDataBase class.
  */
@@ -143,7 +129,7 @@ public class APIDataBase implements StudyBuddyDataBase {
 //    }
 
 //    @Override
-//    public Team formTeam(String name) throws JSONException {
+//    public Availability formTeam(String name) throws JSONException {
 //        final OkHttpClient client = new OkHttpClient().newBuilder()
 //                .build();
 //        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
@@ -169,7 +155,7 @@ public class APIDataBase implements StudyBuddyDataBase {
 //                    members[i] = membersArray.getString(i);
 //                }
 //
-//                return Team.builder()
+//                return Availability.builder()
 //                        .name(team.getString(NAME))
 //                        .members(members)
 //                        .build();
@@ -184,7 +170,7 @@ public class APIDataBase implements StudyBuddyDataBase {
 //    }
 
 //    @Override
-//    public Team joinTeam(String name) throws JSONException {
+//    public Availability joinTeam(String name) throws JSONException {
 //        final OkHttpClient client = new OkHttpClient().newBuilder()
 //                .build();
 //        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
@@ -242,11 +228,10 @@ public class APIDataBase implements StudyBuddyDataBase {
 //    }
 
 //    @Override
-//    // TODO Task 3b: Implement this method
 //    //       Hint: Read the Grade API documentation for getMyTeam (link below) and refer to the above similar
 //    //             methods to help you write this code (copy-and-paste + edit as needed).
 //    //             https://www.postman.com/cloudy-astronaut-813156/csc207-grade-apis-demo/folder/isr2ymn/get-my-team
-//    public Team getMyTeam() {
+//    public Availability getMyTeam() {
 //        final OkHttpClient client = new OkHttpClient().newBuilder()
 //                .build();
 //        final Request request = new Request.Builder()
@@ -268,7 +253,7 @@ public class APIDataBase implements StudyBuddyDataBase {
 //                    members[i] = membersArray.getString(i);
 //                }
 //
-//                return Team.builder()
+//                return Availability.builder()
 //                        .name(team.getString(NAME))
 //                        .members(members)
 //                        .build();

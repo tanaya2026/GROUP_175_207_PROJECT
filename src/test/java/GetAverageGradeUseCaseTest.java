@@ -1,10 +1,10 @@
 import api.GradeDataBase;
+import entity.Availability;
 import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usecase.GetAverageGradeUseCase;
 import entity.Grade;
-import entity.Team;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -108,18 +108,18 @@ public class GetAverageGradeUseCaseTest {
         }
 
         @Override
-        public Team formTeam(String name) throws JSONException {
+        public Availability formTeam(String name) throws JSONException {
             return null;
         }
 
         @Override
-        public Team joinTeam(String name) throws JSONException {
+        public Availability joinTeam(String name) throws JSONException {
             return null;
         }
 
         @Override
-        public Team getMyTeam() {
-            return Team.builder()
+        public Availability getMyTeam() {
+            return Availability.builder()
                     .name("team1")
                     .members(new String[]{"t1chenpa", "t2chenpa"})
                     .build();

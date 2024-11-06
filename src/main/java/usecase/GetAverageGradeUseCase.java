@@ -2,7 +2,7 @@ package usecase;
 
 import api.GradeDataBase;
 import entity.Grade;
-import entity.Team;
+import entity.Availability;
 
 /**
  * GetAverageGradeUseCase class.
@@ -23,7 +23,7 @@ public final class GetAverageGradeUseCase {
         // Call the API to get usernames of all your team members
         float sum = 0;
         int count = 0;
-        final Team team = gradeDataBase.getMyTeam();
+        final Availability team = gradeDataBase.getMyTeam();
         // Call the API to get all the grades for the course for all your team members
 
         for (String user : team.getMembers()) {
