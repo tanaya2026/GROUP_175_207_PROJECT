@@ -2,8 +2,6 @@ package entity;
 
 import java.util.List;
 
-// import javax.management.relation.Role;
-
 /**
  * Represents a user - a student looking for study buddies.
  */
@@ -13,20 +11,22 @@ public class User {
     private final String username;
     private String email;
     private String password;
+    private String name;
     private List<Course> courses;
     private String program;
     private String bio;
     private Availability availability;
 
-    public User(String username, String email, String password, List<Course> courses,
-                String program, String bio, Availability availability) {
+    public User(String username, String email, String password, String name, List<Course> courses,
+                String program, String bio) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.name = name;
         this.courses = courses;
         this.program = program;
         this.bio = bio;
-        this.availability = availability;
+        this.availability = null;
     }
 
     @Override
@@ -96,6 +96,22 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Returns the name of the user.
+     * @return the name of the user.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the user.
+     * @param name the name of the user.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
