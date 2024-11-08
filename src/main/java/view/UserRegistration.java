@@ -1,3 +1,7 @@
+package view;
+
+import entity.User;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,7 +38,10 @@ public class UserRegistration extends JFrame {
         JLabel passwordLabel = new JLabel("Password:");
         JTextField passwordField = new JTextField();
 
-        JLabel coursesLabel = new JLabel("Courses (comma-separated):");
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField();
+
+        JLabel coursesLabel = new JLabel("Courses (comma-separated, no spaces):");
         JTextField coursesField = new JTextField();
 
         JLabel programLabel = new JLabel("Program:");
@@ -55,6 +62,8 @@ public class UserRegistration extends JFrame {
         panel.add(emailField);
         panel.add(passwordLabel);
         panel.add(passwordField);
+        panel.add(nameLabel);
+        panel.add(nameField);
         panel.add(coursesLabel);
         panel.add(coursesField);
         panel.add(programLabel);
@@ -74,11 +83,11 @@ public class UserRegistration extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Parse the courses input
                 String coursesInput = coursesField.getText();
-                List<Course> courses = new ArrayList<>();
+                List<entity.Course> courses = new ArrayList<>();
                 if (!coursesInput.isEmpty()) {
                     List<String> courseCodes = Arrays.asList(coursesInput.split(","));
                     for (String code : courseCodes) {
-                        courses.add(new Course(code.trim()));
+                        courses.add(new entity.Course(code.trim(), "description"));
                     }
                 }
 
@@ -87,10 +96,11 @@ public class UserRegistration extends JFrame {
                         usernameField.getText(),
                         emailField.getText(),
                         passwordField.getText(),
+                        nameField.getText(),
                         courses,
                         programField.getText(),
                         bioField.getText(),
-                        new Availability(availabilityField.getText())
+                        availabilityField.getText()
                 );
 
                 // Display confirmation message
