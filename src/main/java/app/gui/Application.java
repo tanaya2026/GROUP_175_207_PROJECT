@@ -2,22 +2,15 @@ package app.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import api.SlotifyDataBase;
 import app.Config;
-import entity.User;
-import usecase.*;
+import use_case.*;
 
 /**
  * GUI class to run the GUI for the Grade App.
