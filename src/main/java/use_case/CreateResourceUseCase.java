@@ -1,4 +1,4 @@
-package usecase;
+package use_case;
 
 import entity.User;
 import org.json.JSONException;
