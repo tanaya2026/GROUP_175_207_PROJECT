@@ -1,13 +1,13 @@
 package app;
 
 import api.SlotifyDataBase;
-//import usecase.FormTeamUseCase;
-//import usecase.GetAverageGradeUseCase;
-//import usecase.GetGradeUseCase;
-//import usecase.GetTopGradeUseCase;
-//import usecase.JoinTeamUseCase;
-//import usecase.LeaveTeamUseCase;
-import usecase.CreateResourceUseCase;
+//import use_case.FormTeamUseCase;
+//import use_case.GetAverageGradeUseCase;
+//import use_case.GetGradeUseCase;
+//import use_case.GetTopGradeUseCase;
+//import use_case.JoinTeamUseCase;
+//import use_case.LeaveTeamUseCase;
+import use_case.CreateResourceUseCase;
 
 /**
  * Config class to provide use cases with the necessary dependencies.

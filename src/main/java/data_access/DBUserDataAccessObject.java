@@ -9,9 +9,9 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import usecase.change_password.ChangePasswordUserDataAccessInterface;
-import usecase.login.LoginUserDataAccessInterface;
-import usecase.signup.SignupUserDataAccessInterface;
+import use_case.change_password.ChangePasswordUserDataAccessInterface;
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
