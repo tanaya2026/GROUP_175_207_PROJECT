@@ -15,10 +15,11 @@ public class User {
     private List<Course> courses;
     private String program;
     private String bio;
-    private Availability availability;
+    // private Availability availability;
+    private String availability;
 
     public User(String username, String email, String password, String name, List<Course> courses,
-                String program, String bio) {
+                String program, String bio, String availability) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -26,7 +27,7 @@ public class User {
         this.courses = courses;
         this.program = program;
         this.bio = bio;
-        this.availability = null;
+        this.availability = availability;
     }
 
     @Override
