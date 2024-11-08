@@ -3,7 +3,7 @@
 //import org.json.JSONException;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
-//import usecase.GetAverageGradeUseCase;
+//import use_case.GetAverageGradeUseCase;
 //import entity.Grade;
 //
 //import static org.junit.jupiter.api.Assertions.*;
