@@ -2,13 +2,8 @@ package entity;
 
 import java.util.Map;
 
-/**
- * Represents the availability of a user.
- * This class provides a builder for creating instances of Availability.
- */
 public class Availability {
 
-    // Refer to the API documentation for the meaning of these fields.
     private Map<Timeslot, Boolean> availability;
 
     public Availability(Map<Timeslot, Boolean> availability) {
@@ -17,7 +12,14 @@ public class Availability {
 
     @Override
     public String toString() {
-        return "Availability{" + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Availability{");
+        for (Map.Entry<Timeslot, Boolean> entry : availability.entrySet()) {
+            Timeslot timeslot = entry.getKey();
+            Boolean isAvailable = entry.getValue();
+            sb.append("\n  ").append(timeslot.toString()).append(": ").append(isAvailable ? "Available" : "Unavailable");
+        }
+        sb.append("\n}");
+        return sb.toString();
     }
-
 }
