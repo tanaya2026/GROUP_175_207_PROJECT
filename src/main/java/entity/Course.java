@@ -6,11 +6,9 @@ package entity;
 public class Course {
 
     private String courseCode;
-    private String courseName;
 
     public Course(String courseCode, String courseName) {
         this.courseCode = courseCode;
-        this.courseName = courseName;
     }
 
     /**
@@ -19,13 +17,5 @@ public class Course {
      */
     public String getCourseCode() {
         return courseCode;
-    }
-
-    /**
-     * Returns the name of the course, e.g. "Software Design".
-     * @return the course name.
-     */
-    public String getCourseName() {
-        return courseName;
     }
 }
