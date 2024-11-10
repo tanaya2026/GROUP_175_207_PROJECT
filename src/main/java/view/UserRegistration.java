@@ -1,4 +1,4 @@
-package app.gui;
+package view;
 
 import entity.Availability;
 import entity.Course;
