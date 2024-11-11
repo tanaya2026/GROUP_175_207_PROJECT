@@ -43,6 +43,9 @@ public class UserRegistration extends JFrame {
         JLabel bioLabel = new JLabel("Bio:");
         JTextField bioField = new JTextField();
 
+        JLabel genLabel = new JLabel("Gender(female,male,other):");
+        JTextField genField = new JTextField();
+
         JLabel coursesLabel = new JLabel("Courses (comma-separated):");
         JTextField coursesField = new JTextField();
 
@@ -68,14 +71,16 @@ public class UserRegistration extends JFrame {
         // Add components to the main panel
         panel.add(usernameLabel);
         panel.add(usernameField);
-        panel.add(emailLabel);
-        panel.add(emailField);
         panel.add(passwordLabel);
         panel.add(passwordField);
+        panel.add(emailLabel);
+        panel.add(emailField);
         panel.add(programLabel);
         panel.add(programField);
         panel.add(bioLabel);
         panel.add(bioField);
+        panel.add(genLabel);
+        panel.add(genField);
         panel.add(coursesLabel);
         panel.add(coursesField);
         panel.add(availabilityLabel);

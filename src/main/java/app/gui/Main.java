@@ -1,6 +1,7 @@
 package app.gui;
 
-import view.RegisterView;
+import view.OpeningPage;
+import view.UserRegistration;
 
 /**
  * The Main class of our application.
@@ -12,7 +13,7 @@ public class Main {
      * @param args unused arguments
      */
     public static void main(String[] args) {
-        RegisterView.main(args);
+        OpeningPage.main(args);
 
     }
 
