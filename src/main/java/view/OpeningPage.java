@@ -1,19 +1,15 @@
 package view;
 
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+import javax.swing.*;
 
 /**
  * The View for when the user is creating an account into the program.
  */
-public class RegisterView {
+public class OpeningPage {
     private static final int WIDTH_FRAME = 1000;
     private static final int HEIGHT_FRAME = 300;
 
@@ -35,14 +31,25 @@ public class RegisterView {
                         + "performance of our users.", JLabel.CENTER);
         JLabel empties = new JLabel("\n", JLabel.CENTER);
 
-        JButton button = new JButton("Create an Account");
+        JButton registerButton = new JButton("Create an Account");
+        JLabel login = new JLabel("Login", JLabel.CENTER);
+        JLabel usernameLabel = new JLabel("Username:");
+        JTextField usernameField = new JTextField();
+
+        JLabel passwordLabel = new JLabel("Password:");
+        JTextField passwordField = new JTextField();
 
         panel.add(label1);
         panel.add(empty);
         panel.add(label2);
         panel.add(label3);
         panel.add(empties);
-        panel.add(button);
+        panel.add(registerButton);
+        panel.add(login);
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setSize(WIDTH_FRAME, HEIGHT_FRAME);
