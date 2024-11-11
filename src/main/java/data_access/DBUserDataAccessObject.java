@@ -106,7 +106,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
 
         // Convert availability to JSON array
         JSONArray availabilityArray = new JSONArray();
-        for (Map.Entry<Timeslot, Boolean> entry : user.getAvailability().getAvailability().entrySet()) {
+        for (Map.Entry<Timeslot, Boolean> entry : user.getAvailability().entrySet()) {
             JSONObject timeslotJSON = new JSONObject();
             Timeslot timeslot = entry.getKey();
             timeslotJSON.put(DAY, timeslot.getDay()); // Get the day from Timeslot
