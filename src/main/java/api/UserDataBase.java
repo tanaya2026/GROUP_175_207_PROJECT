@@ -1,25 +1,9 @@
 package api;
 
-import java.io.IOException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import entity.Availability;
-import entity.Course;
-import entity.Timeslot;
-import entity.User;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 /**
  * UserDB class.
  */
-public class UserDataBase implements StudyBuddyDataBase {
+public class UserDataBase {
     // Defining some constants.
     private static final String API_URL = "http://vm003.teach.cs.toronto.edu:20112";
     private static final String CONTENT_TYPE = "Content-Type";
