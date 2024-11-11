@@ -3,25 +3,25 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
-public class PotentialMatches extends JPanel {
-    public PotentialMatches() {
+public class NoMatchesFound extends JPanel {
+    public NoMatchesFound() {
         // Set the layout for the panel
         setLayout(new BorderLayout());
 
         // Create a label for the title
-        JLabel titleLabel = new JLabel("Potential Matches", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("No users found in matching courses", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create a panel for the match buttons
+        // Create a panel for the main buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
 
-        // Create two match buttons with different names
-        JButton button1 = new JButton("Match 1");
-        JButton button2 = new JButton("Match 2");
+        // Create two main buttons with different names
+        JButton button1 = new JButton("Match based on shared program");
+        JButton button2 = new JButton("Match based on shared availability");
 
-        // Add match buttons to the button panel
+        // Add buttons to the button panel
         buttonPanel.add(button1);
         buttonPanel.add(button2);
 
@@ -37,10 +37,10 @@ public class PotentialMatches extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Match Finder");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
+        frame.setSize(350, 200);
 
-        // Add PotentialMatches panel to the frame
-        frame.add(new PotentialMatches());
+        // Add NoMatchesFound panel to the frame
+        frame.add(new NoMatchesFound());
 
         // Display the frame
         frame.setVisible(true);
