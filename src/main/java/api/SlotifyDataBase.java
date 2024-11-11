@@ -2,13 +2,9 @@ package api;
 
 import java.io.IOException;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.Availability;
-import entity.Course;
-import entity.Timeslot;
 import entity.User;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -19,7 +15,7 @@ import okhttp3.Response;
 /**
  * UserDB class.
  */
-public class SlotifyDataBase implements StudyBuddyDataBase {
+public class SlotifyDataBase {
     // Defining some constants.
     private static final String API_URL = "https://api.slotify.ca/v1";
     private static final String CONTENT_TYPE = "Content-Type";
