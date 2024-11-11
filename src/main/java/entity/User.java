@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a user - a student looking for study buddies.
@@ -15,7 +16,9 @@ public class User {
     private List<Course> courses;
     private String program;
     private String bio;
-    // private Availability availability;
+    private String schedulerID;
+
+    // temp solution for demo
     private String availability;
 
     public User(String username, String email, String password, String name, List<Course> courses,
@@ -27,6 +30,9 @@ public class User {
         this.courses = courses;
         this.program = program;
         this.bio = bio;
+        this.schedulerID = "default";
+
+        //temp
         this.availability = availability;
     }
 
@@ -193,6 +199,31 @@ public class User {
      */
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    /**
+     * Returns the schedulerID of the user's availability.
+     * @return the schedulerID of the user's availability.
+     */
+    public String getSchedulerID() {
+        return schedulerID;
+    }
+
+    /**
+     * Sets the schedulerID of the user's availability.
+     * @param schedulerID the schedulerID of the user's availability.
+     */
+    public void setSchedulerID(String schedulerID) {
+        this.schedulerID = schedulerID;
+    }
+
+    /**
+     * Returns the availability of the user based on the user's schedulerID.
+     * @return the Availability object representing the user's availability.
+     */
+    public Map<Timeslot, Boolean> getAvailability() {
+        Availability availability = new Availability(schedulerID);
+        return availability.getAvailability();
     }
 
 }

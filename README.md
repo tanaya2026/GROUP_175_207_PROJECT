@@ -25,7 +25,7 @@ Cooper:
 I want to be able to see the profiles of potential matches based on common courses and availability.
 
 Jinbo:
-I want to be able to schedule a new study session with my potential study buddy matches.
+I want to be able to edit my profile including name, availability, and bio.
 
 Alex:
 If no matches are found for students taking the same courses I am who are available at times that work with my schedule, or if I don’t want to study with any of my matches, then I want to be given options to expand my search to find other study buddies, such as others in my same program, or simply with others sharing the same availability.
