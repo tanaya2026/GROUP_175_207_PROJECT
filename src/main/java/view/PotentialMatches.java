@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.*;
-
 import javax.swing.*;
 
 public class PotentialMatches extends JPanel {
@@ -14,7 +13,6 @@ public class PotentialMatches extends JPanel {
     public PotentialMatches() {
         // Set the layout for the panel
         setLayout(new BorderLayout());
-
         // Create a label for the title
         JLabel titleLabel = new JLabel("Potential Matches", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, TITLE_FONT_SIZE));
@@ -46,6 +44,10 @@ public class PotentialMatches extends JPanel {
 
         // Add potential matches button panel to the main panel
         add(buttonPanel, BorderLayout.CENTER);
+
+        // Create a sign-out button and add it to the bottom
+        JButton signOutButton = new JButton("Sign Out");
+        add(signOutButton, BorderLayout.SOUTH);
     }
 
     // Main method to display the panel in a frame
@@ -54,7 +56,7 @@ public class PotentialMatches extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
-        // Add PotentialMatchesPanel to the frame
+        // Add PotentialMatches panel to the frame
         frame.add(new PotentialMatches());
 
         // Display the frame
