@@ -29,9 +29,7 @@ public class Timeslot {
     public String toString() {
         String name = this.dayName();
         String times = this.timeName();
-        return "Timeslot {\n"
-                + "  day: " + name + ",\n"
-                + "  time:" + times + '}';
+        return "Timeslot { day: " + name + ", time: " + times + '}';
     }
 
     /**
