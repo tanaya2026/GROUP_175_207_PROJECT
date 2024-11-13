@@ -1,7 +1,12 @@
 package entity;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import api.SlotifyDataBase;
 
 /**
  * Represents a user - a student looking for study buddies.
@@ -16,13 +21,24 @@ public class User {
     private List<Course> courses;
     private String program;
     private String bio;
+    private String resourceID;
     private String schedulerID;
 
-    // temp solution for demo
-    private String availability;
+//    public User(String username, String email, String password, String name, List<Course> courses,
+//                String program, String bio) {
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.name = name;
+//        this.courses = courses;
+//        this.program = program;
+//        this.bio = bio;
+//        this.schedulerID = "default";
+//
+//    }
 
     public User(String username, String email, String password, String name, List<Course> courses,
-                String program, String bio, String availability) {
+                String program, String bio, Map<Timeslot, Boolean> availability) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -30,10 +46,10 @@ public class User {
         this.courses = courses;
         this.program = program;
         this.bio = bio;
-        this.schedulerID = "default";
 
-        //temp
-        this.availability = availability;
+        SlotifyDataBase db = new SlotifyDataBase();
+        this.resourceID = db.createSlotifyResource(name, email);
+        this.schedulerID = db.createSlotifyScheduler(availability, resourceID);
     }
 
     @Override
