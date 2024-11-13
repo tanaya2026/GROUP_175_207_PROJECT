@@ -6,7 +6,7 @@ import org.json.JSONException;
 import api.SlotifyDataBase;
 
 /**
- * LogGradeUseCase class.
+ * CreateResourceUseCase class.
  */
 public final class CreateResourceUseCase {
     private final SlotifyDataBase slotifyDataBase;
