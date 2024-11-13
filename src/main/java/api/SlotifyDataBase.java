@@ -1,16 +1,25 @@
 package api;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import entity.Timeslot;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import entity.User;
+import entity.Timeslot;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 /**
  * UserDB class.
@@ -22,12 +31,46 @@ public class SlotifyDataBase {
     private static final String APPLICATION_JSON = "application/json";
     private static final String STATUS_CODE = "status_code";
     private static final String SUCCESS = "success";
-    private static final String MESSAGE = "message";
+    private static final String ERRORS = "errors";
     private static final String NAME = "name";
     private static final String EMAIL = "email";
     private static final String ROLE = "role";
+    private static final String ROLE_VALUE = "member";
     private static final String TIMEZONE = "timezone";
+    private static final String TIMEZONE_VALUE = "America/Toronto";
     private static final String TOKEN = "ODE4NzViZWMtYWZhOS00ZGY4LWEwOTktZjNkYmZlNjFlNWZi";
+    private static final String UUID = "uuid";
+
+    private static final String GRAPH = "graph";
+    private static final String GRAPH_TYPE = "instant";
+    private static final String COLOR = "color";
+    private static final String HEX_CODE = "#9e0fd8";
+    private static final String SLOT_CAPACITY = "slot_capacity";
+    private static final int CAPACITY_VALUE = 8;
+    private static final String MODE = "mode";
+    private static final String MODE_TYPE = "mutual";
+    private static final String MIN_NOTICE = "min_notice";
+    private static final String NOTICE_DURATION = "1 days";
+    private static final String DURATION = "duration";
+    private static final String DURATION_TIME = "1 hours";
+    private static final String BUFFER_TIME = "buffer_time";
+    private static final String BUFFER_DURATION = "0 minutes";
+    private static final String BOOKING_WINDOW = "booking_window";
+    private static final String WINDOW_DURATION = "4 weeks";
+    private static final String MIN_CANCELLATION = "min_cancellation";
+    private static final String CANCELLATION_DURATION = "1 days";
+    private static final String SCHEDULER_NAME = "Scheduler" + timedate();
+    private static final String SLUG = "slug";
+    private static final String SLUG_NAME = "newScheduler" + timedate();
+    private static final String UNIT_PRICE = "unit_price";
+    private static final int PRICE_VALUE = 0;
+    private static final String PERDAY_CAPACITY = "perday_capacity";
+    private static final int CAPACITY_PER_DAY = 500;
+    private static final String RULES = "rules";
+
+
+
+
     // load getPassword() from env variable.
     private static final int SUCCESS_CODE = 200;
 
@@ -35,96 +78,45 @@ public class SlotifyDataBase {
         return System.getenv(TOKEN);
     }
 
-//    @Override
-//    public void createSlotifyResource(User user) {
-//
-//        // Build the request to create a new resource.
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/resources", API_URL))
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        // Hint: look at the API documentation to understand what the response looks like.
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
-//                final JSONObject grade = responseBody.getJSONObject(GRADE);
-//                return Grade.builder()
-//                        .username(grade.getString("username"))
-//                        .course(grade.getString("course"))
-//                        .grade(grade.getInt(GRADE))
-//                        .build();
-//            }
-//            else {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+    /**
+     * Create a date time string to better identify the scheduler name.
+     * @return string value of today's date and time in the specified format.
+     */
+    private static String timedate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
 
-//    @Override
-//    public Grade[] getGrades(String username) {
-//
-//        // Build the request to get all grades for a user.
-//        // Note: The API requires the username to be passed as a header.
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/grade?username=%s", API_URL, username))
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        // Hint: look at the API documentation to understand what the response looks like.
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
-//                final JSONArray grades = responseBody.getJSONArray("grades");
-//                final Grade[] result = new Grade[grades.length()];
-//                for (int i = 0; i < grades.length(); i++) {
-//                    final JSONObject grade = grades.getJSONObject(i);
-//                    result[i] = Grade.builder()
-//                            .username(grade.getString("username"))
-//                            .course(grade.getString("course"))
-//                            .grade(grade.getInt(GRADE))
-//                            .build();
-//                }
-//                return result;
-//            }
-//            else {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+    /**
+     * Convert the availabilityMap to the required JSONArray format for Slotify.
+     * @param availabilityMap the user's availability in Map format.
+     * @return the converted availabilityMap in JSONArray format.
+     */
+    private static JSONArray ruleBuilder(Map<Timeslot, Boolean> availabilityMap) {
+        JSONArray rules = new JSONArray();
 
-    // @Override
+        return rules;
+    }
+
     /**
      * Create a resource.
-     * @param user the user.
+     * @param name the name of the user.
+     * @param email the email of the user.
+     * @return the resourceID (String) of the created resource.
      * @throws JSONException if unsuccessful. ?
      * @throws RuntimeException if unsuccessful ?
      */
-    public void createSlotifyResource(User user) throws JSONException {
+    // public void createSlotifyResource(User user) throws JSONException {
+    public String createSlotifyResource(String name, String email) throws JSONException {
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
         final JSONObject requestBody = new JSONObject();
-        requestBody.put(NAME, user.getName());
-        requestBody.put(EMAIL, user.getEmail());
-        requestBody.put(ROLE, "member");
-        requestBody.put(TIMEZONE, "America/Toronto");
+        requestBody.put(NAME, name);
+        requestBody.put(EMAIL, email);
+        requestBody.put(ROLE, ROLE_VALUE);
+        requestBody.put(TIMEZONE, TIMEZONE_VALUE);
         final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
         final Request request = new Request.Builder()
                 .url(String.format("%s/resources", API_URL))
@@ -138,150 +130,65 @@ public class SlotifyDataBase {
             final JSONObject responseBody = new JSONObject(response.body().string());
 
             if (!responseBody.getBoolean(SUCCESS)) {
-                throw new RuntimeException(responseBody.getString(MESSAGE));
+                throw new RuntimeException(responseBody.getString(ERRORS));
             }
+
+            return responseBody.getJSONObject("data").getString(UUID);
         }
         catch (IOException | JSONException event) {
             throw new RuntimeException(event);
         }
     }
 
-//    @Override
-//    public Availability formTeam(String name) throws JSONException {
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
-//        final JSONObject requestBody = new JSONObject();
-//        requestBody.put(NAME, name);
-//        final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/team", API_URL))
-//                .method("POST", body)
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
-//                final JSONObject team = responseBody.getJSONObject("team");
-//                final JSONArray membersArray = team.getJSONArray("members");
-//                final String[] members = new String[membersArray.length()];
-//                for (int i = 0; i < membersArray.length(); i++) {
-//                    members[i] = membersArray.getString(i);
-//                }
-//
-//                return Availability.builder()
-//                        .name(team.getString(NAME))
-//                        .members(members)
-//                        .build();
-//            }
-//            else {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+    /**
+     * Create a scheduler.
+     * @param availabilityMap the user's specified availability.
+     * @param uuid the resourceID of the user whose availability is to be represented with this scheduler.
+     * @return the schedulerID (String) of the created scheduler.
+     * @throws JSONException if unsuccessful. ?
+     * @throws RuntimeException if unsuccessful ?
+     */
+    public String createSlotifyScheduler(Map<Timeslot, Boolean> availabilityMap, String uuid) throws JSONException {
+        final OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
+        final JSONObject requestBody = new JSONObject();
+        requestBody.put(GRAPH, GRAPH_TYPE);
+        requestBody.put(COLOR, HEX_CODE);
+        requestBody.put(SLOT_CAPACITY, CAPACITY_VALUE);
+        requestBody.put(MODE, MODE_TYPE);
+        requestBody.put(MIN_NOTICE, NOTICE_DURATION);
+        requestBody.put(DURATION, DURATION_TIME);
+        requestBody.put(BUFFER_TIME, BUFFER_DURATION);
+        requestBody.put(BOOKING_WINDOW, WINDOW_DURATION);
+        requestBody.put(MIN_CANCELLATION, CANCELLATION_DURATION);
+        requestBody.put(NAME, SCHEDULER_NAME);
+        requestBody.put(SLUG, SLUG_NAME);
+        requestBody.put(UNIT_PRICE, PRICE_VALUE);
+        requestBody.put(PERDAY_CAPACITY, CAPACITY_PER_DAY);
+        requestBody.put(TIMEZONE, TIMEZONE_VALUE);
+        requestBody.put(RULES, GRAPH_TYPE);
+        final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
+        final Request request = new Request.Builder()
+                .url(String.format("%s/schedulers", API_URL))
+                .method("POST", body)
+                .addHeader(TOKEN, getAPIToken())
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .build();
 
-//    @Override
-//    public Availability joinTeam(String name) throws JSONException {
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
-//        final JSONObject requestBody = new JSONObject();
-//        requestBody.put(NAME, name);
-//        final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/team", API_URL))
-//                .method("PUT", body)
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
-//                return null;
-//            }
-//            else {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+        try {
+            final Response response = client.newCall(request).execute();
+            final JSONObject responseBody = new JSONObject(response.body().string());
 
-//    @Override
-//    public void leaveTeam() throws JSONException {
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
-//        final JSONObject requestBody = new JSONObject();
-//        final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/leaveTeam", API_URL))
-//                .method("PUT", body)
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) != SUCCESS_CODE) {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+            if (!responseBody.getBoolean(SUCCESS)) {
+                throw new RuntimeException(/* responseBody.getString(ERRORS)*/ "Resource creation failed");
+            }
 
-//    @Override
-//    //       Hint: Read the Grade API documentation for getMyTeam (link below) and refer to the above similar
-//    //             methods to help you write this code (copy-and-paste + edit as needed).
-//    //             https://www.postman.com/cloudy-astronaut-813156/csc207-grade-apis-demo/folder/isr2ymn/get-my-team
-//    public Availability getMyTeam() {
-//        final OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        final Request request = new Request.Builder()
-//                .url(String.format("%s/team", API_URL))
-//                .method("GET", null)
-//                .addHeader(TOKEN, getAPIToken())
-//                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-//                .build();
-//
-//        try {
-//            final Response response = client.newCall(request).execute();
-//            final JSONObject responseBody = new JSONObject(response.body().string());
-//
-//            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
-//                final JSONObject team = responseBody.getJSONObject("team");
-//                final JSONArray membersArray = team.getJSONArray("members");
-//                final String[] members = new String[membersArray.length()];
-//                for (int i = 0; i < membersArray.length(); i++) {
-//                    members[i] = membersArray.getString(i);
-//                }
-//
-//                return Availability.builder()
-//                        .name(team.getString(NAME))
-//                        .members(members)
-//                        .build();
-//            }
-//            else {
-//                throw new RuntimeException(responseBody.getString(MESSAGE));
-//            }
-//        }
-//        catch (IOException | JSONException event) {
-//            throw new RuntimeException(event);
-//        }
-//    }
+
+        }
+        catch (IOException | JSONException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
 }
