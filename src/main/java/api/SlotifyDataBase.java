@@ -68,7 +68,17 @@ public class SlotifyDataBase {
     private static final int CAPACITY_PER_DAY = 500;
     private static final String RULES = "rules";
 
-
+    private static final String RULE = "rule";
+    private static final String EVERYDAY = "hours";
+    private static final String TYPE = "type";
+    private static final String ALLOWED = "allowed";
+    private static final String TIMES = "times";
+    private static final String START = "start";
+    private static final String END = "end";
+    private static final String DAY = "day";
+    private static final String DAYTIME = "daytime";
+    private static final String BLOCKED = "blocked";
+    private static final String TIME_SUFFIX = ":00";
 
 
     // load getPassword() from env variable.
@@ -94,9 +104,52 @@ public class SlotifyDataBase {
      * @return the converted availabilityMap in JSONArray format.
      */
     private static JSONArray ruleBuilder(Map<Timeslot, Boolean> availabilityMap) {
-        JSONArray rules = new JSONArray();
+        JSONObject allowed = new JSONObject();
+        allowed.put(RULE, EVERYDAY);
+        allowed.put(TYPE, ALLOWED);
+        JSONArray allowedTimes = new JSONArray();
+        JSONObject allowedTime = new JSONObject();
+        allowedTime.put(START, "09:00");
+        allowedTime.put(END, "17:00");
+        allowedTimes.put(allowedTime);
+        allowed.put(TIMES, allowedTimes);
 
+        JSONArray rules = new JSONArray();
+        rules.put(allowed);
+        for (Map.Entry<Timeslot, Boolean> timeslot : availabilityMap.entrySet()) {
+            if (!timeslot.getValue()) {
+                JSONObject rule = blockBuilder(timeslot);
+                rules.put(rule);
+            }
+        }
         return rules;
+    }
+
+    /**
+     * Build the required JSONArray format for Slotify for a blocked off timeslot.
+     * @param timeslot the Map.Entry variable for the blocked timeslot.
+     * @return the blocked timeslot in JSONArray format.
+     */
+    private static JSONObject blockBuilder(Map.Entry<Timeslot, Boolean> timeslot) {
+        JSONObject blockedTimeslot = new JSONObject();
+        blockedTimeslot.put(DAY, timeslot.getKey().dayName().toLowerCase());
+        blockedTimeslot.put(TYPE, BLOCKED);
+        blockedTimeslot.put(RULE, DAYTIME);
+
+        JSONArray blockedTimes = new JSONArray();
+        JSONObject blockedTime = new JSONObject();
+        if (timeslot.getKey().getDay() == 9) {
+            // Requires leading zero
+            blockedTime.put(START, "09:00");
+        }
+        else {
+            blockedTime.put(START, timeslot.getKey().getDay() + TIME_SUFFIX);
+        }
+        blockedTime.put(END, (timeslot.getKey().getDay() + 1) + TIME_SUFFIX);
+        blockedTimes.put(blockedTime);
+        blockedTimeslot.put(TIMES, blockedTimes);
+
+        return blockedTimeslot;
     }
 
     /**
