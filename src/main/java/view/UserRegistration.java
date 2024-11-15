@@ -37,17 +37,20 @@ public class UserRegistration extends JFrame {
         JLabel passwordLabel = new JLabel("Password:");
         JTextField passwordField = new JTextField();
 
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField();
+
+        JLabel coursesLabel = new JLabel("Courses (comma-separated):");
+        JTextField coursesField = new JTextField();
+
         JLabel programLabel = new JLabel("Program:");
         JTextField programField = new JTextField();
 
         JLabel bioLabel = new JLabel("Bio:");
         JTextField bioField = new JTextField();
 
-        JLabel genLabel = new JLabel("Gender(female,male,other):");
-        JTextField genField = new JTextField();
-
-        JLabel coursesLabel = new JLabel("Courses (comma-separated):");
-        JTextField coursesField = new JTextField();
+//        JLabel genLabel = new JLabel("Gender(female,male,other):");
+//        JTextField genField = new JTextField();
 
         // Availability section with checkboxes for days and times
         JLabel availabilityLabel = new JLabel("Availability:");
@@ -56,12 +59,13 @@ public class UserRegistration extends JFrame {
 
         // Days of the week and time slots (morning, afternoon, evening)
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        int[] times = {9, 13, 17, 20}; // 9 AM, 1 PM, 5 PM, 8 PM slots
-        JCheckBox[][] availabilityCheckboxes = new JCheckBox[7][4];
+        int[] times = {9, 10, 11, 12, 13, 14, 15, 16}; // 9 AM, 10 AM, ..., 4 PM slots
+        JCheckBox[][] availabilityCheckboxes = new JCheckBox[7][8];
 
         for (int i = 0; i < days.length; i++) {
             for (int j = 0; j < times.length; j++) {
-                availabilityCheckboxes[i][j] = new JCheckBox(days[i] + " " + times[j] + ":00");
+                availabilityCheckboxes[i][j] = new JCheckBox(days[i] + " " + times[j] + ":00-"
+                        + times[j + 1] + ":00");
                 availabilityPanel.add(availabilityCheckboxes[i][j]);
             }
         }
@@ -71,18 +75,20 @@ public class UserRegistration extends JFrame {
         // Add components to the main panel
         panel.add(usernameLabel);
         panel.add(usernameField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
         panel.add(emailLabel);
         panel.add(emailField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(coursesLabel);
+        panel.add(coursesField);
         panel.add(programLabel);
         panel.add(programField);
         panel.add(bioLabel);
         panel.add(bioField);
-        panel.add(genLabel);
-        panel.add(genField);
-        panel.add(coursesLabel);
-        panel.add(coursesField);
+//        panel.add(genLabel);
+//        panel.add(genField);
         panel.add(availabilityLabel);
         panel.add(availabilityPanel);
         panel.add(new JLabel()); // spacer
@@ -109,19 +115,23 @@ public class UserRegistration extends JFrame {
                             Timeslot timeslot = new Timeslot(i + 1, times[j]); // i+1 for day, times[j] for hour
                             availabilityMap.put(timeslot, true);
                         }
+                        else {
+                            Timeslot timeslot = new Timeslot(i + 1, times[j]); // i+1 for day, times[j] for hour
+                            availabilityMap.put(timeslot, false);
+                        }
                     }
                 }
-                Availability availability = new Availability(availabilityMap);
 
                 // Create a User instance with the input data
                 User newUser = new User(
                         usernameField.getText(),
                         emailField.getText(),
                         passwordField.getText(),
+                        nameField.getText(),
                         courses,
                         programField.getText(),
                         bioField.getText(),
-                        availability
+                        availabilityMap
                 );
 
                 // Display confirmation message

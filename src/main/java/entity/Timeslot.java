@@ -13,8 +13,6 @@ public class Timeslot {
     private static final int SATURDAY = 6;
     private static final int SUNDAY = 7;
 
-    private static final int LAST_SLOT = 23;
-
     // Weekday in int format, where 1 = Monday, 2 = Tuesday, ..., 7 = Saturday.
     private final int day;
     // Start time in 24-hour int format, where 0 = 00:00, 1 = 01:00, ..., 23 = 23:00
@@ -30,6 +28,22 @@ public class Timeslot {
         String name = this.dayName();
         String times = this.timeName();
         return "Timeslot { day: " + name + ", time: " + times + '}';
+    }
+
+    /**
+     * Returns the int of day of the timeslot.
+     * @return the int day.
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * Returns the int of start time of the timeslot.
+     * @return the int time.
+     */
+    public int getTime() {
+        return time;
     }
 
     /**
@@ -72,13 +86,7 @@ public class Timeslot {
      * @return the start and end time of the timeslot in format HH:00-HH:00.
      */
     public String timeName() {
-        String times;
-        if (time == LAST_SLOT) {
-            times = "23:00-23:59";
-        }
-        else {
-            times = String.valueOf(time) + ":00-" + String.valueOf(time + 1) + ":00";
-        }
+        String times = String.valueOf(time) + ":00-" + String.valueOf(time + 1) + ":00";
         return times;
     }
 
