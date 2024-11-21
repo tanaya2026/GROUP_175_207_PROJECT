@@ -10,8 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.User;
-import entity.Timeslot;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +27,7 @@ public class SlotifyDataBase {
     private static final String API_URL = "https://api.slotify.ca/v1";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String APPLICATION_JSON = "application/json";
-    private static final String STATUS_CODE = "status_code";
+    private static final String ACCEPT = "Accept";
     private static final String SUCCESS = "success";
     private static final String ERRORS = "errors";
     private static final String NAME = "name";
@@ -38,7 +36,8 @@ public class SlotifyDataBase {
     private static final String ROLE_VALUE = "member";
     private static final String TIMEZONE = "timezone";
     private static final String TIMEZONE_VALUE = "America/Toronto";
-    private static final String TOKEN = "ODE4NzViZWMtYWZhOS00ZGY4LWEwOTktZjNkYmZlNjFlNWZi";
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String API_TOKEN = "Bearer ODE4NzViZWMtYWZhOS00ZGY4LWEwOTktZjNkYmZlNjFlNWZi";
     private static final String UUID = "uuid";
 
     private static final String GRAPH = "graph";
@@ -66,8 +65,8 @@ public class SlotifyDataBase {
     private static final int PRICE_VALUE = 0;
     private static final String PERDAY_CAPACITY = "perday_capacity";
     private static final int CAPACITY_PER_DAY = 500;
-    private static final String RULES = "rules";
 
+    private static final String RULES = "rules";
     private static final String RULE = "rule";
     private static final String EVERYDAY = "hours";
     private static final String TYPE = "type";
@@ -79,14 +78,19 @@ public class SlotifyDataBase {
     private static final String DAYTIME = "daytime";
     private static final String BLOCKED = "blocked";
     private static final String TIME_SUFFIX = ":00";
+    private static final int SINGLE_DIGIT_9 = 9;
 
+    private static final String RESOURCES = "resources";
 
-    // load getPassword() from env variable.
-    private static final int SUCCESS_CODE = 200;
-
-    public static String getAPIToken() {
-        return System.getenv(TOKEN);
-    }
+    private static final String EVENT = "event";
+    private static final String WHAT = "what";
+    private static final String WHAT_VALUE = "Meeting with study buddy";
+    private static final String LOCATION = "location";
+    private static final String MEETING_TYPE = "google_meet";
+    private static final String DESCRIPTION = "description";
+    private static final String MEETING_DESCRIPTION = "Let's do some studying!";
+    private static final String START_AT = "start_at";
+    private static final String START_AT_DATE = "2024-11-17";
 
     /**
      * Create a date time string to better identify the scheduler name.
@@ -138,18 +142,33 @@ public class SlotifyDataBase {
 
         JSONArray blockedTimes = new JSONArray();
         JSONObject blockedTime = new JSONObject();
-        if (timeslot.getKey().getDay() == 9) {
+        if (timeslot.getKey().getDay() == SINGLE_DIGIT_9) {
             // Requires leading zero
             blockedTime.put(START, "09:00");
         }
         else {
-            blockedTime.put(START, timeslot.getKey().getDay() + TIME_SUFFIX);
+            blockedTime.put(START, timeslot.getKey().getTime() + TIME_SUFFIX);
         }
-        blockedTime.put(END, (timeslot.getKey().getDay() + 1) + TIME_SUFFIX);
+        blockedTime.put(END, (timeslot.getKey().getTime() + 1) + TIME_SUFFIX);
         blockedTimes.put(blockedTime);
         blockedTimeslot.put(TIMES, blockedTimes);
 
         return blockedTimeslot;
+    }
+
+    /**
+     * Creates the "event" parameter object in the required JSONArray format for Slotify.
+     * @return the event in JSONObject format (same for all schedulers).
+     */
+    private static JSONObject eventBuilder() {
+        JSONObject event = new JSONObject();
+        event.put(WHAT, WHAT_VALUE);
+        JSONObject location = new JSONObject();
+        location.put(TYPE, MEETING_TYPE);
+        event.put(LOCATION, location);
+        event.put(DESCRIPTION, MEETING_DESCRIPTION);
+        event.put(START_AT, START_AT_DATE);
+        return event;
     }
 
     /**
@@ -160,7 +179,6 @@ public class SlotifyDataBase {
      * @throws JSONException if unsuccessful. ?
      * @throws RuntimeException if unsuccessful ?
      */
-    // public void createSlotifyResource(User user) throws JSONException {
     public String createSlotifyResource(String name, String email) throws JSONException {
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -174,8 +192,9 @@ public class SlotifyDataBase {
         final Request request = new Request.Builder()
                 .url(String.format("%s/resources", API_URL))
                 .method("POST", body)
-                .addHeader(TOKEN, getAPIToken())
+                .addHeader(AUTHORIZATION_HEADER, API_TOKEN)
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .addHeader(ACCEPT, APPLICATION_JSON)
                 .build();
 
         try {
@@ -183,7 +202,7 @@ public class SlotifyDataBase {
             final JSONObject responseBody = new JSONObject(response.body().string());
 
             if (!responseBody.getBoolean(SUCCESS)) {
-                throw new RuntimeException(responseBody.getString(ERRORS));
+                throw new RuntimeException(responseBody.getJSONObject(ERRORS).toString());
             }
 
             return responseBody.getJSONObject("data").getString(UUID);
@@ -220,13 +239,22 @@ public class SlotifyDataBase {
         requestBody.put(UNIT_PRICE, PRICE_VALUE);
         requestBody.put(PERDAY_CAPACITY, CAPACITY_PER_DAY);
         requestBody.put(TIMEZONE, TIMEZONE_VALUE);
-        requestBody.put(RULES, GRAPH_TYPE);
+
+        requestBody.put(RULES, ruleBuilder(availabilityMap));
+
+        JSONArray resources = new JSONArray();
+        resources.put(uuid);
+        requestBody.put(RESOURCES, resources);
+
+        requestBody.put(EVENT, eventBuilder());
+
         final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
         final Request request = new Request.Builder()
                 .url(String.format("%s/schedulers", API_URL))
                 .method("POST", body)
-                .addHeader(TOKEN, getAPIToken())
+                .addHeader(AUTHORIZATION_HEADER, API_TOKEN)
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .addHeader(ACCEPT, APPLICATION_JSON)
                 .build();
 
         try {
@@ -234,10 +262,10 @@ public class SlotifyDataBase {
             final JSONObject responseBody = new JSONObject(response.body().string());
 
             if (!responseBody.getBoolean(SUCCESS)) {
-                throw new RuntimeException(/* responseBody.getString(ERRORS)*/ "Resource creation failed");
+                throw new RuntimeException(responseBody.getJSONObject(ERRORS).toString());
             }
 
-
+            return responseBody.getJSONObject("data").getString(UUID);
         }
         catch (IOException | JSONException event) {
             throw new RuntimeException(event);
