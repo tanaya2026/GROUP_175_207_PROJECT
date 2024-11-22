@@ -1,14 +1,9 @@
 package entity;
 
-import org.json.JSONObject;
+import data_access.DataAccessObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import api.SlotifyDataBase;
-
-import entity.Availability;
 
 /**
  * Represents a user - a student looking for study buddies.
@@ -36,7 +31,7 @@ public class User {
         this.program = program;
         this.bio = bio;
 
-        SlotifyDataBase db = new SlotifyDataBase();
+        DataAccessObject db = new DataAccessObject();
         this.resourceID = db.createSlotifyResource(name, email);
         this.schedulerID = db.createSlotifyScheduler(availability, resourceID);
     }

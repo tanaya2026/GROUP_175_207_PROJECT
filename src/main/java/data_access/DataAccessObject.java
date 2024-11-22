@@ -1,8 +1,6 @@
-package api;
+package data_access;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import entity.Timeslot;
@@ -22,7 +20,7 @@ import java.time.LocalDateTime;
 /**
  * UserDB class.
  */
-public class SlotifyDataBase {
+public class DataAccessObject {
     // Defining some constants.
     private static final String API_URL = "https://api.slotify.ca/v1";
     private static final String CONTENT_TYPE = "Content-Type";
