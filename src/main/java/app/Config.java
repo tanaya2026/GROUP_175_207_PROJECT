@@ -1,6 +1,6 @@
 package app;
 
-import api.SlotifyDataBase;
+import data_access.DataAccessObject;
 //import use_case.FormTeamUseCase;
 //import use_case.GetAverageGradeUseCase;
 //import use_case.GetGradeUseCase;
@@ -14,14 +14,14 @@ import use_case.CreateResourceUseCase;
  */
 
 public class Config {
-    private final SlotifyDataBase slotifyDataBase = new SlotifyDataBase();
+    private final DataAccessObject dataAccessObject = new DataAccessObject();
 
 //    /**
 //     * Get the GetGradeUseCase object.
 //     * @return GetGradeUseCase object.
 //     */
 //    public GetGradeUseCase getGradeUseCase() {
-//        return new GetGradeUseCase(slotifyDataBase);
+//        return new GetGradeUseCase(dataAccessObject);
 //    }
 
     /**
@@ -29,7 +29,7 @@ public class Config {
      * @return LogGradeUseCase object.
      */
     public CreateResourceUseCase createResourceUseCase() {
-        return new CreateResourceUseCase(slotifyDataBase);
+        return new CreateResourceUseCase(dataAccessObject);
     }
 
 //    /**
@@ -37,7 +37,7 @@ public class Config {
 //     * @return FormTeamUseCase object.
 //     */
 //    public FormTeamUseCase formTeamUseCase() {
-//        return new FormTeamUseCase(slotifyDataBase);
+//        return new FormTeamUseCase(dataAccessObject);
 //    }
 //
 //    /**
@@ -45,7 +45,7 @@ public class Config {
 //     * @return JoinTeamUseCase object.
 //     */
 //    public JoinTeamUseCase joinTeamUseCase() {
-//        return new JoinTeamUseCase(slotifyDataBase);
+//        return new JoinTeamUseCase(dataAccessObject);
 //    }
 //
 //    /**
@@ -53,7 +53,7 @@ public class Config {
 //     * @return LeaveTeamUseCase object.
 //     */
 //    public LeaveTeamUseCase leaveTeamUseCase() {
-//        return new LeaveTeamUseCase(slotifyDataBase);
+//        return new LeaveTeamUseCase(dataAccessObject);
 //    }
 //
 //    /**
@@ -61,7 +61,7 @@ public class Config {
 //     * @return GetAverageGradeUseCase object.
 //     */
 //    public GetAverageGradeUseCase getAverageGradeUseCase() {
-//        return new GetAverageGradeUseCase(slotifyDataBase);
+//        return new GetAverageGradeUseCase(dataAccessObject);
 //    }
 //
 //    /**
@@ -69,6 +69,6 @@ public class Config {
 //     * @return GetTopGradeUseCase object.
 //     */
 //    public GetTopGradeUseCase getTopGradeUseCase() {
-//        return new GetTopGradeUseCase(slotifyDataBase);
+//        return new GetTopGradeUseCase(dataAccessObject);
 //    }
 }
