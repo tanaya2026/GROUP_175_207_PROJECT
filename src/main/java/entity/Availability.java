@@ -3,54 +3,44 @@ package entity;
 import java.util.Map;
 
 /**
- * This class holds the schedulerID of a Slotify scheduler, and retrieves the current
- * scheduler from Slotify in a Map format
+ * This is a utility class which retrieves the current availability of a user according to their schedulerID.
  */
-public class Availability {
+public final class Availability {
 
-    private String schedulerID;
-
-    public Availability(String schedulerID) {
-        this.schedulerID = schedulerID;
+    private Availability() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     /**
-     * Returns the availability in Map format.
+     * Returns the availability from the provided schedulerID in Map format.
+     * @param schedulerID The Slotify schedulerID of the scheduler representation the user's availability.
      * @return the availability in Map format, from its Slotify schedulerID for this user.
-     * // @throws IllegalArgumentException if the day is an unexpected value
      */
-    public Map<Timeslot, Boolean> getAvailability() {
+    public static Map<Timeslot, Boolean> getAvailability(String schedulerID) {
         // Need to figure out how to retrieve the scheduler availability from Slotify
         // Store in JSONObejct and then convert to Map with for loop?
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        int count = 0;
-        sb.append("Availability {");
-        for (Map.Entry<Timeslot, Boolean> entry : getAvailability().entrySet()) {
-            Timeslot timeslot = entry.getKey();
-            Boolean isAvailable = entry.getValue();
-            if (isAvailable) {
-                sb.append("\n.             ").append(timeslot.toString());
-                count = count + 1;
-            }
-        }
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        int count = 0;
+//        sb.append("Availability {");
+//        for (Map.Entry<Timeslot, Boolean> entry : getAvailability().entrySet()) {
+//            Timeslot timeslot = entry.getKey();
+//            Boolean isAvailable = entry.getValue();
+//            if (isAvailable) {
+//                sb.append("\n.             ").append(timeslot.toString());
+//                count = count + 1;
+//            }
+//        }
+//
+//        if (count == 0) {
+//            return "No availability";
+//        }
+//
+//        sb.append("\n}");
+//        return sb.toString();
+//    }
 
-        if (count == 0) {
-            return "No availability";
-        }
-
-        sb.append("\n}");
-        return sb.toString();
-    }
-
-    /**
-     * Returns the schedulerID of this Availability object.
-     * @return the schedulerID string.
-     */
-    public String getSchedulerID() {
-        return schedulerID;
-    }
 }
