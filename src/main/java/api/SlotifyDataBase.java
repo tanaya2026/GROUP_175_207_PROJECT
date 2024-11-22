@@ -107,7 +107,7 @@ public class SlotifyDataBase {
      * @param availabilityMap the user's availability in Map format.
      * @return the converted availabilityMap in JSONArray format.
      */
-    private static JSONArray ruleBuilder(Map<Timeslot, Boolean> availabilityMap) {
+    private JSONArray ruleBuilder(Map<Timeslot, Boolean> availabilityMap) {
         JSONObject allowed = new JSONObject();
         allowed.put(RULE, EVERYDAY);
         allowed.put(TYPE, ALLOWED);
@@ -134,7 +134,7 @@ public class SlotifyDataBase {
      * @param timeslot the Map.Entry variable for the blocked timeslot.
      * @return the blocked timeslot in JSONArray format.
      */
-    private static JSONObject blockBuilder(Map.Entry<Timeslot, Boolean> timeslot) {
+    private JSONObject blockBuilder(Map.Entry<Timeslot, Boolean> timeslot) {
         JSONObject blockedTimeslot = new JSONObject();
         blockedTimeslot.put(DAY, timeslot.getKey().dayName().toLowerCase());
         blockedTimeslot.put(TYPE, BLOCKED);
@@ -160,7 +160,7 @@ public class SlotifyDataBase {
      * Creates the "event" parameter object in the required JSONArray format for Slotify.
      * @return the event in JSONObject format (same for all schedulers).
      */
-    private static JSONObject eventBuilder() {
+    private JSONObject eventBuilder() {
         JSONObject event = new JSONObject();
         event.put(WHAT, WHAT_VALUE);
         JSONObject location = new JSONObject();

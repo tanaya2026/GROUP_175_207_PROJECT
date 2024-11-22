@@ -8,6 +8,8 @@ import java.util.Map;
 
 import api.SlotifyDataBase;
 
+import entity.Availability;
+
 /**
  * Represents a user - a student looking for study buddies.
  */
@@ -23,19 +25,6 @@ public class User {
     private String bio;
     private String resourceID;
     private String schedulerID;
-
-//    public User(String username, String email, String password, String name, List<Course> courses,
-//                String program, String bio) {
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//        this.name = name;
-//        this.courses = courses;
-//        this.program = program;
-//        this.bio = bio;
-//        this.schedulerID = "default";
-//
-//    }
 
     public User(String username, String email, String password, String name, List<Course> courses,
                 String program, String bio, Map<Timeslot, Boolean> availability) {
@@ -238,8 +227,7 @@ public class User {
      * @return the Availability object representing the user's availability.
      */
     public Map<Timeslot, Boolean> getAvailability() {
-        Availability availability = new Availability(schedulerID);
-        return availability.getAvailability();
+        return Availability.getAvailability(schedulerID);
     }
 
 }
