@@ -1,19 +1,17 @@
 package use_case.edit_profile;
 
-import api.SlotifyDataBase;
+import data_access.DataAccessObject;
 import api.UserDataBase;
 import entity.User;
 
-import java.util.Map;
-
 public class EditProfileInteractor implements EditProfileInputBoundary {
     private final UserDataBase userDataBase;
-    private final SlotifyDataBase slotifyDataBase;
+    private final DataAccessObject dataAccessObject;
     private final EditProfileOutputBoundary outputBoundary;
 
-    public EditProfileInteractor(UserDataBase userDataBase, SlotifyDataBase slotifyDataBase, EditProfileOutputBoundary outputBoundary) {
+    public EditProfileInteractor(UserDataBase userDataBase, DataAccessObject dataAccessObject, EditProfileOutputBoundary outputBoundary) {
         this.userDataBase = userDataBase;
-        this.slotifyDataBase = slotifyDataBase;
+        this.dataAccessObject = dataAccessObject;
         this.outputBoundary = outputBoundary;
     }
 
@@ -28,7 +26,7 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
             user.setBio(inputData.getBio());
 
             // Update availability in Slotify
-            slotifyDataBase.updateAvailability(user.getSchedulerID(), inputData.getAvailability());
+            dataAccessObject.updateAvailability(user.getSchedulerID(), inputData.getAvailability());
 
             // Save changes back to the database
             userDataBase.updateUser(user);

@@ -1,18 +1,17 @@
 package use_case;
 
+import data_access.DataAccessObject;
 import entity.User;
 import org.json.JSONException;
-
-import api.SlotifyDataBase;
 
 /**
  * CreateResourceUseCase class.
  */
 public final class CreateResourceUseCase {
-    private final SlotifyDataBase slotifyDataBase;
+    private final DataAccessObject dataAccessObject;
 
-    public CreateResourceUseCase(SlotifyDataBase slotifyDataBase) {
-        this.slotifyDataBase = slotifyDataBase;
+    public CreateResourceUseCase(DataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
     }
 
     /**
@@ -21,6 +20,6 @@ public final class CreateResourceUseCase {
      * @throws JSONException if an error occurs.
      */
     public void createSlotifyResource(User user) throws JSONException {
-        slotifyDataBase.createSlotifyResource(user);
+        dataAccessObject.createSlotifyResource(user);
     }
 }

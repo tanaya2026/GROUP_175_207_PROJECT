@@ -1,9 +1,8 @@
 package use_case;
 
+import data_access.DataAccessObject;
 import entity.Timeslot;
 import org.json.JSONException;
-
-import api.SlotifyDataBase;
 
 import java.util.Map;
 
@@ -11,10 +10,10 @@ import java.util.Map;
  * CreateSchedulerUseCase class.
  */
 public final class CreateSchedulerUseCase {
-    private final SlotifyDataBase slotifyDataBase;
+    private final DataAccessObject dataAccessObject;
 
-    public CreateSchedulerUseCase(SlotifyDataBase slotifyDataBase) {
-        this.slotifyDataBase = slotifyDataBase;
+    public CreateSchedulerUseCase(DataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
     }
 
     /**
@@ -23,6 +22,6 @@ public final class CreateSchedulerUseCase {
      * @throws JSONException if an error occurs.
      */
     public void createSlotifyScheduler(Map<Timeslot, Boolean> availabilityMap) throws JSONException {
-        slotifyDataBase.createSlotifyScheduler(availabilityMap);
+        dataAccessObject.createSlotifyScheduler(availabilityMap);
     }
 }

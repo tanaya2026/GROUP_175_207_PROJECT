@@ -1,4 +1,4 @@
-import api.SlotifyDataBase;
+import data_access.DataAccessObject;
 import entity.Course;
 import entity.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CreateResourceUseCaseMockitoTest {
     @Mock
-    private SlotifyDataBase slotifyDataBase;
+    private DataAccessObject dataAccessObject;
 
     private CreateResourceUseCase createResourceUseCase;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this); // Use openMocks() instead of initMocks() if using Mockito 3.2+
-        createResourceUseCase = new CreateResourceUseCase(slotifyDataBase);
+        createResourceUseCase = new CreateResourceUseCase(dataAccessObject);
     }
 
     @Test
