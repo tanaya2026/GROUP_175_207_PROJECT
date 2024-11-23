@@ -1,9 +1,12 @@
 package data_access;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import entity.Matcher;
 import entity.Timeslot;
+import entity.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -278,6 +281,11 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         catch (IOException | JSONException event) {
             throw new RuntimeException(event);
         }
+    }
+
+    @Override
+    public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
+        return Matcher.findMatches(user, expand);
     }
 
 }
