@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class NoMatchesFound extends JPanel {
@@ -13,23 +15,50 @@ public class NoMatchesFound extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create a panel for the main buttons
+        // Create a panel for the main button
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
 
-        // Create two main buttons with different names
-        JButton button1 = new JButton("Match based on shared program");
-        JButton button2 = new JButton("Match based on shared availability");
+        // Create a main button
+        JButton button1 = new JButton("Match based on shared availability");
 
-        // Add buttons to the button panel
+        // Add an action listener to the button
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create the PotentialMatches frame when button1 is clicked
+                JFrame potentialMatchesFrame = new JFrame("Potential Matches");
+                potentialMatchesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                potentialMatchesFrame.setSize(300, 200);
+                potentialMatchesFrame.add(new PotentialMatches());
+                potentialMatchesFrame.setVisible(true);
+            }
+        });
+
+        // Add button1 to the button panel
         buttonPanel.add(button1);
-        buttonPanel.add(button2);
 
         // Add button panel to the main panel
         add(buttonPanel, BorderLayout.CENTER);
 
         // Create a sign-out button and add it to the bottom
         JButton signOutButton = new JButton("Sign Out");
+        signOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open the OpeningPage (welcome/login page)
+                JFrame openingPageFrame = new JFrame("StudyBuddyFinder App");
+                openingPageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                openingPageFrame.setSize(1000, 300);
+                openingPageFrame.add(new OpeningPage());
+                openingPageFrame.setLocationRelativeTo(null);  // Center the window
+                openingPageFrame.setVisible(true);
+
+                // Close the current frame (NoMatchesFound)
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(NoMatchesFound.this);
+                currentFrame.dispose();
+            }
+        });
         add(signOutButton, BorderLayout.SOUTH);
     }
 
