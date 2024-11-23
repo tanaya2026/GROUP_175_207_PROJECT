@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * The DAO for user data.
  */
-public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
+public class DONOTUSEDAO implements SignupUserDataAccessInterface,
         LoginUserDataAccessInterface,
         ChangePasswordUserDataAccessInterface {
     private static final int SUCCESS_CODE = 200;
@@ -42,7 +42,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
     private static final String MESSAGE = "message";
     private final UserFactory userFactory;
 
-    public DBUserDataAccessObject(UserFactory userFactory) {
+    public DONOTUSEDAO(UserFactory userFactory) {
         this.userFactory = userFactory;
     }
 
