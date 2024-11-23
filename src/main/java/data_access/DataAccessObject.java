@@ -14,13 +14,23 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import use_case.edit_profile.EditProfileDataAccessInterface;
+import use_case.find_potential_matches.FindPotentialMatchesDataAccessInterface;
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.logout.LogoutUserDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 /**
  * UserDB class.
  */
-public class DataAccessObject {
+public class DataAccessObject implements EditProfileDataAccessInterface,
+        FindPotentialMatchesDataAccessInterface,
+        LoginUserDataAccessInterface,
+        LogoutUserDataAccessInterface,
+        SignupUserDataAccessInterface {
     // Defining some constants.
     private static final String API_URL = "https://api.slotify.ca/v1";
     private static final String CONTENT_TYPE = "Content-Type";
