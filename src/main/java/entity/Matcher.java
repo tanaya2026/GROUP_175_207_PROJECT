@@ -14,21 +14,21 @@ public final class Matcher {
     }
 
     /**
-     * Returns the Users who are potential matches and the Timeslots for which they share availability.
-     * Potential matches are determined by shared availability and courses.
+     * Returns the Users who are matches and the Timeslots for which they share availability.
+     * Matches are determined by shared availability and courses.
      * @param user The User who is seeking study buddy matches.
-     * @return a Map of the Users who are potential matches and a list of Timeslots for which they share availability.
+     * @return a Map of the Users who are matches and a list of Timeslots for which they share availability.
      */
     public static Map<User, List<Timeslot>> findMatches(User user) {
         return findMatches(user, false);
     }
 
     /**
-     * Returns the Users who are potential matches and the Timeslots for which they share availability.
-     * Potential matches are determined by shared availability and either courses or program
+     * Returns the Users who are matches and the Timeslots for which they share availability.
+     * Matches are determined by shared availability and either courses or program
      * @param user The User who is seeking study buddy matches.
      * @param expand A boolean: false = match by courses, true = match by program.
-     * @return a Map of the Users who are potential matches and a list of Timeslots for which they share availability.
+     * @return a Map of the Users who are matches and a list of Timeslots for which they share availability.
      */
     public static Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
         return null;
