@@ -1,9 +1,12 @@
 package data_access;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import entity.Matcher;
 import entity.Timeslot;
+import entity.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +50,7 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String API_TOKEN = "Bearer ODE4NzViZWMtYWZhOS00ZGY4LWEwOTktZjNkYmZlNjFlNWZi";
     private static final String UUID = "uuid";
+    private static final int SUCCESSFUL_DELETION_CODE = 204;
 
     private static final String GRAPH = "graph";
     private static final String GRAPH_TYPE = "instant";
@@ -221,6 +225,37 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
     }
 
     /**
+     * Delete a resource.
+     * @param uuid the uuid of the resource to be deleted.
+     * @throws JSONException if unsuccessful. ?
+     * @throws RuntimeException if unsuccessful ?
+     */
+    public void deleteSlotifyResource(String uuid) throws JSONException {
+        final OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        final Request request = new Request.Builder()
+                .url(String.format("%s/resources/%s", API_URL, uuid))
+                .method("DELETE", null)
+                .addHeader(AUTHORIZATION_HEADER, API_TOKEN)
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .addHeader(ACCEPT, APPLICATION_JSON)
+                .build();
+
+        try {
+            final Response response = client.newCall(request).execute();
+
+            if (response.code() != SUCCESSFUL_DELETION_CODE) {
+                final JSONObject responseBody = new JSONObject(response.body().string());
+                throw new RuntimeException(responseBody.getJSONObject(ERRORS).toString());
+            }
+
+        }
+        catch (IOException | JSONException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
+    /**
      * Create a scheduler.
      * @param availabilityMap the user's specified availability.
      * @param uuid the resourceID of the user whose availability is to be represented with this scheduler.
@@ -278,6 +313,42 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         catch (IOException | JSONException event) {
             throw new RuntimeException(event);
         }
+    }
+
+    /**
+     * Delete a scheduler.
+     * @param uuid the uuid of the scheduler to be deleted.
+     * @throws JSONException if unsuccessful. ?
+     * @throws RuntimeException if unsuccessful ?
+     */
+    public void deleteSlotifyScheduler(String uuid) throws JSONException {
+        final OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        final Request request = new Request.Builder()
+                .url(String.format("%s/schedulers/%s", API_URL, uuid))
+                .method("DELETE", null)
+                .addHeader(AUTHORIZATION_HEADER, API_TOKEN)
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .addHeader(ACCEPT, APPLICATION_JSON)
+                .build();
+
+        try {
+            final Response response = client.newCall(request).execute();
+
+            if (response.code() != SUCCESSFUL_DELETION_CODE) {
+                final JSONObject responseBody = new JSONObject(response.body().string());
+                throw new RuntimeException(responseBody.getJSONObject(ERRORS).toString());
+            }
+
+        }
+        catch (IOException | JSONException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
+    @Override
+    public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
+        return Matcher.findMatches(user, expand);
     }
 
 }
