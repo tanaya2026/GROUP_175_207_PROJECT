@@ -2,6 +2,7 @@ package entity;
 
 import data_access.DataAccessObject;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public class User {
 
-    // Refer to the API documentation for the meaning of these fields.
+    // Note that the username is final - this is the unique identifier for users and cannot be changed.
     private final String username;
     private String email;
     private String password;
@@ -20,6 +21,7 @@ public class User {
     private String bio;
     private String resourceID;
     private String schedulerID;
+    private Map<User, List<Timeslot>> matches;
 
     public User(String username, String email, String password, String name, List<Course> courses,
                 String program, String bio, Map<Timeslot, Boolean> availability) {
@@ -30,6 +32,7 @@ public class User {
         this.courses = courses;
         this.program = program;
         this.bio = bio;
+        matches = new HashMap<>();
 
         DataAccessObject db = new DataAccessObject();
         this.resourceID = db.createSlotifyResource(name, email);
@@ -58,10 +61,11 @@ public class User {
         return "User {" + System.lineSeparator()
                 + "  username: " + username + newLine
                 + "  email: " + email + newLine
+                + "  name: " + name + newLine
                 + "  courses: " + lstCourses + newLine
                 + "  program: " + program + newLine
                 + "  bio: " + bio + newLine
-                + "  availability: " + availability.toString() + '}';
+                + "  availability: " + Availability.getAvailability(schedulerID).toString() + '}';
     }
 
     /**
@@ -223,6 +227,22 @@ public class User {
      */
     public Map<Timeslot, Boolean> getAvailability() {
         return Availability.getAvailability(schedulerID);
+    }
+
+    /**
+     * Returns the matches of the user.
+     * @return the Map of the Users who are matches and a list of Timeslots for which they share availability.
+     */
+    public Map<User, List<Timeslot>> getMatches() {
+        return matches;
+    }
+
+    /**
+     * Sets the matches of the user.
+     * @param matches the Map of the Users who are matches and a list of Timeslots for which they share availability.
+     */
+    public void setMatches(Map<User, List<Timeslot>> matches) {
+        this.matches = matches;
     }
 
 }
