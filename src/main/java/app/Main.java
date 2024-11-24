@@ -13,12 +13,12 @@ public class Main {
     public static void main(String[] args) {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
-                .addPotentialMatchesView()
+                .addMatchesView()
                 .addHomePageView()
                 .addLoginView()
                 .addSignupView()
                 .addLoggedInView()
-                .addFindPotentialMatchesUseCase()
+                .addFindMatchesUseCase()
                 .addSignupUseCase()
                 .addLoginUseCase()
                 .addLogoutUseCase()
