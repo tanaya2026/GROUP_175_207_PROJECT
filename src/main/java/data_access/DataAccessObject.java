@@ -1,6 +1,8 @@
 package data_access;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,7 +104,13 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
     private static final String DESCRIPTION = "description";
     private static final String MEETING_DESCRIPTION = "Let's do some studying!";
     private static final String START_AT = "start_at";
-    private static final String START_AT_DATE = "2024-11-17";
+    private static final String START_AT_DATE = "2024-12-08";
+
+    private static final String SCHEDULER_ID = "scheduler_id";
+    private static final String OUTPUT_TIMEZONE = "output_timezone";
+    private static final String END_AT_DATE = "2024-12-14";
+
+    private final Map<String, User> users = new HashMap<>();
 
     /**
      * Create a date time string to better identify the scheduler name.
@@ -181,6 +189,16 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         event.put(DESCRIPTION, MEETING_DESCRIPTION);
         event.put(START_AT, START_AT_DATE);
         return event;
+    }
+
+    /**
+     * Creates the "event" parameter object in the required JSONArray format for Slotify.
+     * @param jsonAvailability the availability in JSONArray format from Slotify.
+     * @return the converted availability in Map format.
+     */
+    private Map<Timeslot, Boolean> convertAvailability(JSONArray jsonAvailability) {
+        // TODO: implement
+        return null;
     }
 
     /**
@@ -346,9 +364,62 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         }
     }
 
+    /**
+     * Fetch a user's availability based on their scheduler.
+     * @param schedulerID the schedulerID for the scheduler representing the user's availability.
+     * @return the resourceID (String) of the created resource.
+     * @throws JSONException if unsuccessful. ?
+     * @throws RuntimeException if unsuccessful ?
+     */
+    public Map<Timeslot, Boolean> fetchAvailability(String schedulerID) throws JSONException {
+        final OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
+        final JSONObject requestBody = new JSONObject();
+        requestBody.put(SCHEDULER_ID, schedulerID);
+        requestBody.put(OUTPUT_TIMEZONE, TIMEZONE_VALUE);
+        requestBody.put(START, START_AT_DATE + "T09:00:00-04:00");
+        requestBody.put(END, END_AT_DATE + "T17:00:00-04:00");
+        final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
+        final Request request = new Request.Builder()
+                .url(String.format("%s/slots/available", API_URL))
+                .method("POST", body)
+                .addHeader(AUTHORIZATION_HEADER, API_TOKEN)
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .addHeader(ACCEPT, APPLICATION_JSON)
+                .build();
+
+        try {
+            final Response response = client.newCall(request).execute();
+            final JSONObject responseBody = new JSONObject(response.body().string());
+
+            if (!responseBody.getBoolean(SUCCESS)) {
+                throw new RuntimeException(responseBody.getJSONObject(ERRORS).toString());
+            }
+
+            JSONArray jsonAvailability = responseBody.getJSONArray("data");
+            return convertAvailability(jsonAvailability);
+        }
+        catch (IOException | JSONException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
     @Override
     public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
-        return Matcher.findMatches(user, expand);
+        Map<User, List<Timeslot>> matches = Matcher.findMatches(user, expand);
+        user.setMatches(matches);
+        return matches;
+    }
+
+    @Override
+    public boolean existsByName(String identifier) {
+        return users.containsKey(identifier);
+    }
+
+    @Override
+    public void save(User user) {
+        users.put(user.getName(), user);
     }
 
 }
