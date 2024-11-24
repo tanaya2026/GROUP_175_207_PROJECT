@@ -15,12 +15,12 @@ public class FindPotentialMatchesInputData {
         this.expand = expand;
     }
 
-//    String getPassword() {
-//        return password;
-//    }
+    User getUser() {
+        return user;
+    }
 
-//    String getUsername() {
-//        return username;
-//    }
+    boolean getExpand() {
+        return expand;
+    }
 
 }

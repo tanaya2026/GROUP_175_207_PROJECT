@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * And for when they request all their matches
  */
 
-public class AccountSuccessfull {
+public class AccountCreationSuccessful {
     private static final int WIDTH_FRAME = 1000;
     private static final int HEIGHT_FRAME = 300;
 
@@ -23,12 +23,12 @@ public class AccountSuccessfull {
      * @param args unused arguments
      */
     public static void main(String[] args) {
-        final JFrame frame = new JFrame("Account Successfull!");
+        final JFrame frame = new JFrame("Account Creation Successful!");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel label1 = new JLabel("Account Succesfully Created!", JLabel.CENTER);
+        JLabel label1 = new JLabel("Account Created Successfully!", JLabel.CENTER);
         JLabel empty = new JLabel("\n", JLabel.CENTER);
         JLabel empties = new JLabel("\n", JLabel.CENTER);
 
