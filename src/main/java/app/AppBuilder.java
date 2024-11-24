@@ -16,6 +16,7 @@ import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.find_potential_matches.FindPotentialMatchesController;
 import interface_adapter.find_potential_matches.FindPotentialMatchesPresenter;
 import interface_adapter.find_potential_matches.FindPotentialMatchesViewModel;
+import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -40,10 +41,10 @@ import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
 import view.EditProfileView;
+import view.HomePageView;
 import view.LoggedInView; // missing??
 import view.LoginView; // needed?
 import view.PotentialMatches;
-import view.SignupView; // needed?
 import view.ViewManager;
 
 /**
@@ -64,7 +65,8 @@ public class AppBuilder {
     private EditProfileViewModel editProfileViewModel;
     private PotentialMatches potentialMatchesView;
     private FindPotentialMatchesViewModel findPotentialMatchesViewModel;
-    private SignupView signupView;
+    private HomePageViewModel homePageViewModel;
+    private HomePageView homePageView;
     private SignupViewModel signupViewModel;
     private LoginViewModel loginViewModel;
     private LoggedInViewModel loggedInViewModel;
@@ -73,6 +75,18 @@ public class AppBuilder {
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
+    }
+
+
+    /**
+     * Adds the HomePage View to the application.
+     * @return this builder
+     */
+    public AppBuilder addHomePageView() {
+        homePageViewModel = new HomePageViewModel();
+        homePageView = new HomePageView(homePageViewModel);
+        cardPanel.add(homePageView, homePageView.getViewName());
+        return this;
     }
 
     /**
@@ -202,12 +216,12 @@ public class AppBuilder {
      * @return the application
      */
     public JFrame build() {
-        final JFrame application = new JFrame("Login Example");
+        final JFrame application = new JFrame("Home Page");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         application.add(cardPanel);
 
-        viewManagerModel.setState(signupView.getViewName());
+        viewManagerModel.setState(HomePageView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;
