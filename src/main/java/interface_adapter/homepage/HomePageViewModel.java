@@ -1,7 +1,6 @@
 package interface_adapter.homepage;
 
 import interface_adapter.ViewModel;
-import interface_adapter.find_potential_matches.FindPotentialMatchesState;
 
 /**
  * The View Model for HomePage View.

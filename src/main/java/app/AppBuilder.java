@@ -10,12 +10,10 @@ import data_access.DataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.edit_profile.EditProfileController;
-import interface_adapter.edit_profile.EditProfilePresenter;
 import interface_adapter.edit_profile.EditProfileViewModel;
-import interface_adapter.find_potential_matches.FindPotentialMatchesController;
-import interface_adapter.find_potential_matches.FindPotentialMatchesPresenter;
-import interface_adapter.find_potential_matches.FindPotentialMatchesViewModel;
+import interface_adapter.find_matches.FindMatchesController;
+import interface_adapter.find_matches.FindMatchesPresenter;
+import interface_adapter.find_matches.FindMatchesViewModel;
 import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
@@ -25,12 +23,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
-import use_case.edit_profile.EditProfileInputBoundary;
-import use_case.edit_profile.EditProfileInteractor;
-import use_case.edit_profile.EditProfileOutputBoundary;
-import use_case.find_potential_matches.FindPotentialMatchesInputBoundary;
-import use_case.find_potential_matches.FindPotentialMatchesInteractor;
-import use_case.find_potential_matches.FindPotentialMatchesOutputBoundary;
+import use_case.find_matches.FindMatchesInputBoundary;
+import use_case.find_matches.FindMatchesInteractor;
+import use_case.find_matches.FindMatchesOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -44,7 +39,7 @@ import view.EditProfileView;
 import view.HomePageView;
 import view.LoggedInView; // missing??
 import view.LoginView; // needed?
-import view.PotentialMatches;
+import view.MatchesView;
 import view.ViewManager;
 
 /**
@@ -63,8 +58,8 @@ public class AppBuilder {
 
     private EditProfileView editProfileView;
     private EditProfileViewModel editProfileViewModel;
-    private PotentialMatches potentialMatchesView;
-    private FindPotentialMatchesViewModel findPotentialMatchesViewModel;
+    private MatchesView matchesView;
+    private FindMatchesViewModel findMatchesViewModel;
     private HomePageViewModel homePageViewModel;
     private HomePageView homePageView;
     private SignupViewModel signupViewModel;
@@ -90,13 +85,13 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the PotentialMatches View to the application.
+     * Adds the MatchesView View to the application.
      * @return this builder
      */
-    public AppBuilder addPotentialMatchesView() {
-        findPotentialMatchesViewModel = new FindPotentialMatchesViewModel();
-        potentialMatchesView = new PotentialMatches(findPotentialMatchesViewModel);
-        cardPanel.add(potentialMatchesView, potentialMatchesView.getViewName());
+    public AppBuilder addMatchesView() {
+        findMatchesViewModel = new FindMatchesViewModel();
+        matchesView = new MatchesView(findMatchesViewModel);
+        cardPanel.add(matchesView, matchesView.getViewName());
         return this;
     }
 
@@ -134,17 +129,17 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the FindPotentialMatches Use Case to the application.
+     * Adds the FindMatches Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addFindPotentialMatchesUseCase() {
-        final FindPotentialMatchesOutputBoundary findPotentialMatchesOutputBoundary = new FindPotentialMatchesPresenter(viewManagerModel,
+    public AppBuilder addFindMatchesUseCase() {
+        final FindMatchesOutputBoundary findMatchesOutputBoundary = new FindMatchesPresenter(viewManagerModel,
                 signupViewModel, loginViewModel);
-        final FindPotentialMatchesInputBoundary findPotentialMatchesInteractor = new FindPotentialMatchesInteractor(
-                dataAccessObject, findPotentialMatchesOutputBoundary, userFactory);
+        final FindMatchesInputBoundary findMatchesInteractor = new FindMatchesInteractor(
+                dataAccessObject, findMatchesOutputBoundary, userFactory);
 
-        final FindPotentialMatchesController controller = new FindPotentialMatchesController(findPotentialMatchesInteractor);
-        potentialMatchesView.setFindPotentialMatchesController(controller);
+        final FindMatchesController controller = new FindMatchesController(findMatchesInteractor);
+        matchesView.setFindMatchesController(controller);
         return this;
     }
 
