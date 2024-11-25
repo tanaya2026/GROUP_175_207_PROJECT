@@ -39,6 +39,21 @@ public class User {
         this.schedulerID = db.createSlotifyScheduler(availability, resourceID);
     }
 
+    // For the purposes of loading in the pre-set users
+    public User(String username, String email, String name, List<Course> courses,
+                String program, String bio, String schedulerID) {
+        this.username = username;
+        this.email = email;
+        this.password = "123";
+        this.name = name;
+        this.courses = courses;
+        this.program = program;
+        this.bio = bio;
+        this.resourceID = "resourceID";
+        this.schedulerID = schedulerID;
+        matches = new HashMap<>();
+    }
+
     @Override
     public String toString() {
         String lstCourses;
@@ -226,7 +241,8 @@ public class User {
      * @return the Availability object representing the user's availability.
      */
     public Map<Timeslot, Boolean> getAvailability() {
-        return Availability.getAvailability(schedulerID);
+        DataAccessObject db = new DataAccessObject();
+        return db.fetchAvailability(schedulerID);
     }
 
     /**
