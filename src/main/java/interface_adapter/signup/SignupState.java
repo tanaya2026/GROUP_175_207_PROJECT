@@ -5,35 +5,42 @@ package interface_adapter.signup;
  */
 public class SignupState {
     private String username = "";
-    private String usernameError;
     private String password = "";
-    private String passwordError;
-    private String repeatPassword = "";
-    private String repeatPasswordError;
+    private String name = "";
+    private String email = "";
+    private String courses = "";
+    private String program = "";
+    private String bio = "";
+    private String avaliability = "";
 
     public String getUsername() {
         return username;
-    }
-
-    public String getUsernameError() {
-        return usernameError;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getPasswordError() {
-        return passwordError;
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getCourses() {
+        return courses;
+    }
+    public String getProgram() {
+        return program;
+    }
+    public String getBio() {
+        return bio;
+    }
+    public String getAvaliability() {
+        return avaliability;
     }
 
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public String getRepeatPasswordError() {
-        return repeatPasswordError;
-    }
+    // write all the set methods!
 
     public void setUsername(String username) {
         this.username = username;
@@ -59,12 +66,12 @@ public class SignupState {
         this.repeatPasswordError = repeatPasswordError;
     }
 
-    @Override
-    public String toString() {
-        return "SignupState{"
-                + "username='" + username + '\''
-                + ", password='" + password + '\''
-                + ", repeatPassword='" + repeatPassword + '\''
-                + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "SignupState{"
+//                + "username='" + username + '\''
+//                + ", password='" + password + '\''
+//                + ", repeatPassword='" + repeatPassword + '\''
+                // + '}';
+
 }
