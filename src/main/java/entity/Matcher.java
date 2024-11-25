@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import data_access.DataAccessObject;
+
 /**
  * This is a utility class which performs the study buddy matching algorithm.
  */
@@ -31,7 +33,9 @@ public final class Matcher {
      * @return a Map of the Users who are matches and a list of Timeslots for which they share availability.
      */
     public static Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
-        return null;
+        DataAccessObject dataAccessObject = new DataAccessObject();
+        Map<Timeslot, Boolean> matches = dataAccessObject.fetchAvailability(user.getSchedulerID());
+
     }
 
 }

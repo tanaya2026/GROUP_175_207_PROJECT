@@ -1,10 +1,10 @@
 package data_access;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.ZonedDateTime;
+import java.util.*;
 
+import entity.Course;
 import entity.Matcher;
 import entity.Timeslot;
 import entity.User;
@@ -110,6 +110,7 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
     private static final String END_AT_DATE = "2024-12-14";
 
     private final Map<String, User> users = new HashMap<>();
+    private final List<Course> courses = loadCourses();
 
     /**
      * Create a date time string to better identify the scheduler name.
@@ -119,6 +120,87 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
+    }
+
+    /**
+     * Load in the courses that students can be enrolled in.
+     * @return a list of the courses that students can be enrolled in.
+     */
+    private static List<Course> loadCourses() {
+        List<Course> courses = new ArrayList<>();
+        courses.add(new Course("CSC207", "Software Design"));
+        courses.add(new Course("CSC110", "Foundations of Computer Science I"));
+        courses.add(new Course("CSC111", "Foundations of Computer Science II"));
+        courses.add(new Course("CSC148", "Introduction to Computer Science"));
+        courses.add(new Course("CSC165", "Mathematical Expression and Reasoning for Computer Science"));
+        courses.add(new Course("CSC240", "Enriched Introduction to the Theory of Computation"));
+        courses.add(new Course("MAT137", "Calculus with Proofs"));
+        courses.add(new Course("CSC236", "Introduction to the Theory of Computation"));
+        courses.add(new Course("AST251", "Life on Other Worlds"));
+        // Add more?
+        return courses;
+    }
+
+    /**
+     * Load in some hypothetical users who have signed up.
+     * @return a map of the usernames and User objects of these hypothetical users.
+     */
+    private static Map<String, User> loadUsers() {
+        List<Course> courses = loadCourses();
+        // CSC148, CSC165
+        List<Course> ajohnsonCourses = new ArrayList<>();
+        // CSC110, MAT137, AST251
+        List<Course> jsmithCourses = new ArrayList<>();
+        // CSC207, CSC236
+        List<Course> csingerCourses = new ArrayList<>();
+        // CSC207, CSC236, AST251
+        List<Course> djacksonCourses = new ArrayList<>();
+        for (Course course : courses) {
+            if (course.getCourseCode().equals("CSC148")) {
+                ajohnsonCourses.add(course);
+            }
+            if (course.getCourseCode().equals("CSC165")) {
+                ajohnsonCourses.add(course);
+            }
+            if (course.getCourseCode().equals("CSC110")) {
+                jsmithCourses.add(course);
+            }
+            if (course.getCourseCode().equals("MAT137")) {
+                jsmithCourses.add(course);
+            }
+            if (course.getCourseCode().equals("AST251")) {
+                jsmithCourses.add(course);
+                djacksonCourses.add(course);
+            }
+            if (course.getCourseCode().equals("CSC207")) {
+                csingerCourses.add(course);
+                djacksonCourses.add(course);
+            }
+            if (course.getCourseCode().equals("CSC236")) {
+                csingerCourses.add(course);
+                djacksonCourses.add(course);
+            }
+        }
+        String programCS = "Computer Science";
+        String ajohnsonBio = "I study best in the mornings!";
+        String jsmithBio = "To be totally honest, I've fallen behind in calc and could use some help explaining concepts.";
+        String csingerBio = "I love studying with a good snack, but sometimes end up eating more than studying... :(";
+        String djacksonBio = "Looking to pursue a career in AI";
+        String ajohnsonSchedulerID = "";
+        String jsmithSchedulerID = "";
+        String csingerSchedulerID = "";
+        String djacksonSchedulerID = "";
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("ajohnson", "ajohn@gmail.com", "Andrew Johnson", ajohnsonCourses, programCS, ajohnsonBio, ajohnsonSchedulerID));
+        userList.add(new User("jsmith", "jess03ica@hotmail.com", "Jessica Smith", jsmithCourses, "Mathematics", jsmithBio, jsmithSchedulerID));
+        userList.add(new User("csinger", "camsing5090@gmail.com", "Cameron Singer", csingerCourses, programCS, csingerBio, csingerSchedulerID));
+        userList.add(new User("djackson", "dennisjackson17@outlook.com", "Dennis Jackson", djacksonCourses, programCS, djacksonBio, djacksonSchedulerID));
+
+        Map<String, User> users = new HashMap<>();
+        for (User user : userList) {
+            users.put(user.getUsername(), user);
+        }
+        return users;
     }
 
     /**
@@ -196,8 +278,23 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
      * @return the converted availability in Map format.
      */
     private Map<Timeslot, Boolean> convertAvailability(JSONArray jsonAvailability) {
-        // TODO: implement
-        return null;
+        Map<Timeslot, Boolean> availabilityMap = new HashMap<>();
+        for (int i = 0; i < jsonAvailability.length(); i++) {
+            JSONObject timeslotJson = jsonAvailability.getJSONObject(i);
+            // Parse the "start" times
+            String start = timeslotJson.getString(START);
+            // Convert the start time to a ZonedDateTime
+            ZonedDateTime startTime = ZonedDateTime.parse(start);
+            // Extract the weekday (1 = Monday, ..., 7 = Sunday)
+            int day = startTime.getDayOfWeek().getValue();
+            // Extract the hour in 24-hour format
+            int hour = startTime.getHour();
+            // Create a Timeslot object
+            Timeslot timeslot = new Timeslot(day, hour);
+            // Add the Timeslot to the map with a value of true (indicating availability)
+            availabilityMap.put(timeslot, true);
+        }
+        return availabilityMap;
     }
 
     /**
@@ -406,7 +503,59 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
 
     @Override
     public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
-        Map<User, List<Timeslot>> matches = Matcher.findMatches(user, expand);
+        Map<Timeslot, Boolean> availabilityMap = fetchAvailability(user.getSchedulerID());
+        Map<User, List<Timeslot>> matchesByAvailability = new HashMap<>();
+        // Get a list of all users (excluding the current user)
+        for (Map.Entry<String, User> entry : users.entrySet()) {
+            User otherUser = entry.getValue();
+
+            // Skip matching with the current user
+            if (!otherUser.equals(user)) {
+                Map<Timeslot, Boolean> otherUserAvailabilityMap = fetchAvailability(otherUser.getSchedulerID());
+                List<Timeslot> sharedTimeslots = new ArrayList<>();
+
+                // Compare the availability of the current user with this other user
+                for (Map.Entry<Timeslot, Boolean> timeEntry : availabilityMap.entrySet()) {
+                    Timeslot timeslot = timeEntry.getKey();
+                    Boolean isAvailable = timeEntry.getValue();
+
+                    // If both users are available at the same time for this Timeslot, add it to the match list
+                    if (isAvailable && otherUserAvailabilityMap.getOrDefault(timeslot, false)) {
+                        sharedTimeslots.add(timeslot);
+                    }
+                }
+
+                // If there are any shared Timeslots, add them to the matches map
+                if (!sharedTimeslots.isEmpty()) {
+                    matchesByAvailability.put(otherUser, sharedTimeslots);
+                }
+            }
+        }
+
+        Map<User, List<Timeslot>> matches = new HashMap<>();
+        for (Map.Entry<User, List<Timeslot>> entry : matchesByAvailability.entrySet()) {
+            User otherUser = entry.getKey();
+            List<Timeslot> timeslots = entry.getValue();
+            if (expand) {
+                // Match by program
+                // TODO: PART OF ALEX'S USER STORY
+            }
+            else {
+                // Match by courses
+                // Convert the course lists to sets
+                Set<Course> userCourseSet = new HashSet<>(user.getCourses());
+                Set<Course> otherUserCourseSet = new HashSet<>(otherUser.getCourses());
+
+                // Retain only the courses that are common to both sets
+                userCourseSet.retainAll(otherUserCourseSet);
+
+                if (!userCourseSet.isEmpty()) {
+                    matches.put(otherUser, timeslots);
+                }
+            }
+        }
+
+        // Set the user's matches as per above criteria
         user.setMatches(matches);
         return matches;
     }
