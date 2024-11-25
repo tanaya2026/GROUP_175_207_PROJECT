@@ -16,25 +16,24 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import view.LabelTextPanel;
 
 /**
  * The View for the Home page of the program.
  */
 public class HomePageView extends JPanel implements PropertyChangeListener {
-    private static final int WIDTH_FRAME = 1000;
-    private static final int HEIGHT_FRAME = 300;
-    private final String viewName = "sign up";
+    private final String viewName = "home page";
     private final HomePageViewModel homePageViewModel;
 
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
 
     private final JButton createAccount;
-    private final JButton Login;
+    private final JButton login;
 
     public HomePageView(HomePageViewModel homePageViewModel) {
         this.homePageViewModel = homePageViewModel;
-        // homePageViewModel.addPropertyChangeListener(this);
+        homePageViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel(HomePageViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -42,8 +41,8 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
         final JLabel explanation = new JLabel(HomePageViewModel.APP_LABEL);
         explanation.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        final JLabel login = new JLabel(HomePageViewModel.LOGIN_TITLE_BUTTON_LABEL);
-        login.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel loginlabel = new JLabel(HomePageViewModel.LOGIN_TITLE_BUTTON_LABEL);
+        loginlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel(HomePageViewModel.USERNAME_LABEL), usernameInputField);
@@ -53,8 +52,8 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
         final JPanel buttons = new JPanel();
         createAccount = new JButton(HomePageViewModel.SIGNUP_BUTTON_LABEL);
         buttons.add(createAccount);
-        Login = new JButton(HomePageViewModel.LOGIN_TITLE_BUTTON_LABEL);
-        buttons.add(Login);
+        login = new JButton(HomePageViewModel.LOGIN_TITLE_BUTTON_LABEL);
+        buttons.add(login);
 
         // Action listener for the "Create an Account" button
         createAccount.addActionListener(new ActionListener() {
@@ -70,7 +69,7 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
         });
 
         // ActionListener for "Login" button
-        Login.addActionListener(new ActionListener() {
+        login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open the Login UseCase frame
@@ -89,5 +88,13 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
 
     public static final String getViewName() {
         return viewName;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final SignupState state = (SignupState) evt.getNewValue();
+        if (state.getUsernameError() != null) {
+            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        }
     }
 }

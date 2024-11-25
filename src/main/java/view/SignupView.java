@@ -12,11 +12,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import view.LabelTextPanel;
 
 /**
  * The View for the Signup Use Case.
@@ -161,5 +164,13 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     }
     public String getViewName() {
         return viewName;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final SignupState state = (SignupState) evt.getNewValue();
+        if (state.getUsernameError() != null) {
+            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        }
     }
 }
