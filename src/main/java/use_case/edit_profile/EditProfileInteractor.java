@@ -37,6 +37,9 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
                 user.setName(inputData.getName());
                 nameOrEmailUpdated = true;
             }
+            if (inputData.getPassword() != null && !inputData.getPassword().equals(user.getPassword())) {
+                user.setPassword(inputData.getPassword());
+            }
             if (inputData.getBio() != null) user.setBio(inputData.getBio());
             if (inputData.getProgram() != null) user.setProgram(inputData.getProgram());
             if (inputData.getCourses() != null) {
@@ -85,6 +88,7 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
             // Create output data and present success
             EditProfileOutputData outputData = new EditProfileOutputData(
                     user.getName(),
+                    user.getPassword(),
                     user.getBio(),
                     user.getEmail(),
                     user.getProgram(),
