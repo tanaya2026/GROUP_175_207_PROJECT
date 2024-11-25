@@ -26,16 +26,12 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
             // Fetch the user
             User user = dataAccessObject.getUserByUsername(username);
 
-            boolean nameOrEmailUpdated = false;
-
             // Check and update personal details
             if (inputData.getEmail() != null && !inputData.getEmail().equals(user.getEmail())) {
                 user.setEmail(inputData.getEmail());
-                nameOrEmailUpdated = true;
             }
             if (inputData.getName() != null && !inputData.getName().equals(user.getName())) {
                 user.setName(inputData.getName());
-                nameOrEmailUpdated = true;
             }
             if (inputData.getPassword() != null && !inputData.getPassword().equals(user.getPassword())) {
                 user.setPassword(inputData.getPassword());
@@ -47,32 +43,8 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
                 user.addCourses(inputData.getCourses());
             }
 
-            // Handle name/email update that affects resourceID
-            if (nameOrEmailUpdated) {
-                // Fetch existing availability as a fallback
-                Map<Timeslot, Boolean> currentAvailability = dataAccessObject.fetchAvailability(user.getSchedulerID());
-
-                // Delete the old resource
-                dataAccessObject.deleteSlotifyResource(user.getResourceID());
-
-                // Create a new resource and update resourceID
-                String newResourceID = dataAccessObject.createSlotifyResource(user.getName(), user.getEmail());
-                user.setResourceID(newResourceID);
-
-                // Create a new schedule
-                Map<Timeslot, Boolean> newAvailability;
-                if (inputData.getAvailability() != null) {
-                    // Use the provided new availability
-                    newAvailability = inputData.getAvailability();
-                } else {
-                    // Fallback to the current availability
-                    newAvailability = currentAvailability;
-                }
-
-                String newSchedulerID = dataAccessObject.createSlotifyScheduler(newAvailability, newResourceID);
-                user.setSchedulerID(newSchedulerID);
-            } else if (inputData.getAvailability() != null) {
-                // Handle schedule updates independently if name/email is unchanged
+            if (inputData.getAvailability() != null) {
+                // Delete an existing schedule
                 dataAccessObject.deleteSlotifyScheduler(user.getSchedulerID());
 
                 // Create a new schedule
@@ -83,8 +55,6 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
             // Save the updated user
             dataAccessObject.save(user);
 
-            // Create output data and present success
-            // Create output data and present success
             // Create output data and present success
             EditProfileOutputData outputData = new EditProfileOutputData(
                     user.getName(),
