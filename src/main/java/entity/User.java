@@ -246,6 +246,23 @@ public class User {
     }
 
     /**
+     * Returns the resourceID of the user.
+     * @return the resourceID of the user.
+     */
+    public String getResourceID() {
+        return resourceID;
+    }
+
+    /**
+     * Sets the resourceID of the user.
+     * @param resourceID the new resourceID to set.
+     */
+    public void setResourceID(String resourceID) {
+        this.resourceID = resourceID;
+    }
+
+
+    /**
      * Returns the matches of the user.
      * @return the Map of the Users who are matches and a list of Timeslots for which they share availability.
      */
