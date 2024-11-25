@@ -20,7 +20,7 @@ import javax.swing.event.DocumentListener;
 /**
  * The View for the Home page of the program.
  */
-public class HomePageView extends JPanel {
+public class HomePageView extends JPanel implements PropertyChangeListener {
     private static final int WIDTH_FRAME = 1000;
     private static final int HEIGHT_FRAME = 300;
     private final String viewName = "sign up";
@@ -65,10 +65,27 @@ public class HomePageView extends JPanel {
                 registrationApp.setVisible(true);
 
                 // Close the current RegisterView frame
+                registrationApp.dispose();
+            }
+        });
+
+        // ActionListener for "Login" button
+        Login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open the Login UseCase frame
+
+                // Include code here!
+
+                // Close the current RegisterView frame
                 //  frame.dispose();
             }
         });
+
     }
+
+    // Include a action listener button for Login Use Case!
+
 
     public static final String getViewName() {
         return viewName;
