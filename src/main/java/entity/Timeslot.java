@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Objects;
+
 /**
  * Represents a timeslot which is used to define the availability of users.
  */
@@ -28,6 +30,25 @@ public class Timeslot {
         String name = this.dayName();
         String times = this.timeName();
         return "Timeslot { day: " + name + ", time: " + times + '}';
+    }
+
+    // Override equals() to compare based on day and time
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Timeslot timeslot = (Timeslot) obj;
+        return day == timeslot.getDay() && time == timeslot.getTime();
+    }
+
+    // Override hashCode() to ensure consistency with equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, time);
     }
 
     /**
