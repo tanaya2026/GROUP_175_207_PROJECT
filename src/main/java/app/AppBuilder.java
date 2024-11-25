@@ -35,12 +35,12 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.EditProfileView;
-import view.HomePageView;
+import view.*;
 import view.LoggedInView; // missing??
-import view.LoginView; // needed?
-import view.MatchesView;
-import view.ViewManager;
+import view.LoginView;// needed?
+import view.HomePageView;
+import view.SignupView;
+
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of CA architecture; piece by piece.
@@ -63,6 +63,7 @@ public class AppBuilder {
     private HomePageViewModel homePageViewModel;
     private HomePageView homePageView;
     private SignupViewModel signupViewModel;
+    private SignupView signupView;
     private LoginViewModel loginViewModel;
     private LoggedInViewModel loggedInViewModel;
     private LoggedInView loggedInView;
