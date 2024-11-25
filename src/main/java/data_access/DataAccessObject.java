@@ -570,4 +570,12 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         users.put(user.getName(), user);
     }
 
+    public User getUserByUsername(String username) {
+        if (!existsByName(username)) {
+            throw new IllegalArgumentException("User not found.");
+        }
+        return users.get(username);
+    }
+
+
 }
