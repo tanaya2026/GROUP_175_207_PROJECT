@@ -1,13 +1,23 @@
 package view;
 
+import interface_adapter.edit_profile.EditProfileController;
+import entity.Course;
+import entity.Timeslot;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditProfileView extends JFrame {
 
-    public EditProfileView() {
+    private final EditProfileController controller;
+
+    public EditProfileView(EditProfileController controller) {
+        this.controller = controller;
+
         setTitle("Edit Profile");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,12 +69,12 @@ public class EditProfileView extends JFrame {
 
         // Availability Section (Monday-Sunday, 9 AM to 5 PM)
         JLabel availabilityLabel = new JLabel("Availability:");
-        JPanel availabilityPanel = new JPanel(new GridLayout(7, 9)); // 7 days, 9 time blocks (9 AM to 5 PM)
-        JCheckBox[][] checkBoxes = new JCheckBox[7][9];
+        JPanel availabilityPanel = new JPanel(new GridLayout(7, 8)); // 7 days, 8 time blocks (9 AM to 5 PM)
+        JCheckBox[][] checkBoxes = new JCheckBox[7][8];
 
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 9; j++) {
+            for (int j = 0; j < 8; j++) {
                 JCheckBox checkBox = new JCheckBox(days[i] + " " + (9 + j) + ":00");
                 checkBoxes[i][j] = checkBox;
                 availabilityPanel.add(checkBox);
@@ -96,28 +106,39 @@ public class EditProfileView extends JFrame {
             String program = programField.getText();
             String courses = coursesField.getText();
 
+            // Convert courses to a List of Course objects
+            List<Course> courseList = new ArrayList<>();
+            for (String courseCode : courses.split(",")) {
+                courseList.add(new Course(courseCode.trim(), "")); // Assuming course name is not required for now
+            }
+
             // Collect only selected availability
-            Map<String, Boolean> selectedAvailability = new HashMap<>();
+            Map<Timeslot, Boolean> selectedAvailability = new HashMap<>();
             for (int i = 0; i < 7; i++) {
-                for (int j = 0; j < 9; j++) {
+                for (int j = 0; j < 8; j++) {
                     if (checkBoxes[i][j].isSelected()) {
-                        String timeBlock = days[i] + " " + (9 + j) + ":00";
-                        selectedAvailability.put(timeBlock, true);
+                        Timeslot timeslot = new Timeslot(i + 1, 9 + j);
+                        selectedAvailability.put(timeslot, true);
                     }
                 }
             }
 
-            // Display collected data
-            JOptionPane.showMessageDialog(this,
-                    "Saved:\nEmail: " + email +
-                            "\nPassword: " + password +
-                            "\nName: " + name +
-                            "\nBio: " + bio +
-                            "\nProgram: " + program +
-                            "\nCourses: " + courses +
-                            "\nSelected Availability: " + selectedAvailability.keySet());
+            // Pass data to the controller
+            controller.handleEditProfile(
+                    "currentUsername", // Replace with actual username
+                    email,
+                    password,
+                    name,
+                    bio,
+                    program,
+                    courseList,
+                    selectedAvailability,
+                    "currentSchedulerID" // Replace with the actual schedulerID
+            );
+
+            JOptionPane.showMessageDialog(this, "Changes saved successfully.");
         });
-        //need to pass it to Controlller logic
+
         cancelButton.addActionListener(e -> dispose());
     }
 }
