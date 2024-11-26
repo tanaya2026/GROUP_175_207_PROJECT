@@ -11,9 +11,9 @@ import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.edit_profile.EditProfileViewModel;
-import interface_adapter.find_matches.FindMatchesController;
-import interface_adapter.find_matches.FindMatchesPresenter;
-import interface_adapter.find_matches.FindMatchesViewModel;
+import interface_adapter.display_matches.DisplayMatchesController;
+import interface_adapter.display_matches.DisplayMatchesPresenter;
+import interface_adapter.display_matches.DisplayMatchesViewModel;
 import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
@@ -23,9 +23,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
-import use_case.find_matches.FindMatchesInputBoundary;
-import use_case.find_matches.FindMatchesInteractor;
-import use_case.find_matches.FindMatchesOutputBoundary;
+import use_case.display_matches.DisplayMatchesInputBoundary;
+import use_case.display_matches.DisplayMatchesInteractor;
+import use_case.display_matches.DisplayMatchesOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -36,8 +36,7 @@ import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
 import view.*;
-import view.LoggedInView; // missing??
-import view.LoginView;// needed?
+import view.LoginView; // TODO: ADD THIS VIEW
 import view.HomePageView;
 import view.SignupView;
 
@@ -58,15 +57,13 @@ public class AppBuilder {
 
     private EditProfileView editProfileView;
     private EditProfileViewModel editProfileViewModel;
-    private MatchesView matchesView;
-    private FindMatchesViewModel findMatchesViewModel;
+    private DisplayMatchesView displayMatchesView;
+    private DisplayMatchesViewModel displayMatchesViewModel;
     private HomePageViewModel homePageViewModel;
     private HomePageView homePageView;
     private SignupViewModel signupViewModel;
     private SignupView signupView;
     private LoginViewModel loginViewModel;
-    private LoggedInViewModel loggedInViewModel;
-    private LoggedInView loggedInView;
     private LoginView loginView;
 
     public AppBuilder() {
@@ -75,7 +72,7 @@ public class AppBuilder {
 
 
     /**
-     * Adds the HomePage View to the application.
+     * Adds the HomePageView to the application.
      * @return this builder
      */
     public AppBuilder addHomePageView() {
@@ -86,18 +83,18 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the MatchesView View to the application.
+     * Adds the DisplayMatchesView to the application.
      * @return this builder
      */
-    public AppBuilder addMatchesView() {
-        findMatchesViewModel = new FindMatchesViewModel();
-        matchesView = new MatchesView(findMatchesViewModel);
-        cardPanel.add(matchesView, matchesView.getViewName());
+    public AppBuilder addDisplayMatchesView() {
+        displayMatchesViewModel = new DisplayMatchesViewModel();
+        displayMatchesView = new DisplayMatchesView(displayMatchesViewModel);
+        cardPanel.add(displayMatchesView, displayMatchesView.getViewName());
         return this;
     }
 
     /**
-     * Adds the Signup View to the application.
+     * Adds the SignupView to the application.
      * @return this builder
      */
     public AppBuilder addSignupView() {
@@ -108,7 +105,7 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the Login View to the application.
+     * Adds the LoginView to the application.
      * @return this builder
      */
     public AppBuilder addLoginView() {
@@ -130,17 +127,16 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the FindMatches Use Case to the application.
+     * Adds the DisplayMatches Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addFindMatchesUseCase() {
-        final FindMatchesOutputBoundary findMatchesOutputBoundary = new FindMatchesPresenter(viewManagerModel,
-                signupViewModel, loginViewModel);
-        final FindMatchesInputBoundary findMatchesInteractor = new FindMatchesInteractor(
-                dataAccessObject, findMatchesOutputBoundary, userFactory);
+    public AppBuilder addDisplayMatchesUseCase() {
+        final DisplayMatchesOutputBoundary displayMatchesOutputBoundary = new DisplayMatchesPresenter(displayMatchesViewModel);
+        final DisplayMatchesInputBoundary displayMatchesInteractor = new DisplayMatchesInteractor(
+                dataAccessObject, displayMatchesOutputBoundary);
 
-        final FindMatchesController controller = new FindMatchesController(findMatchesInteractor);
-        matchesView.setFindMatchesController(controller);
+        final DisplayMatchesController controller = new DisplayMatchesController(displayMatchesInteractor);
+        displayMatchesView.setDisplayMatchesController(controller);
         return this;
     }
 

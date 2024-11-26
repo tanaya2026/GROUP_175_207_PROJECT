@@ -1,16 +1,20 @@
 package view;
 
+import interface_adapter.display_matches.DisplayMatchesViewModel;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class MatchesView extends JPanel {
+public class DisplayMatchesView extends JPanel {
+
+    private final String viewName = "display matches";
 
     // CONSTANTS
     private static final int TITLE_FONT_SIZE = 16;
     private static final int FRAME_HEIGHT = 200;
     private static final int FRAME_WIDTH = 300;
 
-    public MatchesView() {
+    public DisplayMatchesView(DisplayMatchesViewModel displayMatchesViewModel) {
         // Set the layout for the panel
         setLayout(new BorderLayout());
         // Create a label for the title
@@ -56,10 +60,14 @@ public class MatchesView extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
-        // Add MatchesView panel to the frame
-        frame.add(new MatchesView());
+        // Add DisplayMatchesView panel to the frame
+        frame.add(new DisplayMatchesView());
 
         // Display the frame
         frame.setVisible(true);
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

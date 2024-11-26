@@ -5,7 +5,6 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 import entity.Course;
-import entity.Matcher;
 import entity.Timeslot;
 import entity.User;
 import org.json.JSONArray;
@@ -19,7 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import use_case.edit_profile.EditProfileDataAccessInterface;
-import use_case.find_matches.FindMatchesDataAccessInterface;
+import use_case.display_matches.DisplayMatchesDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.logout.LogoutUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
@@ -31,7 +30,7 @@ import java.time.LocalDateTime;
  * UserDB class.
  */
 public class DataAccessObject implements EditProfileDataAccessInterface,
-        FindMatchesDataAccessInterface,
+        DisplayMatchesDataAccessInterface,
         LoginUserDataAccessInterface,
         LogoutUserDataAccessInterface,
         SignupUserDataAccessInterface {
