@@ -1,16 +1,16 @@
-package use_case.find_matches;
+package use_case.display_matches;
 
 import entity.User;
 
 /**
- * The input data for the Find Matches Use Case.
+ * The input data for the Display Matches Use Case.
  */
-public class FindMatchesInputData {
+public class DisplayMatchesInputData {
 
     private final User user;
     private final boolean expand;
 
-    public FindMatchesInputData(User user, boolean expand) {
+    public DisplayMatchesInputData(User user, boolean expand) {
         this.user = user;
         this.expand = expand;
     }

@@ -1,5 +1,7 @@
 package entity;
 
+import data_access.DataAccessObject;
+
 import java.util.Map;
 
 /**
@@ -17,30 +19,8 @@ public final class Availability {
      * @return the availability in Map format, from its Slotify schedulerID for this user.
      */
     public static Map<Timeslot, Boolean> getAvailability(String schedulerID) {
-        // Need to figure out how to retrieve the scheduler availability from Slotify
-        // Store in JSONObejct and then convert to Map with for loop?
+        DataAccessObject db = new DataAccessObject();
+        return db.fetchAvailability(schedulerID);
     }
-
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        int count = 0;
-//        sb.append("Availability {");
-//        for (Map.Entry<Timeslot, Boolean> entry : getAvailability().entrySet()) {
-//            Timeslot timeslot = entry.getKey();
-//            Boolean isAvailable = entry.getValue();
-//            if (isAvailable) {
-//                sb.append("\n.             ").append(timeslot.toString());
-//                count = count + 1;
-//            }
-//        }
-//
-//        if (count == 0) {
-//            return "No availability";
-//        }
-//
-//        sb.append("\n}");
-//        return sb.toString();
-//    }
 
 }

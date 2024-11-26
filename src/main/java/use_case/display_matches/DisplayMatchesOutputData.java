@@ -1,4 +1,4 @@
-package use_case.find_matches;
+package use_case.display_matches;
 
 import entity.Timeslot;
 import entity.User;
@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Output Data for the Find Matches Use Case.
+ * Output Data for the Display Matches Use Case.
  */
-public class FindMatchesOutputData {
+public class DisplayMatchesOutputData {
 
     private final Map<User, List<Timeslot>> matches;
 
     private final boolean useCaseFailed;
 
-    public FindMatchesOutputData(Map<User, List<Timeslot>> matches, boolean useCaseFailed) {
+    public DisplayMatchesOutputData(Map<User, List<Timeslot>> matches, boolean useCaseFailed) {
         this.matches = matches;
         this.useCaseFailed = useCaseFailed;
     }
