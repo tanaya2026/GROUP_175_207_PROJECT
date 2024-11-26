@@ -26,11 +26,11 @@ public class NoMatchesFound extends JPanel {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create the MatchesView frame when button1 is clicked
+                // Create the DisplayMatchesView frame when button1 is clicked
                 JFrame potentialMatchesFrame = new JFrame("Potential Matches");
                 potentialMatchesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 potentialMatchesFrame.setSize(300, 200);
-                potentialMatchesFrame.add(new MatchesView());
+                potentialMatchesFrame.add(new DisplayMatchesView());
                 potentialMatchesFrame.setVisible(true);
             }
         });
