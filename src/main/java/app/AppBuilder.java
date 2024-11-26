@@ -83,6 +83,21 @@ public class AppBuilder {
     }
 
     /**
+     * Adds the HomePage Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addHomePageUseCase() {
+        final SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel,
+                signupViewModel, displayMatchesViewModel);
+        final SignupInputBoundary userSignupInteractor = new SignupInteractor(
+                dataAccessObject, signupOutputBoundary, userFactory);
+
+        final SignupController controller = new SignupController(userSignupInteractor);
+        signupView.setSignupController(controller);
+        return this;
+    }
+
+    /**
      * Adds the DisplayMatchesView to the application.
      * @return this builder
      */
@@ -146,7 +161,7 @@ public class AppBuilder {
      */
     public AppBuilder addSignupUseCase() {
         final SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel,
-                signupViewModel, loginViewModel);
+                signupViewModel, displayMatchesViewModel);
         final SignupInputBoundary userSignupInteractor = new SignupInteractor(
                 dataAccessObject, signupOutputBoundary, userFactory);
 
