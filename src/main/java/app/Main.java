@@ -15,6 +15,7 @@ public class Main {
         final JFrame application = appBuilder
                 .addDisplayMatchesView()
                 .addHomePageView()
+                .addHomePageUseCase()
                 .addLoginView()
                 .addSignupView()
                 .addLoggedInView()
