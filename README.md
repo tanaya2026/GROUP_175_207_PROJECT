@@ -1,18 +1,57 @@
-Team Members:
-1. Tanaya Datar
-2. Cooper Bolinius
-3. Alexander Pascalev
-4. Jinbo Chang
-5. Harris Ahmed
+# Study Buddy Finder
 
-GitHub Usernames:
-| Member  | GitHub usernames |
-| ------------- | ------------- |
-| Tanaya Datar  |tanaya2026|
-| Cooper Bolinius  |cbolinius|
-| Alexander Pascalev  |a1exp4sc|
-| Jinbo Chang  |JinboChang|
-| Harris Ahmed  |harriss4567|
+**CSC207 Group Project**
+
+---
+
+## Authors and Contributors:
+- [**Tanaya Datar**](https://github.com/tanaya2026)
+- [**Cooper Bolinius**](https://github.com/cbolinius)
+- [**Alexander Pascalev**](https://github.com/a1exp4sc)
+- [**Jinbo Chang**](https://github.com/JinboChang)
+- [**Harris Ahmed**](https://github.com/harriss4567)
+
+---
+
+## Project Summary
+
+SUMMARY
+
+---
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Guide](#usage-guide)
+4. [License](#license)
+5. [Feedback](#feedback)
+6. [Contributions](#contributions)
+
+---
+
+## Features
+
+### Key Features
+- **Feature 1**: 
+- **Feature 2**: 
+- **Feature 3**: 
+
+<br/>
+
+### Demonstrations
+![Feature Screenshot](path/to/screenshot.png)  
+[Watch Tutorial](https://youtube.com/tutorial-link)  
+
+---
+
+## Installation Instructions
+
+### Prerequisites
+- Software: Java 17
+- Packages: ?
+
+---
 
 User stories:
 Team user story (core functionality):
