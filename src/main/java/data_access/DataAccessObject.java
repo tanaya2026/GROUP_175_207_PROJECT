@@ -5,7 +5,6 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 import entity.Course;
-import entity.Matcher;
 import entity.Timeslot;
 import entity.User;
 import org.json.JSONArray;
@@ -19,7 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import use_case.edit_profile.EditProfileDataAccessInterface;
-import use_case.find_matches.FindMatchesDataAccessInterface;
+import use_case.display_matches.DisplayMatchesDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.logout.LogoutUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
@@ -31,7 +30,7 @@ import java.time.LocalDateTime;
  * UserDB class.
  */
 public class DataAccessObject implements EditProfileDataAccessInterface,
-        FindMatchesDataAccessInterface,
+        DisplayMatchesDataAccessInterface,
         LoginUserDataAccessInterface,
         LogoutUserDataAccessInterface,
         SignupUserDataAccessInterface {
@@ -186,10 +185,10 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         String jsmithBio = "To be totally honest, I've fallen behind in calc and could use some help explaining concepts.";
         String csingerBio = "I love studying with a good snack, but sometimes end up eating more than studying... :(";
         String djacksonBio = "Looking to pursue a career in AI";
-        String ajohnsonSchedulerID = "";
-        String jsmithSchedulerID = "";
-        String csingerSchedulerID = "";
-        String djacksonSchedulerID = "";
+        String ajohnsonSchedulerID = "217e62a0-3725-4173-99c3-86dd92f7fb9e";
+        String jsmithSchedulerID = "aaa7c176-9e23-4368-abc6-94665d8cf822";
+        String csingerSchedulerID = "e44bc9da-f5a7-4fcc-a0d9-3c7b31ec1bb3";
+        String djacksonSchedulerID = "55120d37-50e2-469e-8632-ff1d0ee7db09";
         List<User> userList = new ArrayList<>();
         userList.add(new User("ajohnson", "ajohn@gmail.com", "Andrew Johnson", ajohnsonCourses, programCS, ajohnsonBio, ajohnsonSchedulerID));
         userList.add(new User("jsmith", "jess03ica@hotmail.com", "Jessica Smith", jsmithCourses, "Mathematics", jsmithBio, jsmithSchedulerID));
@@ -243,7 +242,7 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
 
         JSONArray blockedTimes = new JSONArray();
         JSONObject blockedTime = new JSONObject();
-        if (timeslot.getKey().getDay() == SINGLE_DIGIT_9) {
+        if (timeslot.getKey().getTime() == SINGLE_DIGIT_9) {
             // Requires leading zero
             blockedTime.put(START, "09:00");
         }
