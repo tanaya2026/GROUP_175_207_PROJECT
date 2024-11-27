@@ -1,10 +1,10 @@
 package use_case.display_matches;
 
-import entity.Timeslot;
-import entity.User;
-
 import java.util.List;
 import java.util.Map;
+
+import entity.Timeslot;
+import entity.User;
 
 /**
  * The interface of the DAO for the Display Matches Use Case.
