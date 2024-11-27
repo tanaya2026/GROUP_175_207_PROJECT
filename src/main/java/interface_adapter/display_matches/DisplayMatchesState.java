@@ -17,18 +17,34 @@ public class DisplayMatchesState {
 
     }
 
+    /**
+     * Returns the current user's username.
+     * @return this username.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the current user's username.
+     * @param username this username.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Sets the current user's password.
+     * @param password this password.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Returns the current user's password.
+     * @return this password.
+     */
     public String getPassword() {
         return password;
     }

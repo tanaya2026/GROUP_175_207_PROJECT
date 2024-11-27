@@ -15,10 +15,18 @@ public class DisplayMatchesInputData {
         this.expand = expand;
     }
 
+    /**
+     * Returns the current user requesting to display their matches.
+     * @return this User object.
+     */
     User getUser() {
         return user;
     }
 
+    /**
+     * Returns the boolean indicating whether to match based on courses or program.
+     * @return this boolean "expand".
+     */
     boolean getExpand() {
         return expand;
     }
