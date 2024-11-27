@@ -1,4 +1,5 @@
 package view;
+import interface_adapter.homepage.HomePageController;
 import interface_adapter.homepage.HomePageViewModel;
 
 import java.awt.Component;
@@ -16,13 +17,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import interface_adapter.homepage.HomePageViewState;
+import interface_adapter.signup.SignupState;
 import view.LabelTextPanel;
 
 /**
  * The View for the Home page of the program.
  */
 public class HomePageView extends JPanel implements PropertyChangeListener {
-    private final String viewName = "home page";
+    private static final String viewName = "home page";
     private final HomePageViewModel homePageViewModel;
 
     private final JTextField usernameInputField = new JTextField(15);
@@ -59,32 +63,26 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
         createAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open the UserRegistrationApp frame
-                UserRegistration registrationApp = new UserRegistration();
-                registrationApp.setVisible(true);
-
-                // Close the current RegisterView frame
-                registrationApp.dispose();
+                if (e.getSource().equals(createAccount)) {
+                    final HomePageViewState currentState = HomePageViewModel.getState();
+                    HomePageController.execute();
             }
         });
 
-        // ActionListener for "Login" button
-        login.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open the Login UseCase frame
-
-                // Include code here!
-
-                // Close the current RegisterView frame
-                //  frame.dispose();
-            }
+//        // ActionListener for "Login" button
+//        login.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Open the Login UseCase frame
+//
+//                // Include code here!
+//
+//                // Close the current RegisterView frame
+//                //  frame.dispose();
+//            }
         });
 
     }
-
-    // Include a action listener button for Login Use Case!
-
 
     public static final String getViewName() {
         return viewName;
@@ -92,9 +90,6 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
-        }
+        final HomePageViewState state = (HomePageViewState) evt.getNewValue();
     }
 }
