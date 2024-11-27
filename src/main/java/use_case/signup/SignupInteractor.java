@@ -21,7 +21,14 @@ public class SignupInteractor implements SignupInputBoundary {
 
     @Override
     public void execute(SignupInputData signupInputData) {
-        final User user = userFactory.create(signupInputData.getUsername(), signupInputData.getEmail(), signupInputData.getPassword(),signupInputData.getName(), signupInputData.getCourses(),signupInputData.getProgram(),signupInputData.getBio(), signupInputData.getAvaliablity());
+        final User user = userFactory.create(signupInputData.getUsername(),
+                signupInputData.getEmail(),
+                signupInputData.getPassword(),
+                signupInputData.getName(),
+                signupInputData.getCourses(),
+                signupInputData.getProgram(),
+                signupInputData.getBio(),
+                signupInputData.getAvaliablity());
         userDataAccessObject.save(user);
 
         final SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);

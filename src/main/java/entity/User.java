@@ -1,7 +1,5 @@
 package entity;
 
-import data_access.DataAccessObject;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +17,12 @@ public class User {
     private List<Course> courses;
     private String program;
     private String bio;
-    private String resourceID;
+    private final String resourceID;
     private String schedulerID;
     private Map<User, List<Timeslot>> matches;
 
     public User(String username, String email, String password, String name, List<Course> courses,
-                String program, String bio, Map<Timeslot, Boolean> availability) {
+                String program, String bio, Map<Timeslot, Boolean> availability, SlotifyServiceInterface slotifyService) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -34,9 +32,8 @@ public class User {
         this.bio = bio;
         matches = new HashMap<>();
 
-        DataAccessObject db = new DataAccessObject();
-        this.resourceID = db.createSlotifyResource(name, email);
-        this.schedulerID = db.createSlotifyScheduler(availability, resourceID);
+        this.resourceID = slotifyService.createSlotifyResource(name, email);
+        this.schedulerID = slotifyService.createSlotifyScheduler(availability, resourceID);
     }
 
     // For the purposes of loading in the pre-set users
@@ -80,7 +77,8 @@ public class User {
                 + "  courses: " + lstCourses + newLine
                 + "  program: " + program + newLine
                 + "  bio: " + bio + newLine
-                + "  availability: " + Availability.getAvailability(schedulerID).toString() + '}';
+                + "  resourceID: " + resourceID + newLine
+                + "  schedulerID: " + schedulerID + newLine + '}';
     }
 
     /**
@@ -107,7 +105,6 @@ public class User {
         this.email = email;
     }
 
-    // TO BE REMOVED AFTER USER DB IMPLEMENTED
     /**
      * Returns the password of the user.
      * @return the password of the user.
@@ -238,11 +235,11 @@ public class User {
 
     /**
      * Returns the availability of the user based on the user's schedulerID.
+     * @param slotifyService Dependency Injection for calling the API.
      * @return the Availability object representing the user's availability.
      */
-    public Map<Timeslot, Boolean> getAvailability() {
-        DataAccessObject db = new DataAccessObject();
-        return db.fetchAvailability(schedulerID);
+    public Map<Timeslot, Boolean> getAvailability(SlotifyServiceInterface slotifyService) {
+        return slotifyService.fetchAvailability(schedulerID);
     }
 
     /**
@@ -252,15 +249,6 @@ public class User {
     public String getResourceID() {
         return resourceID;
     }
-
-    /**
-     * Sets the resourceID of the user.
-     * @param resourceID the new resourceID to set.
-     */
-    public void setResourceID(String resourceID) {
-        this.resourceID = resourceID;
-    }
-
 
     /**
      * Returns the matches of the user.
