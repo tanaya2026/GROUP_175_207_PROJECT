@@ -26,7 +26,7 @@ public class ViewModel<T> {
         return this.viewName;
     }
 
-    public T getState() {
+    public static T getState() {
         return this.state;
     }
 
