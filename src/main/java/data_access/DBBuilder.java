@@ -77,10 +77,10 @@ public class DBBuilder {
         String jsmithBio = "To be totally honest, I've fallen behind in calc and could use some help explaining concepts.";
         String csingerBio = "I love studying with a good snack, but sometimes end up eating more than studying... :(";
         String djacksonBio = "Looking to pursue a career in AI";
-        String ajohnsonSchedulerID = "217e62a0-3725-4173-99c3-86dd92f7fb9e";
-        String jsmithSchedulerID = "aaa7c176-9e23-4368-abc6-94665d8cf822";
-        String csingerSchedulerID = "e44bc9da-f5a7-4fcc-a0d9-3c7b31ec1bb3";
-        String djacksonSchedulerID = "55120d37-50e2-469e-8632-ff1d0ee7db09";
+        String ajohnsonSchedulerID = "b8f85ef4-a5c3-4bf4-960e-b9b7733b4486";
+        String jsmithSchedulerID = "4f2f3ba3-22bb-43eb-9e7a-a5096051d564";
+        String csingerSchedulerID = "a721d55a-7d86-4386-bd5b-f990bdb003e0";
+        String djacksonSchedulerID = "95491c69-3cf9-45f4-9715-5cee13c4eb4d";
         List<User> userList = new ArrayList<>();
         userList.add(new User("ajohnson", "ajohn@gmail.com", "Andrew Johnson", ajohnsonCourses, programComputerScience, ajohnsonBio, ajohnsonSchedulerID));
         userList.add(new User("jsmith", "jess03ica@hotmail.com", "Jessica Smith", jsmithCourses, "Mathematics", jsmithBio, jsmithSchedulerID));
