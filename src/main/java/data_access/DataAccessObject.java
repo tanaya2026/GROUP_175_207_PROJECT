@@ -2,24 +2,28 @@ package data_access;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import entity.Course;
 import entity.SlotifyServiceInterface;
 import entity.Timeslot;
 import entity.User;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.display_matches.DisplayMatchesDataAccessInterface;
+import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.logout.LogoutUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
@@ -34,89 +38,10 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         SignupUserDataAccessInterface,
         SlotifyServiceInterface {
 
-    private final Map<String, User> users = loadUsers();
-    private final List<Course> courses = loadCourses();
+    private final Map<String, User> users = DBBuilder.loadUsers();
+    private final List<Course> courses = DBBuilder.loadCourses();
 
-    /**
-     * Load in the courses that students can be enrolled in.
-     * @return a list of the courses that students can be enrolled in.
-     */
-    private static List<Course> loadCourses() {
-        List<Course> courses = new ArrayList<>();
-        courses.add(new Course("CSC207", "Software Design"));
-        courses.add(new Course("CSC110", "Foundations of Computer Science I"));
-        courses.add(new Course("CSC111", "Foundations of Computer Science II"));
-        courses.add(new Course("CSC148", "Introduction to Computer Science"));
-        courses.add(new Course("CSC165", "Mathematical Expression and Reasoning for Computer Science"));
-        courses.add(new Course("CSC240", "Enriched Introduction to the Theory of Computation"));
-        courses.add(new Course("MAT137", "Calculus with Proofs"));
-        courses.add(new Course("CSC236", "Introduction to the Theory of Computation"));
-        courses.add(new Course("AST251", "Life on Other Worlds"));
-        // Add more?
-        return courses;
-    }
-
-    /**
-     * Load in some hypothetical users who have signed up.
-     * @return a map of the usernames and User objects of these hypothetical users.
-     */
-    private static Map<String, User> loadUsers() {
-        List<Course> courses = loadCourses();
-        // CSC148, CSC165
-        List<Course> ajohnsonCourses = new ArrayList<>();
-        // CSC110, MAT137, AST251
-        List<Course> jsmithCourses = new ArrayList<>();
-        // CSC207, CSC236
-        List<Course> csingerCourses = new ArrayList<>();
-        // CSC207, CSC236, AST251
-        List<Course> djacksonCourses = new ArrayList<>();
-        for (Course course : courses) {
-            if (course.getCourseCode().equals("CSC148")) {
-                ajohnsonCourses.add(course);
-            }
-            if (course.getCourseCode().equals("CSC165")) {
-                ajohnsonCourses.add(course);
-            }
-            if (course.getCourseCode().equals("CSC110")) {
-                jsmithCourses.add(course);
-            }
-            if (course.getCourseCode().equals("MAT137")) {
-                jsmithCourses.add(course);
-            }
-            if (course.getCourseCode().equals("AST251")) {
-                jsmithCourses.add(course);
-                djacksonCourses.add(course);
-            }
-            if (course.getCourseCode().equals("CSC207")) {
-                csingerCourses.add(course);
-                djacksonCourses.add(course);
-            }
-            if (course.getCourseCode().equals("CSC236")) {
-                csingerCourses.add(course);
-                djacksonCourses.add(course);
-            }
-        }
-        String programCS = "Computer Science";
-        String ajohnsonBio = "I study best in the mornings!";
-        String jsmithBio = "To be totally honest, I've fallen behind in calc and could use some help explaining concepts.";
-        String csingerBio = "I love studying with a good snack, but sometimes end up eating more than studying... :(";
-        String djacksonBio = "Looking to pursue a career in AI";
-        String ajohnsonSchedulerID = "217e62a0-3725-4173-99c3-86dd92f7fb9e";
-        String jsmithSchedulerID = "aaa7c176-9e23-4368-abc6-94665d8cf822";
-        String csingerSchedulerID = "e44bc9da-f5a7-4fcc-a0d9-3c7b31ec1bb3";
-        String djacksonSchedulerID = "55120d37-50e2-469e-8632-ff1d0ee7db09";
-        List<User> userList = new ArrayList<>();
-        userList.add(new User("ajohnson", "ajohn@gmail.com", "Andrew Johnson", ajohnsonCourses, programCS, ajohnsonBio, ajohnsonSchedulerID));
-        userList.add(new User("jsmith", "jess03ica@hotmail.com", "Jessica Smith", jsmithCourses, "Mathematics", jsmithBio, jsmithSchedulerID));
-        userList.add(new User("csinger", "camsing5090@gmail.com", "Cameron Singer", csingerCourses, programCS, csingerBio, csingerSchedulerID));
-        userList.add(new User("djackson", "dennisjackson17@outlook.com", "Dennis Jackson", djacksonCourses, programCS, djacksonBio, djacksonSchedulerID));
-
-        Map<String, User> users = new HashMap<>();
-        for (User user : userList) {
-            users.put(user.getUsername(), user);
-        }
-        return users;
-    }
+    private String currentUsername;
 
     @Override
     public String createSlotifyResource(String name, String email) throws JSONException {
@@ -294,6 +219,8 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         }
     }
 
+    // DataAccessInterface implementations
+
     @Override
     public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
         Map<Timeslot, Boolean> availabilityMap = fetchAvailability(user.getSchedulerID());
@@ -363,11 +290,30 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         users.put(user.getName(), user);
     }
 
+    @Override
     public User getUserByUsername(String username) {
         if (!existsByName(username)) {
             throw new IllegalArgumentException("User not found.");
         }
         return users.get(username);
+    }
+
+    @Override
+    public void setCurrentUsername(String name) {
+        this.currentUsername = name;
+    }
+
+    @Override
+    public String getCurrentUsername() {
+        return this.currentUsername;
+    }
+
+    /**
+     * Return the list of courses loaded into this DAO.
+     * @return this list of Course objects.
+     */
+    public List<Course> getCourses() {
+        return courses;
     }
 
     // The below methods are helpers for Slotify API calls
@@ -390,39 +336,52 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
 
         JSONArray rules = new JSONArray();
         rules.put(allowed);
+
+        // Group timeslots by day since Slotify API requires blocked times to be grouped in this way
+        Map<String, List<Timeslot>> timeslotGroups = new HashMap<>();
         for (Map.Entry<Timeslot, Boolean> timeslot : availabilityMap.entrySet()) {
             if (!timeslot.getValue()) {
-                JSONObject rule = blockBuilder(timeslot);
-                rules.put(rule);
+                String day = timeslot.getKey().dayName();
+                timeslotGroups.computeIfAbsent(day, k -> new ArrayList<>()).add(timeslot.getKey());
             }
+        }
+        // Now iterate over the grouped Timeslots and call blockBuilder on each group
+        for (Map.Entry<String, List<Timeslot>> entry : timeslotGroups.entrySet()) {
+            List<Timeslot> group = entry.getValue();
+            String day = entry.getKey();
+            // Pass the grouped timeslots to blockBuilder
+            JSONObject rule = blockBuilder(group, day);
+            rules.put(rule);
         }
         return rules;
     }
 
     /**
      * Build the required JSONArray format for Slotify for a blocked off timeslot.
-     * @param timeslot the Map.Entry variable for the blocked timeslot.
+     * @param timeslots the list of Timeslots (all the same day) to be blocked.
+     * @param day the day of the group of Timeslots, in string format, e.g. "Monday"
      * @return the blocked timeslot in JSONArray format.
      */
-    private JSONObject blockBuilder(Map.Entry<Timeslot, Boolean> timeslot) {
+    private JSONObject blockBuilder(List<Timeslot> timeslots, String day) {
         JSONObject blockedTimeslot = new JSONObject();
-        blockedTimeslot.put(DAY, timeslot.getKey().dayName().toLowerCase());
+        blockedTimeslot.put(DAY, day.toLowerCase());
         blockedTimeslot.put(TYPE, BLOCKED);
         blockedTimeslot.put(RULE, DAYTIME);
 
         JSONArray blockedTimes = new JSONArray();
-        JSONObject blockedTime = new JSONObject();
-        if (timeslot.getKey().getTime() == SINGLE_DIGIT_9) {
-            // Requires leading zero
-            blockedTime.put(START, "09:00");
+        for (Timeslot timeslot : timeslots) {
+            JSONObject blockedTime = new JSONObject();
+            if (timeslot.getTime() == SINGLE_DIGIT_9) {
+                // Requires leading zero
+                blockedTime.put(START, "09:00");
+            }
+            else {
+                blockedTime.put(START, timeslot.getTime() + TIME_SUFFIX);
+            }
+            blockedTime.put(END, (timeslot.getTime() + 1) + TIME_SUFFIX);
+            blockedTimes.put(blockedTime);
         }
-        else {
-            blockedTime.put(START, timeslot.getKey().getTime() + TIME_SUFFIX);
-        }
-        blockedTime.put(END, (timeslot.getKey().getTime() + 1) + TIME_SUFFIX);
-        blockedTimes.put(blockedTime);
         blockedTimeslot.put(TIMES, blockedTimes);
-
         return blockedTimeslot;
     }
 
