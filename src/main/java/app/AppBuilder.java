@@ -23,6 +23,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.view_profile.ViewProfileController;
+import interface_adapter.view_profile.ViewProfilePresenter;
+import interface_adapter.view_profile.ViewProfileViewModel;
 import use_case.display_matches.DisplayMatchesInputBoundary;
 import use_case.display_matches.DisplayMatchesInteractor;
 import use_case.display_matches.DisplayMatchesOutputBoundary;
@@ -35,6 +38,9 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
+import use_case.view_profile.ViewProfileInputBoundary;
+import use_case.view_profile.ViewProfileInteractor;
+import use_case.view_profile.ViewProfileOutputBoundry;
 import view.*;
 import view.LoginView; // TODO: ADD THIS VIEW
 import view.HomePageView;
@@ -65,6 +71,9 @@ public class AppBuilder {
     private SignupView signupView;
     private LoginViewModel loginViewModel;
     private LoginView loginView;
+    private ViewProfileViewModel viewProfileViewModel;
+    private ViewProfileView viewprofileview;
+
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -94,6 +103,32 @@ public class AppBuilder {
 
         final SignupController controller = new SignupController(userSignupInteractor);
         signupView.setSignupController(controller);
+        return this;
+    }
+
+    /**
+     * Adds the ViewProfilesView to the application.
+     * @return this builder
+     */
+    public AppBuilder addViewProfileView() {
+        viewProfileViewModel = new ViewProfileViewModel();
+        viewprofileview = new ViewProfileView(viewProfileViewModel);
+        cardPanel.add(viewprofileview, viewprofileview.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the ViewProfile Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addViewProfileUseCase() {
+        final ViewProfileOutputBoundry viewProfileOutputBoundry = new ViewProfilePresenter(viewManagerModel,
+                viewProfileViewModel, // newViewtobedisplayed);
+        final ViewProfileInputBoundary view_profile_interactor = new ViewProfileInteractor(
+                dataAccessObject, viewProfileOutputBoundry, //userFactory);
+
+        final ViewProfileController controller = new ViewProfileController(view_profile_interactor);
+        viewprofileview.setSignupController(controller);
         return this;
     }
 
