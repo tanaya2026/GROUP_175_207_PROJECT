@@ -28,6 +28,12 @@ public class Course {
         return Objects.equals(courseCode, course.getCourseCode());
     }
 
+    // Override hashCode() to ensure consistency with equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseCode);
+    }
+
     /**
      * Returns the code of the course, e.g. "CSC207".
      * @return the course code.

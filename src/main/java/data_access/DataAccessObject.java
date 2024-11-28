@@ -219,6 +219,8 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         }
     }
 
+    // DataAccessInterface implementations
+
     @Override
     public Map<User, List<Timeslot>> findMatches(User user, boolean expand) {
         Map<Timeslot, Boolean> availabilityMap = fetchAvailability(user.getSchedulerID());
@@ -278,8 +280,6 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         return matches;
     }
 
-    // DataAccessInterface implementations
-
     @Override
     public boolean existsByName(String identifier) {
         return users.containsKey(identifier);
@@ -308,6 +308,14 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
         return this.currentUsername;
     }
 
+    /**
+     * Return the list of courses loaded into this DAO.
+     * @return this list of Course objects.
+     */
+    public List<Course> getCourses() {
+        return courses;
+    }
+
     // The below methods are helpers for Slotify API calls
 
     /**
@@ -328,39 +336,52 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
 
         JSONArray rules = new JSONArray();
         rules.put(allowed);
+
+        // Group timeslots by day since Slotify API requires blocked times to be grouped in this way
+        Map<String, List<Timeslot>> timeslotGroups = new HashMap<>();
         for (Map.Entry<Timeslot, Boolean> timeslot : availabilityMap.entrySet()) {
             if (!timeslot.getValue()) {
-                JSONObject rule = blockBuilder(timeslot);
-                rules.put(rule);
+                String day = timeslot.getKey().dayName();
+                timeslotGroups.computeIfAbsent(day, k -> new ArrayList<>()).add(timeslot.getKey());
             }
+        }
+        // Now iterate over the grouped Timeslots and call blockBuilder on each group
+        for (Map.Entry<String, List<Timeslot>> entry : timeslotGroups.entrySet()) {
+            List<Timeslot> group = entry.getValue();
+            String day = entry.getKey();
+            // Pass the grouped timeslots to blockBuilder
+            JSONObject rule = blockBuilder(group, day);
+            rules.put(rule);
         }
         return rules;
     }
 
     /**
      * Build the required JSONArray format for Slotify for a blocked off timeslot.
-     * @param timeslot the Map.Entry variable for the blocked timeslot.
+     * @param timeslots the list of Timeslots (all the same day) to be blocked.
+     * @param day the day of the group of Timeslots, in string format, e.g. "Monday"
      * @return the blocked timeslot in JSONArray format.
      */
-    private JSONObject blockBuilder(Map.Entry<Timeslot, Boolean> timeslot) {
+    private JSONObject blockBuilder(List<Timeslot> timeslots, String day) {
         JSONObject blockedTimeslot = new JSONObject();
-        blockedTimeslot.put(DAY, timeslot.getKey().dayName().toLowerCase());
+        blockedTimeslot.put(DAY, day.toLowerCase());
         blockedTimeslot.put(TYPE, BLOCKED);
         blockedTimeslot.put(RULE, DAYTIME);
 
         JSONArray blockedTimes = new JSONArray();
-        JSONObject blockedTime = new JSONObject();
-        if (timeslot.getKey().getTime() == SINGLE_DIGIT_9) {
-            // Requires leading zero
-            blockedTime.put(START, "09:00");
+        for (Timeslot timeslot : timeslots) {
+            JSONObject blockedTime = new JSONObject();
+            if (timeslot.getTime() == SINGLE_DIGIT_9) {
+                // Requires leading zero
+                blockedTime.put(START, "09:00");
+            }
+            else {
+                blockedTime.put(START, timeslot.getTime() + TIME_SUFFIX);
+            }
+            blockedTime.put(END, (timeslot.getTime() + 1) + TIME_SUFFIX);
+            blockedTimes.put(blockedTime);
         }
-        else {
-            blockedTime.put(START, timeslot.getKey().getTime() + TIME_SUFFIX);
-        }
-        blockedTime.put(END, (timeslot.getKey().getTime() + 1) + TIME_SUFFIX);
-        blockedTimes.put(blockedTime);
         blockedTimeslot.put(TIMES, blockedTimes);
-
         return blockedTimeslot;
     }
 
