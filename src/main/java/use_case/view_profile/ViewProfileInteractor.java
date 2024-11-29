@@ -16,6 +16,7 @@ public class ViewProfileInteractor implements ViewProfileInputBoundary {
     public void execute(ViewProfileInputData viewprofileInputData) {
         final ViewprofileOutputData viewprofileOutputData = new ViewprofileOutputData();
         // Here first find the User, and send the information to presenter;
+        // create OD with strings list of strings; instantoate Od
         viewprofilePresenter.prepareSuccessView(viewprofileOutputData);
     }
 }
