@@ -29,6 +29,7 @@ public class SignupInteractor implements SignupInputBoundary {
                 signupInputData.getProgram(),
                 signupInputData.getBio(),
                 signupInputData.getAvaliablity());
+//                slotifyserviceinterafce off = DAO; pass that here
         userDataAccessObject.save(user);
 
         final SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
