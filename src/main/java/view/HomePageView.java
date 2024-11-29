@@ -65,6 +65,8 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(createAccount)) {
                     final HomePageViewState currentState = HomePageViewModel.getState();
+                    // change Model to instance
+                    // change to nonstatic
                     HomePageController.execute();
             }
         });
