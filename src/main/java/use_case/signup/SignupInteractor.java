@@ -28,18 +28,18 @@ public class SignupInteractor implements SignupInputBoundary {
                 signupInputData.getCourses(),
                 signupInputData.getProgram(),
                 signupInputData.getBio(),
-                signupInputData.getAvaliablity());
-//                slotifyserviceinterafce off = DAO; pass that here
+                signupInputData.getAvaliablity(),
+                signupInputData.getSlotifyService());
+
         userDataAccessObject.save(user);
 
         final SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
         userPresenter.prepareSuccessView(signupOutputData);
-        }
-
+    }
 
     @Override
     public void switchToLoginView() {
         userPresenter.switchToLoginView();
     }
 }
-}
+

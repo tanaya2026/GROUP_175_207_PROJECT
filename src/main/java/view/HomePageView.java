@@ -1,6 +1,4 @@
 package view;
-import interface_adapter.homepage.HomePageController;
-import interface_adapter.homepage.HomePageViewModel;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -8,25 +6,21 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
+import interface_adapter.homepage.HomePageController;
+import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.homepage.HomePageViewState;
-import interface_adapter.signup.SignupState;
-import view.LabelTextPanel;
 
 /**
  * The View for the Home page of the program.
  */
 public class HomePageView extends JPanel implements PropertyChangeListener {
-    private static final String viewName = "home page";
+    private final String viewName = "home page";
     private final HomePageViewModel homePageViewModel;
 
     private final JTextField usernameInputField = new JTextField(15);
@@ -34,6 +28,7 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
 
     private final JButton createAccount;
     private final JButton login;
+    private HomePageController homePageController;
 
     public HomePageView(HomePageViewModel homePageViewModel) {
         this.homePageViewModel = homePageViewModel;
@@ -64,29 +59,19 @@ public class HomePageView extends JPanel implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(createAccount)) {
-                    final HomePageViewState currentState = HomePageViewModel.getState();
-                    // change Model to instance
-                    // change to nonstatic
-                    HomePageController.execute();
+                    final HomePageViewState currentState = homePageViewModel.getState();
+                    homePageController.execute();
+                }
             }
         });
-
-//        // ActionListener for "Login" button
-//        login.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Open the Login UseCase frame
-//
-//                // Include code here!
-//
-//                // Close the current RegisterView frame
-//                //  frame.dispose();
-//            }
-        });
-
     }
 
-    public static final String getViewName() {
+    /**
+     * Returns the viewName.
+     * @return viewName the viewName.
+     */
+
+    public String getViewName() {
         return viewName;
     }
 
