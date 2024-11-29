@@ -84,8 +84,8 @@ Many students struggle to find study partners who align with their courses and a
   - [Slotify API](https://slotify.ca/api/page/introduction): Facilitates availability management and scheduling functionalities.
 
 - **Clean Architecture Adherence**:
-  - All project files are packaged by layer according to CA
-  - All code is divided into distinct use cases and respective Views
+  - All project files are packaged by layer according to CA.
+  - All code is divided into distinct use cases and respective Views.
   - Each use case includes the various files for CA, including Controllers, Interactors, Input/Output Data/Boundaries, ViewModels, Presenters, and States.
   - API calls were integrated into entities using dependency injection.
 
