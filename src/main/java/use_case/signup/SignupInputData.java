@@ -15,7 +15,7 @@ public class SignupInputData {
     private final String avaliablity;
 
 
-    public SignupInputData(String username, String password, String repeatPassword, String email, String name, String courses, String program, String bio, String avaliablity) {
+    public SignupInputData(String username, String password, String email, String name, String courses, String program, String bio, String avaliablity) {
         this.username = username;
         this.password = password;
         this.email = email;
