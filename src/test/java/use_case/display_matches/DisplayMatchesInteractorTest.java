@@ -3,14 +3,13 @@ package use_case.display_matches;
 import data_access.DataAccessObject;
 import entity.*;
 import org.junit.jupiter.api.*;
-import use_case.login.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DisplayMatchesInteractorTest {
+class DisplayMatchesInteractorTest {
 
     private DataAccessObject dataAccessObject;
     private List<Course> userCourses;
@@ -67,7 +66,7 @@ public class DisplayMatchesInteractorTest {
     }
 
     @Test
-    void successTest() {
+    void successMatchByCourseTest() {
         DisplayMatchesDataAccessInterface userRepository = new DataAccessObject();
         DisplayMatchesInputData inputData = new DisplayMatchesInputData(currentUser, false);
 
