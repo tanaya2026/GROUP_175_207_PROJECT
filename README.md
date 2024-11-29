@@ -1,3 +1,6 @@
+## License
+This project is in the **public domain** under the [CC0 1.0 Universal (Public Domain Dedication)](./LICENSE).
+
 Team Members:
 1. Tanaya Datar
 2. Cooper Bolinius
