@@ -1,31 +1,28 @@
 package view;
 
-import entity.Course;
-import entity.Timeslot;
-import entity.User;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
-import interface_adapter.signup.SignupController;
-
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import view.LabelTextPanel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 
 /**
  * The View for the Signup Use Case.
  */
 
-public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
+public class SignupView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "sign up";
 
@@ -83,7 +80,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         final LabelTextPanel bioInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.BIO_LABEL), bioInputField);
 
-        final LabelTextPanel Avaliablityinfo = new LabelTextPanel(
+        final LabelTextPanel avaliablityInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.AVAIL_LABEL), availabilityPanel);
 
         final JPanel buttons = new JPanel();
@@ -105,11 +102,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                             currentState.getCourses(),
                             currentState.getProgram(),
                             currentState.getAvaliability(),
-                            currentState.getBio()
+                            currentState.getBio(),
+                            currentState.getSlotifyService()
                     );
                 }
             }
-
 
             //                // Parse courses from comma-separated input
 //                List<Course> courses = new ArrayList<>();
@@ -159,9 +156,14 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 //        });
 //    }
 //
-        }
-
+        });
     }
+
+    /**
+     * Returns the viewName.
+     * @return viewName the viewName.
+     */
+
     public String getViewName() {
         return viewName;
     }
@@ -170,6 +172,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     public void propertyChange(PropertyChangeEvent evt) {
         final SignupState state = (SignupState) evt.getNewValue();
     }
+
+    /**
+     * Initializes the controller.
+     * @param controller The SignUpcontroller.
+     */
 
     public void setSignupController(SignupController controller) {
         this.signupController = controller;
