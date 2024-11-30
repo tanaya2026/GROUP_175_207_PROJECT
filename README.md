@@ -103,9 +103,8 @@ This program is ideal for students who value structured, collaborative study ses
 
 ---
 
-### Demonstrations
-![Feature Screenshot](path/to/screenshot.png)  
-[Watch Tutorial](https://youtube.com/tutorial-link)  
+### Usage Guide
+[Watch Demonstration](https://youtube.com/tutorial-link)  
 
 ---
 
@@ -114,6 +113,15 @@ This program is ideal for students who value structured, collaborative study ses
 ### Prerequisites
 - Software: Java 17
 - Packages: ?
+
+---
+
+---
+
+## Contributions
+
+### Our code will be closed for contribution
+- Version control was utilized during development via Github
 
 ---
 
