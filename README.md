@@ -73,6 +73,19 @@ Many students struggle to find study partners who align with their courses and a
 
 <br/>
 
+## Feedback
+
+We value your feedback on our application Study Buddy Finder! Whether you have suggestions for improvements, found a bug, or want to share your thoughts, suggestions, we’d love to hear from you!
+
+**How to Provide Feedback**
+
+You can share your feedback in the following ways:
+1. **Fill out our feedback form**: (https://forms.gle/GZGMxP4RrLb5YGH19)
+2. **Email us directly**: tanaya.datar@mail.utoronto.ca
+
+
+
+
 **Technical Details for Developers**  
 
 - **Entity Design**:
