@@ -84,7 +84,31 @@ You can share your feedback in the following ways:
 2. **Email us directly**: tanaya.datar@mail.utoronto.ca
 
 
+**Main topics we aim to cover in the feedback form**
 
+In the feedback form, the main questions will encompass:
+
+- **General feedback**: Share your thoughts about the project.
+- **Feature suggestions**: Recommend new features or improvements.
+- **Bug reports**: Let us know if something isn’t working as expected.
+- **User experience**: Tell us how easy or difficult the project was to use.
+- **Additional comments**: Any other feedback you'd like to provide.
+
+  **What We're Looking For i.e. what counts as valid feedback**
+  
+  Rules for Valid Feedback:
+  1. The comments and suggeestions must pertain to our application.
+  2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
+  3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
+  4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
+  5. Please state your feedback in a positive and constructive manner while being respectful.
+ 
+  **What to expect when submitting feedback**
+  
+  1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
+  2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
+  3. Our team will maintain confidentiality of the feedback recieved.
+  
 
 **Technical Details for Developers**  
 
