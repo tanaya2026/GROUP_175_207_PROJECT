@@ -258,8 +258,16 @@ public class DataAccessObject implements EditProfileDataAccessInterface,
             List<Timeslot> timeslots = entry.getValue();
             if (expand) {
                 // Match by program
-                // TODO: PART OF ALEX'S USER STORY
+
+                String userProgram = user.getProgram();
+                String otherUserProgram = otherUser.getProgram();
+
+                // If both users share the same program, match them
+                if (userProgram.equals(otherUserProgram)) {
+                    matches.put(otherUser, timeslots);
+                }
             }
+
             else {
                 // Match by courses
                 // Convert the course lists to sets
