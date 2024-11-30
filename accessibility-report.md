@@ -39,4 +39,17 @@ This principle ensures that designs accommodate users with varying physical abil
   - **Touch-Friendly Interaction**: Increase the size of clickable elements and optimize them for touch input, enabling usability on mobile devices and tablets.
   - **Keyboard and Assistive Technology Support**: Ensure that all functionalities are accessible via keyboard navigation and compatible with screen readers.
   - **Cross-Platform Deployment**: Expand the project to run on multiple platforms, including web and mobile applications, to reach a wider audience.
+ 
+
+### 6. **Low Physical Effort**
+
+The application Study Buddy Finder has been designed in such a way that it can be used efficiently and comfortably with minimum fatigue.
+
+- As the application can be accessed on a laptop or tablet device, the user is able to utilize this application while maintaining a neutral spine position.
+
+- To minimize repetitive actions, our application has unique buttons like Logout, Create Account, Back to HomePage.
+
+- To minimize sustained effort, our application can give you potential matches within a few seconds.
+
+ - The amount of physical effort required to run our program is low, allowing a diversity of people to utilize the application.
 
