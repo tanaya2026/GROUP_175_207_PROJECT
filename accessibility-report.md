@@ -45,9 +45,9 @@ This principle ensures that designs accommodate users with varying physical abil
 
 The application Study Buddy Finder has been designed in such a way that it can be used efficiently and comfortably with minimum fatigue.
 
-- As the application can be accessed on a laptop or tablet device, the user is able to utilize this application while maintaining a neutral spine position.
+- As the application can be accessed on a laptop or tablet device, the user is able to use this application while maintaining a neutral spine position.
 
-- To minimize repetitive actions, our application has unique buttons like Logout, Create Account, Back to HomePage.
+- To minimize repetitive actions, our application has unique buttons like 'Logout', 'Create Account', 'Back to HomePage'.
 
 - To minimize sustained effort, our application can give you potential matches within a few seconds.
 
