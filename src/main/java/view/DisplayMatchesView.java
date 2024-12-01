@@ -1,20 +1,27 @@
 package view;
 
+import interface_adapter.display_matches.DisplayMatchesController;
+import interface_adapter.display_matches.DisplayMatchesState;
 import interface_adapter.display_matches.DisplayMatchesViewModel;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 
-public class DisplayMatchesView extends JPanel {
-
-    private final String viewName = "display matches";
+public class DisplayMatchesView extends JPanel implements PropertyChangeListener {
 
     // CONSTANTS
     private static final int TITLE_FONT_SIZE = 16;
-    private static final int FRAME_HEIGHT = 200;
-    private static final int FRAME_WIDTH = 300;
+
+    private final String viewName = "display matches";
+
+    private final DisplayMatchesViewModel displayMatchesViewModel;
 
     public DisplayMatchesView(DisplayMatchesViewModel displayMatchesViewModel) {
+        this.displayMatchesViewModel = displayMatchesViewModel;
+        displayMatchesViewModel.addPropertyChangeListener(this);
+
         // Set the layout for the panel
         setLayout(new BorderLayout());
         // Create a label for the title
@@ -54,20 +61,12 @@ public class DisplayMatchesView extends JPanel {
         add(signOutButton, BorderLayout.SOUTH);
     }
 
-    // Main method to display the panel in a frame
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Match Finder");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
-        // Add DisplayMatchesView panel to the frame
-        frame.add(new DisplayMatchesView());
-
-        // Display the frame
-        frame.setVisible(true);
-    }
-
     public String getViewName() {
         return viewName;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final DisplayMatchesState state = (DisplayMatchesState) evt.getNewValue();
     }
 }
