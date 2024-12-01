@@ -1,6 +1,5 @@
 package use_case.signup;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,10 @@ public class SignupInputData {
     private final Map<Timeslot, Boolean> avaliability;
     private final SlotifyServiceInterface slotifyService;
 
-    public SignupInputData(String username, String password, String email, String name, List<Course> courses, String program, String bio, Map<Timeslot, Boolean> avaliability, SlotifyServiceInterface slotifyService) {
+    public SignupInputData(String username, String password, String email, String name,
+                           List<Course> courses, String program, String bio,
+                           Map<Timeslot, Boolean> avaliability,
+                           SlotifyServiceInterface slotifyService) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -77,12 +79,7 @@ public class SignupInputData {
      */
 
     List<Course> getCourses() {
-        List<Course> courses = new ArrayList<>();
-        for (String courseCode : coursesinfo.getText().split(",")) {
-            courses.add(new Course(courseCode.trim()));
-
-            return courses;
-        }
+        return courses;
     }
 
     /**
