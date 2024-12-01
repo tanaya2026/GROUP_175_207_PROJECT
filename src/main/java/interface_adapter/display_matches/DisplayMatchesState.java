@@ -1,15 +1,23 @@
 package interface_adapter.display_matches;
 
+import java.util.List;
+import java.util.Map;
+
+import entity.Timeslot;
+import entity.User;
+
 /**
  * The state for the Display Matches View Model.
  */
 public class DisplayMatchesState {
     private String username = "";
     private String password = "";
+    private Map<User, List<Timeslot>> matches;
 
     public DisplayMatchesState(DisplayMatchesState copy) {
         username = copy.username;
         password = copy.password;
+        matches = copy.matches;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
@@ -47,6 +55,22 @@ public class DisplayMatchesState {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Returns the matches of the user.
+     * @return the Map of the Users who are matches and a list of Timeslots for which they share availability.
+     */
+    public Map<User, List<Timeslot>> getMatches() {
+        return matches;
+    }
+
+    /**
+     * Sets the matches of the user.
+     * @param matches the Map of the Users who are matches and a list of Timeslots for which they share availability.
+     */
+    public void setMatches(Map<User, List<Timeslot>> matches) {
+        this.matches = matches;
     }
 
 }
