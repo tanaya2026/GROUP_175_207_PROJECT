@@ -106,7 +106,7 @@ This program is ideal for students who value structured, collaborative study ses
 As a student, I want to be matched with a study buddy who is in the same course as me and is available during my study times, so that we can collaborate effectively and keep each other accountable.
 
 **Tanaya:** <br/>
-I want to be able to create an account and fill in personal information (such as name, courses, bio, etc.) and see the profiles of potential study buddy matches. I also want to be able to see the HomePage when the application is opened.
+I want to be able to create an account and fill in personal information (such as name, courses, bio, etc.) and view the profiles of potential study buddy matches. I also want to be able to view the HomePage when the application is opened.
 
 **Cooper:** <br/>
 I want to be effectively matched with other students I can study with based on our common availability and shared courses.
