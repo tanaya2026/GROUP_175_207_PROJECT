@@ -1,29 +1,33 @@
-package use_case.display_matches;
+package use_case.no_matches_found;
 
+import entity.User;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import data_access.DataAccessObject;
-import entity.User;
-import entity.Timeslot;
 
-/**
- * Interactor to handle the logic of finding matches by program.
- */
+public class NoMatchesFoundInteractor implements NoMatchesFoundInputBoundary {
+    private final NoMatchesFoundDataAccessInterface dataAccess;
+    private final NoMatchesFoundOutputBoundary presenter;
 
-public class NoMatchesFoundInteractor {
-    private final DataAccessObject dao;
-
-    public NoMatchesFoundInteractor(DataAccessObject dao) {
-        this.dao = dao;
+    public NoMatchesFoundInteractor(NoMatchesFoundDataAccessInterface dataAccess, NoMatchesFoundOutputBoundary presenter) {
+        this.dataAccess = dataAccess;
+        this.presenter = presenter;
     }
 
-    /**
-     * This method handles the use case of finding matches based on the program.
-     * @param currentUser the logged-in user.
-     */
-    //
-    public Map<User, List<Timeslot>> findMatchesBasedOnProgram(User currentUser) {
-        // Interact with the data access layer to find matches based on program
-        return dao.findMatches(currentUser, true);
+    @Override
+    public void findMatches(NoMatchesFoundInputData inputData) {
+        String program = inputData.getProgram();
+        Map<User, String> users = dataAccess.findUsersByProgram(program);
+
+        if (users.isEmpty()) {
+            presenter.presentMatches(new NoMatchesFoundOutputData(new HashMap<>(), "No matches found for your program."));
+        } else {
+            // Convert the data into the required output format
+            Map<User, List<String>> matches = new HashMap<>();
+            for (Map.Entry<User, String> entry : users.entrySet()) {
+                matches.put(entry.getKey(), List.of(entry.getValue()));
+            }
+            presenter.presentMatches(new NoMatchesFoundOutputData(matches, "Matches found!"));
+        }
     }
 }
