@@ -1,14 +1,10 @@
 package interface_adapter.homepage;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.display_matches.DisplayMatchesState;
-import interface_adapter.display_matches.DisplayMatchesViewModel;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
 import use_case.home_page.HomepageOutputBoundary;
 import use_case.home_page.HomepageOutputData;
-import use_case.signup.SignupOutputData;
-
 
 /**
  * The Presenter for the HomePage Use Case.
