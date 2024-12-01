@@ -24,6 +24,7 @@ public class ViewProfilePresenter implements ViewProfileOutputBoundry {
     public void prepareSuccessView(ViewprofileOutputData response) {
         // Update ViewModel to contain new Information.
 
+        // Updates the fields in ViewProfileView, to have an updated information of the matched User.
         final ViewProfileState viewProfileState = viewProfileViewModel.getState();
         viewProfileState.setUsername(response.getUsername());
         viewProfileState.setPassword(response.getPassword());
