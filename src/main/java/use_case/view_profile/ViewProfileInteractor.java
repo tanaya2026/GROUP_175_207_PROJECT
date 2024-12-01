@@ -1,10 +1,5 @@
 package use_case.view_profile;
 
-import use_case.home_page.HomepageInputBoundary;
-import use_case.home_page.HomepageInputData;
-import use_case.home_page.HomepageOutputBoundary;
-import use_case.home_page.HomepageOutputData;
-
 public class ViewProfileInteractor implements ViewProfileInputBoundary {
     private final ViewProfileOutputBoundry viewprofilePresenter;
 
