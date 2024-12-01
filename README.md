@@ -95,20 +95,21 @@ In the feedback form, the main questions will encompass:
 - **Additional comments**: Any other feedback you'd like to provide.
 
   **What We're Looking For i.e. what counts as valid feedback**
-  
+
   Rules for Valid Feedback:
-  1. The comments and suggeestions must pertain to our application.
-  2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
-  3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
-  4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
-  5. Please state your feedback in a positive and constructive manner while being respectful.
- 
+    1. The comments and suggeestions must pertain to our application.
+    2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
+    3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
+    4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
+    5. Please state your feedback in a positive and constructive manner while being respectful.
+
   **What to expect when submitting feedback**
-  
-  1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
-  2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
-  3. Our team will maintain confidentiality of the feedback recieved.
-  
+
+    1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
+    2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
+    3. Our team will maintain confidentiality of the feedback recieved.
+
+<br/>  
 
 **Technical Details for Developers**  
 
@@ -132,6 +133,7 @@ In the feedback form, the main questions will encompass:
 - **Student A** creates an account and lists their availability to be from 10 AM–12 PM on weekdays and selects *CSC207* as one of their courses.  
 - The tool matches **Student A** with **Student B**, who shares the same course and is available from 11 AM–1 PM on Mondays and Thursdays.  
 
+
 <br/>
 
 This program is ideal for students who value structured, collaborative study sessions and want a tool to simplify finding compatible study partners. The integration of scheduling and academic data ensures the matches are both relevant and practical.
@@ -141,7 +143,9 @@ This program is ideal for students who value structured, collaborative study ses
 ---
 
 ### Usage Guide
+
 [Watch Demonstration](https://youtube.com/tutorial-link)  
+
 
 ---
 
@@ -180,3 +184,6 @@ Of all study buddy matches with common availability, if no matches are found tak
 
 Harris:
 Once I have made an account, I want to be able to log into my account and see my potential study buddy matches. I also want to be able to log out.
+
+## License
+This project is in the **public domain** under the [CC0 1.0 Universal (Public Domain Dedication)](./LICENSE).
