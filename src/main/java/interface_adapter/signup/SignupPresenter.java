@@ -30,6 +30,9 @@ public class SignupPresenter implements SignupOutputBoundary {
         final DisplayMatchesState displayMatchesState = displayMatchesViewModel.getState();
         // loginState.setUsername(response.getUsername());
         this.displayMatchesViewModel.setState(displayMatchesState);
+        // DMS - object
+        // get a list in there
+        // state holds list
         displayMatchesViewModel.firePropertyChanged();
 
         viewManagerModel.setState(displayMatchesViewModel.getViewName());
