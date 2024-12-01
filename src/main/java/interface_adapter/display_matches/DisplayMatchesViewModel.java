@@ -7,6 +7,9 @@ import interface_adapter.ViewModel;
  */
 public class DisplayMatchesViewModel extends ViewModel<DisplayMatchesState> {
 
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 300;
+
     public DisplayMatchesViewModel() {
         super("display matches");
         setState(new DisplayMatchesState());
