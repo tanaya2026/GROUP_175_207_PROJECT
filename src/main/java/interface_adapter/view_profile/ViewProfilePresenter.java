@@ -1,9 +1,6 @@
 package interface_adapter.view_profile;
 
-
 import interface_adapter.ViewManagerModel;
-import interface_adapter.display_matches.DisplayMatchesState;
-import interface_adapter.display_matches.DisplayMatchesViewModel;
 import use_case.view_profile.ViewProfileOutputBoundry;
 import use_case.view_profile.ViewprofileOutputData;
 
@@ -14,27 +11,34 @@ import use_case.view_profile.ViewprofileOutputData;
 public class ViewProfilePresenter implements ViewProfileOutputBoundry {
 
     private final ViewProfileViewModel viewProfileViewModel;
-    private final DisplayMatchesViewModel displayMatchesViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ViewProfilePresenter(ViewManagerModel viewManagerModel,
-                             DisplayMatchesViewModel displayMatchesViewModel,
                              ViewProfileViewModel viewProfileViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.displayMatchesViewModel = displayMatchesViewModel;
         this.viewProfileViewModel = viewProfileViewModel;
 
     }
 
     @Override
     public void prepareSuccessView(ViewprofileOutputData response) {
-        // On success, switch to DisplayMatchesView
+        // Update ViewModel to contain new Information.
 
-        final DisplayMatchesState displayMatchesState = displayMatchesViewModel.getState();
-        this.displayMatchesViewModel.setState(displayMatchesState);
-        displayMatchesViewModel.firePropertyChanged();
+        final ViewProfileState viewProfileState = viewProfileViewModel.getState();
+        viewProfileState.setUsername(response.getUsername());
+        viewProfileState.setPassword(response.getPassword());
+        viewProfileState.setEmail(response.getEmail());
+        viewProfileState.setName(response.getName());
+        viewProfileState.setAvaliability(response.getAvaliability());
+        viewProfileState.setCourses(response.getCourses());
+        viewProfileState.setBio(response.getBio());
+        viewProfileState.setProgram(response.getProgram());
 
-        viewManagerModel.setState(DisplayMatchesViewModel.getViewName());
+        this.viewProfileViewModel.setState(viewProfileState);
+        viewProfileViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(viewProfileViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+
     }
 }
