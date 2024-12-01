@@ -4,11 +4,6 @@ package interface_adapter.view_profile;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.display_matches.DisplayMatchesState;
 import interface_adapter.display_matches.DisplayMatchesViewModel;
-import interface_adapter.homepage.HomePageViewModel;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
-import use_case.home_page.HomepageOutputBoundary;
-import use_case.home_page.HomepageOutputData;
 import use_case.view_profile.ViewProfileOutputBoundry;
 import use_case.view_profile.ViewprofileOutputData;
 
