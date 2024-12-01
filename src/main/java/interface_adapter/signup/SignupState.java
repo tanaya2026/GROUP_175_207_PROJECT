@@ -1,6 +1,5 @@
 package interface_adapter.signup;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +22,7 @@ public class SignupState {
     private String bio = "";
     private Map<Timeslot, Boolean> avaliability = new HashMap<>();
     private SlotifyServiceInterface slotifyService;
+    private String usernameError;
 
     /**
      * Getter function for SignUpState.
@@ -81,7 +81,7 @@ public class SignupState {
     }
 
     /**
-     * Getter function for SignUpData.
+     * Getter function for SignUpState.
      *
      * @return bio the biography of the user.
      */
@@ -90,7 +90,7 @@ public class SignupState {
     }
 
     /**
-     * Getter function for SignUpData.
+     * Getter function for SignUpState.
      *
      * @return avaliability the avaliability of the user.
      */
@@ -100,7 +100,7 @@ public class SignupState {
     }
 
     /**
-     * Getter function for SignUpData.
+     * Getter function for SignUpState.
      *
      * @return slotifyService an instance of the Slotify service.
      */
@@ -109,7 +109,14 @@ public class SignupState {
         return slotifyService;
     }
 
-    // write all the setter methods!
+    /**
+     * Getter function for SignUpState.
+     *
+     * @param usernameError the UserNameError.
+     */
+    public void setUsernameError(String usernameError) {
+        this.usernameError = usernameError;
+    }
 
 //    public void setUsername(String username) {
 //        this.username = username;

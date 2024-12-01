@@ -14,9 +14,19 @@ public class SignupOutputData {
         this.useCaseFailed = useCaseFailed;
     }
 
+    /**
+     * Getter function for SignUpData.
+     * @return username the Username.
+     */
+
     public String getUsername() {
         return username;
     }
+
+    /**
+     * Getter function for SignUpData.
+     * @return password the password.
+     */
 
     public boolean isUseCaseFailed() {
         return useCaseFailed;

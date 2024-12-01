@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import entity.Timeslot;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
@@ -42,12 +47,18 @@ public class SignupView extends JPanel implements PropertyChangeListener {
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
 
-        JPanel availabilityPanel = new JPanel(new GridLayout(7, 4));
+        JPanel availabilityPanel = new JPanel(new GridLayout(SignupViewModel.AVAIL_ROWS, SignupViewModel.AVAIL_COLS));
+        // JPanel availabilityPanel = new JPanel(new GridLayout(7, 4));
 
         // Days of the week and time slots (morning, afternoon, evening)
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        int[] times = {9, 10, 11, 12, 13, 14, 15, 16}; // 9 AM, 10 AM, ..., 4 PM slots
-        JCheckBox[][] availabilityCheckboxes = new JCheckBox[7][8];
+        // 9 AM, 10 AM, ..., 4 PM slots
+        int[] times = {SignupViewModel.TIME_9, SignupViewModel.TIME_10, SignupViewModel
+                .TIME_11, SignupViewModel.TIME_12, SignupViewModel.TIME_13, SignupViewModel
+                .TIME_14, SignupViewModel.TIME_15, SignupViewModel.TIME_16};
+        // int[] times = {9, 10, 11, 12, 13, 14, 15, 16};
+        JCheckBox[][] availabilityCheckboxes = new JCheckBox[SignupViewModel.AVAIL_ROWS][SignupViewModel.CHECK_BOX_COLS];
+        // JCheckBox[][] availabilityCheckboxes = new JCheckBox[7][8];
 
         for (int i = 0; i < days.length; i++) {
             for (int j = 0; j < times.length; j++) {
@@ -80,7 +91,7 @@ public class SignupView extends JPanel implements PropertyChangeListener {
         final LabelTextPanel bioInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.BIO_LABEL), bioInputField);
 
-        final LabelTextPanel avaliablityInfo = new LabelTextPanel(
+        final JPanel avaliablityInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.AVAIL_LABEL), availabilityPanel);
 
         final JPanel buttons = new JPanel();
@@ -94,68 +105,40 @@ public class SignupView extends JPanel implements PropertyChangeListener {
                 if (e.getSource().equals(createAccount)) {
                     final SignupState currentState = signupViewModel.getState();
 
+                    List<String> courses = new ArrayList<>();
+                    for (String courseCode : coursesInputField.getText().split(",")) {
+                        courses.add(courseCode.trim());
+                    }
+
+                    Map<Timeslot, Boolean> availabilityMap = new HashMap<>();
+                    for (int i = 0; i < days.length; i++) {
+                        for (int j = 0; j < times.length; j++) {
+                            if (availabilityCheckboxes[i][j].isSelected()) {
+                                // i+1 for day, times[j] for hour
+                                Timeslot timeslot = new Timeslot(i + 1, times[j]);
+                                availabilityMap.put(timeslot, true);
+                                }
+                            else {
+                                // i+1 for day, times[j] for hour
+                                Timeslot timeslot = new Timeslot(i + 1, times[j]);
+                                availabilityMap.put(timeslot, false);
+                                }
+                            }
+                        }
+
                     signupController.execute(
-                            currentState.getUsername(),
-                            currentState.getPassword(),
-                            currentState.getEmail(),
-                            currentState.getName(),
-                            currentState.getCourses(),
-                            currentState.getProgram(),
-                            currentState.getAvaliability(),
-                            currentState.getBio(),
+                            usernameInputField.getText(),
+                            passwordInputField.getText(),
+                            emailInputField.getText(),
+                            nameInputField.getText(),
+                            courses,
+                            programInputField.getText(),
+                            bioInputField.getText(),
+                            availabilityMap,
                             currentState.getSlotifyService()
                     );
                 }
             }
-
-            //                // Parse courses from comma-separated input
-//                List<Course> courses = new ArrayList<>();
-//                for (String courseCode : coursesField.getText().split(",")) {
-//                    courses.add(new Course(courseCode.trim()));
-//                }
-//
-//                // Parse availability from selected checkboxes
-//                Map<Timeslot, Boolean> availabilityMap = new HashMap<>();
-//                for (int i = 0; i < days.length; i++) {
-//                    for (int j = 0; j < times.length; j++) {
-//                        if (availabilityCheckboxes[i][j].isSelected()) {
-//                            Timeslot timeslot = new Timeslot(i + 1, times[j]); // i+1 for day, times[j] for hour
-//                            availabilityMap.put(timeslot, true);
-//                        }
-//                        else {
-//                            Timeslot timeslot = new Timeslot(i + 1, times[j]); // i+1 for day, times[j] for hour
-//                            availabilityMap.put(timeslot, false);
-//                        }
-//                    }
-//                }
-//
-//                // Create a User instance with the input data
-//                User newUser = new User(
-//                        usernameField.getText(),
-//                        emailField.getText(),
-//                        passwordField.getText(),
-//                        nameField.getText(),
-//                        courses,
-//                        programField.getText(),
-//                        bioField.getText(),
-//                        availabilityMap
-//                );
-//
-//                // Display confirmation message
-//                JOptionPane.showMessageDialog(null, "Account created for: " + newUser.getUsername());
-//                System.out.println(newUser.toString());  // Print user details to console for debugging
-//            }
-//        });
-//    }
-//
-//    // Main method to run the application
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            UserRegistration app = new UserRegistration();
-//            app.setVisible(true);
-//        });
-//    }
-//
         });
     }
 
