@@ -123,7 +123,7 @@ public class AppBuilder {
      */
     public AppBuilder addViewProfileUseCase() {
         final ViewProfileOutputBoundry viewProfileOutputBoundry = new ViewProfilePresenter(viewManagerModel,
-                viewProfileViewModel, // newViewtobedisplayed);
+                viewProfileViewModel, viewProfileViewModel);
         final ViewProfileInputBoundary view_profile_interactor = new ViewProfileInteractor(
                 dataAccessObject, viewProfileOutputBoundry, //userFactory);
 

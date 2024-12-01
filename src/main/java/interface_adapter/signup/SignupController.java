@@ -1,9 +1,10 @@
 package interface_adapter.signup;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import data_access.DataAccessObject;
 import entity.Course;
 import entity.SlotifyServiceInterface;
 import entity.Timeslot;
@@ -33,9 +34,21 @@ public class SignupController {
      * @param avaliablity the avaliablity to sign up
      * @param slotifyService the slotify service - API.
      */
-    public void execute(String username, String password, String email, String name, List<Course> courses, String program, String bio, Map<Timeslot, Boolean> avaliablity, SlotifyServiceInterface slotifyService) {
+    public void execute(String username, String password, String email, String name, List<String> courses, String program, String bio, Map<Timeslot, Boolean> avaliablity, SlotifyServiceInterface slotifyService) {
+
+        final DataAccessObject dataAccessObject = new DataAccessObject();
+        List<Course> storeCourses = dataAccessObject.getCourses();
+        List<Course> newCourses = null;
+        for (Course storeCours : storeCourses) {
+            for (String course : courses) {
+                if (storeCours.getCourseCode() == course) {
+                    newCourses = new ArrayList<Course>();
+                    newCourses.add(storeCours);
+                }
+            }
+        }
         final SignupInputData signupInputData = new SignupInputData(
-                username, password, email, name, courses, program, bio, avaliablity, slotifyService);
+                username, password, email, name, newCourses, program, bio, avaliablity, slotifyService);
 
         userSignupUseCaseInteractor.execute(signupInputData);
     }
