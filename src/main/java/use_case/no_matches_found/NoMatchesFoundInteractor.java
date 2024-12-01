@@ -9,7 +9,8 @@ public class NoMatchesFoundInteractor implements NoMatchesFoundInputBoundary {
     private final NoMatchesFoundDataAccessInterface dataAccess;
     private final NoMatchesFoundOutputBoundary presenter;
 
-    public NoMatchesFoundInteractor(NoMatchesFoundDataAccessInterface dataAccess, NoMatchesFoundOutputBoundary presenter) {
+    public NoMatchesFoundInteractor(NoMatchesFoundDataAccessInterface dataAccess,
+                                    NoMatchesFoundOutputBoundary presenter) {
         this.dataAccess = dataAccess;
         this.presenter = presenter;
     }
@@ -20,14 +21,17 @@ public class NoMatchesFoundInteractor implements NoMatchesFoundInputBoundary {
         Map<User, String> users = dataAccess.findUsersByProgram(program);
 
         if (users.isEmpty()) {
-            presenter.presentMatches(new NoMatchesFoundOutputData(new HashMap<>(), "No matches found for your program."));
-        } else {
+            presenter.presentMatches(new NoMatchesFoundOutputData(new HashMap<>(),
+                    "No matches found for your program."));
+        }
+        else {
             // Convert the data into the required output format
             Map<User, List<String>> matches = new HashMap<>();
             for (Map.Entry<User, String> entry : users.entrySet()) {
                 matches.put(entry.getKey(), List.of(entry.getValue()));
             }
-            presenter.presentMatches(new NoMatchesFoundOutputData(matches, "Matches found!"));
+            presenter.presentMatches(new NoMatchesFoundOutputData(matches,
+                    "Matches found!"));
         }
     }
 }
