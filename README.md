@@ -28,7 +28,7 @@ Many students struggle to find study partners who align with their courses and a
 
 <br/>
 
-**Target Users**
+**Target Users**  
 - Students seeking structured studying/collaboration.
 - Those who value accountability in their study routines.
 - Individuals looking to expand their academic networks and make friends in your classes/program.
@@ -49,27 +49,27 @@ Many students struggle to find study partners who align with their courses and a
 
 ## Features
 
-**Core Features**
+**Core Features**  
 
 1. **User Account Management**
-    - **Create Account**: Users can input personal details (name, email, courses, bio, availability).
-    - **Edit Profile**: Modify details such as availability, email, bio, and enrolled courses.
+   - **Create Account**: Users can input personal details (name, email, courses, bio, availability).
+   - **Edit Profile**: Modify details such as availability, email, bio, and enrolled courses.
 
 2. **Matching Algorithm**
-    - Matches students by shared courses and availability.
-    - Expands search to program-level matches if no course-specific matches exist.
+   - Matches students by shared courses and availability.
+   - Expands search to program-level matches if no course-specific matches exist.
 
 3. **Scheduler Integration**
-    - Leverages the *Slotify API* for scheduling and availability management.
-    - Allows users to set hourly time slots (9 AM–5 PM).
-    - Note that the actual calendar booking of meetings is out of the project scope.
+   - Leverages the *Slotify API* for scheduling and availability management.
+   - Allows users to set hourly time slots (9 AM–5 PM).
+   - Note that the actual calendar booking of meetings is out of the project scope.
 
 4. **User Interface**
-    - Simple and intuitive interface for account creation and match display.
-    - Notifies users when no matches are found and offers expanded search options.
+   - Simple and intuitive interface for account creation and match display.
+   - Notifies users when no matches are found and offers expanded search options.
 
 5. **Account Security**
-    - Login and logout functionality to protect user data.
+   - Login and logout functionality to protect user data.
 
 <br/>
 
@@ -109,28 +109,30 @@ In the feedback form, the main questions will encompass:
     2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
     3. Our team will maintain confidentiality of the feedback recieved.
 
+<br/>  
 
-**Technical Details for Developers**
+**Technical Details for Developers**  
 
 - **Entity Design**:
-    - **User**: Contains attributes like username, name, courses, program of study, and matches, as well as storing the user's Slotify resource and scheduler UUIDs.
-    - **Course**: Includes course code and title.
-    - **Timeslot**: Represents availability as 1-hour blocks between 9 AM–5 PM for all seven days of the week.
+  - **User**: Contains attributes like username, name, courses, program of study, and matches, as well as storing the user's Slotify resource and scheduler UUIDs.
+  - **Course**: Includes course code and title.
+  - **Timeslot**: Represents availability as 1-hour blocks between 9 AM–5 PM for all seven days of the week.
 
 - **APIs Used**:
-    - [Slotify API](https://slotify.ca/api/page/introduction): Facilitates availability management and scheduling functionalities.
+  - [Slotify API](https://slotify.ca/api/page/introduction): Facilitates availability management and scheduling functionalities.
 
 - **Clean Architecture Adherence**:
-    - All project files are packaged by layer according to CA.
-    - All code is divided into distinct use cases and respective Views.
-    - Each use case includes the various files for CA, including Controllers, Interactors, Input/Output Data/Boundaries, ViewModels, Presenters, and States.
-    - API calls were integrated into entities using dependency injection.
+  - All project files are packaged by layer according to CA.
+  - All code is divided into distinct use cases and respective Views.
+  - Each use case includes the various files for CA, including Controllers, Interactors, Input/Output Data/Boundaries, ViewModels, Presenters, and States.
+  - API calls were integrated into entities using dependency injection.
 
 <br/>
 
-**Example Usage**
-- **Student A** creates an account and lists their availability to be from 10 AM–12 PM on weekdays and selects *CSC207* as one of their courses.
-- The tool matches **Student A** with **Student B**, who shares the same course and is available from 11 AM–1 PM on Mondays and Thursdays.
+**Example Usage**  
+- **Student A** creates an account and lists their availability to be from 10 AM–12 PM on weekdays and selects *CSC207* as one of their courses.  
+- The tool matches **Student A** with **Student B**, who shares the same course and is available from 11 AM–1 PM on Mondays and Thursdays.  
+
 
 <br/>
 
@@ -141,7 +143,9 @@ This program is ideal for students who value structured, collaborative study ses
 ---
 
 ### Usage Guide
-[Watch Demonstration](https://youtube.com/tutorial-link)
+
+[Watch Demonstration](https://youtube.com/tutorial-link)  
+
 
 ---
 

@@ -17,10 +17,11 @@ public interface UserFactory {
      * @param program the program of the new user
      * @param bio the bio of the new user
      * @param availability the availability of the new user
+     * @param slotifyService the interface for making calls to the Slotify API
      * @return the new user
      */
     User create(String username, String email, String password, String name, List<Course> courses,
-                String program, String bio, Map<Timeslot, Boolean> availability);
+                String program, String bio, Map<Timeslot, Boolean> availability, SlotifyServiceInterface slotifyService);
 
 }
 
