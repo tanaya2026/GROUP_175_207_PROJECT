@@ -11,7 +11,7 @@ import interface_adapter.no_matches_found.NoMatchesFoundViewModel;
 import interface_adapter.no_matches_found.NoMatchesFoundController;
 import use_case.display_matches.NoMatchesFoundInteractor;
 
-public class NoMatchesFoundView extends JPanel {
+public class NoMatchesFoundView     extends JPanel {
     private final NoMatchesFoundViewModel viewModel;
     private final NoMatchesFoundController controller;
 
