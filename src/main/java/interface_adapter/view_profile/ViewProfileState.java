@@ -6,9 +6,10 @@ package interface_adapter.view_profile;
 
 public class ViewProfileState {
     private String username = "";
+
     /**
-     * getter function for Username
-     * @return username the username
+     * Getter function for Username.
+     * @return username the username.
      */
     public String getUsername() {
         return username;

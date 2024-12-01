@@ -42,7 +42,7 @@ public class ViewProfileView extends JPanel implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(back)) {
-                    final ViewProfileState currentState = ViewProfileViewModel.getState();
+                    final ViewProfileState currentState = viewProfileViewModel.getState();
                     viewProfileController.execute();
                 }
             }
