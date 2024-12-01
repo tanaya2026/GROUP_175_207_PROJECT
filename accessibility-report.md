@@ -2,7 +2,7 @@
 
 ## Achieving the Principles of Universal Design
 
-The *Study Buddy Finder* project strikves to incorporate key accessibility principles to ensure inclusivity and usability for all users. This report evaluates how the project meets the following principles, along with recommendations for improvements.
+The *Study Buddy Finder* project strives to incorporate key accessibility principles to ensure inclusivity and usability for all users. This report evaluates how the project meets the following principles, along with recommendations for improvements.
 
 ### 1. **Tolerance for Error**
 
@@ -40,3 +40,21 @@ This principle ensures that designs accommodate users with varying physical abil
   - **Keyboard and Assistive Technology Support**: Ensure that all functionalities are accessible via keyboard navigation and compatible with screen readers.
   - **Cross-Platform Deployment**: Expand the project to run on multiple platforms, including web and mobile applications, to reach a wider audience.
 
+## Who is this program for?
+
+If we were to sell or license our program, we would market it to university students. In particular, these would be 
+group-oriented students seeking structured study/collaboration with students in the same course or program. An 
+alternative option would be, rather than marketing our product to students individually, seeking to license our product 
+to universities, who have very large bases of precisely the users we are targeting with this product, to facilitate 
+collaboration within their student community.
+
+## Accessibility among varied demographics
+
+From an accessibility standpoint, it is possible that our product will be less-likely used by individuals with certain
+disabilities, namely those impairing gross and fine motor skills. Individuals with impairments to their ability to use
+their hands and digits may have a limitation with regard to navigating, especially because our program relies upon usage of a mouse
+for its functionality (e.g. clicking buttons, accessing text fields). Ultimately, our design is largely accessible as it
+satisfies many of the Principles of Universal Design, but its low flexibility for use and low tolerance for error render
+it potentially inaccessible to the disabled. Demographically, individuals in lower-income areas are less likely to have 
+the technological access or literacy necessary to install and utilize the program. The program is also not intended for 
+a wide demographic, as it would not be useful to individuals who are not in school. Within the population of able-bodied university students, we do not expect any demographic limitations.
