@@ -53,7 +53,7 @@ This principle ensures that the design is useful and marketable to people with d
   - The project requires you to download/fork from GitHub which also limits accessibility.
   - The project is limited to UofT students.
   
-- **Future Enhancements**:
+- **Future-Enhancements**:
   - Cross Platform Deployment for greater accessibility, not just limited to app stores and such, but for users that struggle with standard desktop and mobile applications.
   - Universality of the program by making it a general program for university students outside of UofT or even for anyone that isn't a university student, but wants to find someone to study with.
 
