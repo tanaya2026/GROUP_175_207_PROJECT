@@ -15,13 +15,13 @@ public class EditProfileController {
         this.interactor = interactor;
     }
 
-    public void handleEditProfile(String username, String email, String password, String name, String bio,
+    public void handleEditProfile(String email, String password, String name, String bio,
                                   String program, List<Course> courses, Map<Timeslot, Boolean> availability,
                                   String schedulerID) {
         // Create InputData and call the interactor
         EditProfileInputData inputData = new EditProfileInputData(
                 email, password, name, bio, program, courses, availability, schedulerID
         );
-        interactor.editProfile(username, inputData);
+        interactor.editProfile(inputData);
     }
 }

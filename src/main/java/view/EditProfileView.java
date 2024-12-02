@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.edit_profile.EditProfileController;
+import interface_adapter.edit_profile.EditProfileViewModel;
 import entity.Course;
 import entity.Timeslot;
 
@@ -12,11 +13,20 @@ import java.util.List;
 import java.util.Map;
 
 public class EditProfileView extends JFrame {
+    public final static String viewName = "edit profile";
+    private EditProfileController controller;
+    private final EditProfileViewModel viewModel;
 
-    private final EditProfileController controller;
+    private final JTextField emailField;
+    private final JPasswordField passwordField;
+    private final JTextField nameField;
+    private final JTextArea bioField;
+    private final JTextField programField;
+    private final JTextField coursesField;
+    private final JCheckBox[][] checkBoxes;
 
-    public EditProfileView(EditProfileController controller) {
-        this.controller = controller;
+    public EditProfileView(EditProfileViewModel viewModel) {
+        this.viewModel = viewModel;
 
         setTitle("Edit Profile");
         setSize(800, 600);
@@ -32,45 +42,45 @@ public class EditProfileView extends JFrame {
 
         // Email Field
         JLabel emailLabel = new JLabel("Email:");
-        JTextField emailField = new JTextField();
+        emailField = new JTextField();
         inputPanel.add(emailLabel);
         inputPanel.add(emailField);
 
         // Password Field
         JLabel passwordLabel = new JLabel("Password:");
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         inputPanel.add(passwordLabel);
         inputPanel.add(passwordField);
 
         // Name Field
         JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField();
+        nameField = new JTextField();
         inputPanel.add(nameLabel);
         inputPanel.add(nameField);
 
         // Bio Field
         JLabel bioLabel = new JLabel("Bio:");
-        JTextArea bioField = new JTextArea(3, 20);
+        bioField = new JTextArea(3, 20);
         JScrollPane bioScroll = new JScrollPane(bioField);
         inputPanel.add(bioLabel);
         inputPanel.add(bioScroll);
 
         // Program Field
         JLabel programLabel = new JLabel("Program:");
-        JTextField programField = new JTextField();
+        programField = new JTextField();
         inputPanel.add(programLabel);
         inputPanel.add(programField);
 
         // Courses Field
         JLabel coursesLabel = new JLabel("Courses (comma-separated):");
-        JTextField coursesField = new JTextField();
+        coursesField = new JTextField();
         inputPanel.add(coursesLabel);
         inputPanel.add(coursesField);
 
         // Availability Section (Monday-Sunday, 9 AM to 5 PM)
         JLabel availabilityLabel = new JLabel("Availability:");
         JPanel availabilityPanel = new JPanel(new GridLayout(7, 8)); // 7 days, 8 time blocks (9 AM to 5 PM)
-        JCheckBox[][] checkBoxes = new JCheckBox[7][8];
+        checkBoxes = new JCheckBox[7][8];
 
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (int i = 0; i < 7; i++) {
@@ -125,7 +135,6 @@ public class EditProfileView extends JFrame {
 
             // Pass data to the controller
             controller.handleEditProfile(
-                    "currentUsername", // Replace with actual username
                     email,
                     password,
                     name,
@@ -133,12 +142,62 @@ public class EditProfileView extends JFrame {
                     program,
                     courseList,
                     selectedAvailability,
-                    "currentSchedulerID" // Replace with the actual schedulerID
+                    "currentSchedulerID"  // This should come from the current user's data
             );
 
-            JOptionPane.showMessageDialog(this, "Changes saved successfully.");
+            if (viewModel.getState().isSuccessful()) {
+                JOptionPane.showMessageDialog(this, "Changes saved successfully.");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        viewModel.getState().getErrorMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         cancelButton.addActionListener(e -> dispose());
+
+        // Initialize fields with current values from ViewModel
+        updateFields();
+    }
+
+    private void updateFields() {
+        if (viewModel.getEmail() != null) emailField.setText(viewModel.getEmail());
+        if (viewModel.getPassword() != null) passwordField.setText(viewModel.getPassword());
+        if (viewModel.getName() != null) nameField.setText(viewModel.getName());
+        if (viewModel.getBio() != null) bioField.setText(viewModel.getBio());
+        if (viewModel.getProgram() != null) programField.setText(viewModel.getProgram());
+
+        // Update courses field
+        if (viewModel.getCourses() != null) {
+            StringBuilder coursesText = new StringBuilder();
+            for (Course course : viewModel.getCourses()) {
+                if (coursesText.length() > 0) {
+                    coursesText.append(", ");
+                }
+                coursesText.append(course.getCourseCode());
+            }
+            coursesField.setText(coursesText.toString());
+        }
+
+        // Update availability checkboxes
+        if (viewModel.getAvailability() != null) {
+            Map<Timeslot, Boolean> availability = viewModel.getAvailability();
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 8; j++) {
+                    Timeslot timeslot = new Timeslot(i + 1, 9 + j);
+                    checkBoxes[i][j].setSelected(availability.getOrDefault(timeslot, false));
+                }
+            }
+        }
+    }
+
+    public void setController(EditProfileController controller) {
+        this.controller = controller;
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

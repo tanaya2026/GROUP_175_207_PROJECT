@@ -5,6 +5,7 @@ import entity.User;
 import java.util.Map;
 
 public interface EditProfileDataAccessInterface {
+    String getCurrentUsername();
     /**
      * Checks if a user exists by username.
      * @param username the username to check.
