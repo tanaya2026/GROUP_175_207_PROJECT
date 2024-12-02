@@ -83,6 +83,12 @@ The application Study Buddy Finder has been designed in such a way that it can b
 
  - The amount of physical effort required to run our program is low, allowing a diversity of people to utilize the application.
 
+### 6. **Perceptible Information**
+As implemented, our program exclusively delivers information visually, rendering it inaccessible for the blind, as
+previously mentioned. For sighted people, information is conveyed using plain-text and highly visible buttons. We may 
+consider implementing some form of text-to-speech functionality in order to provide an alternative means of conveying 
+information i.e. auditorily, for those who have vision impairments.
+
 ## Who is this program for?
 
 If we were to sell or license our program, we would market it to university students. In particular, these would be 
