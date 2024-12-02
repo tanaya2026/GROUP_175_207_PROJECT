@@ -131,9 +131,17 @@ Once I have made an account, I want to be able to log into my account and see my
 
 ## Installation Instructions
 
-### Prerequisites
-- Software: Java 17
-- Packages: ?
+**Instructions and Prerequesits**
+- Software: Java 17 (JDK 17+), IntelliJ
+   - As A student you can use https://www.jetbrains.com/shop/eform/students and create a InellliJ Ultimate account for free with official installation instructions here: https://www.jetbrains.com/help/idea/installation-guide.html
+   - The application requires Java 17+ to run so you use the following link as a guide: https://www.jetbrains.com/help/idea/sdk.html#add_global_sdk
+- Packages: Maven 3.9+
+   - Installation instructions for Maven in IntelliJ: https://www.jetbrains.com/help/idea/maven-support.html 
+- Libraries: JSON, Java Swing
+   - Guide for JSON in IntelliJ: https://www.jetbrains.com/help/idea/json.html 
+
+**OS Requirements**
+The application has no OS requirements and will work on any OS system.
 
 ---
 
