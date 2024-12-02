@@ -7,24 +7,25 @@ import entity.Timeslot;
 import java.util.Map;
 
 public class EditProfileInteractor implements EditProfileInputBoundary {
-    private final DataAccessObject dataAccessObject;
+    private final EditProfileDataAccessInterface dataAccessObject;
     private final EditProfileOutputBoundary outputBoundary;
 
-    public EditProfileInteractor(DataAccessObject dataAccessObject, EditProfileOutputBoundary outputBoundary) {
+    public EditProfileInteractor(EditProfileDataAccessInterface dataAccessObject, EditProfileOutputBoundary outputBoundary) {
         this.dataAccessObject = dataAccessObject;
         this.outputBoundary = outputBoundary;
     }
 
     @Override
-    public void editProfile(String username, EditProfileInputData inputData) {
+    public void editProfile(EditProfileInputData inputData) {
         try {
+            String currentUsername = dataAccessObject.getCurrentUsername();
             // Check if user exists
-            if (!dataAccessObject.existsByName(username)) {
+            if (!dataAccessObject.existsByName(currentUsername)) {
                 throw new IllegalArgumentException("User does not exist.");
             }
 
             // Fetch the user
-            User user = dataAccessObject.getUserByUsername(username);
+            User user = dataAccessObject.getUserByUsername(currentUsername);
 
             // Check and update personal details
             if (inputData.getEmail() != null && !inputData.getEmail().equals(user.getEmail())) {
