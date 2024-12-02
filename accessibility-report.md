@@ -40,6 +40,20 @@ This principle ensures that designs accommodate users with varying physical abil
   - **Keyboard and Assistive Technology Support**: Ensure that all functionalities are accessible via keyboard navigation and compatible with screen readers.
   - **Cross-Platform Deployment**: Expand the project to run on multiple platforms, including web and mobile applications, to reach a wider audience.
  
+### 3. **Simple and Intuitive Use**
+
+The program utilizes a well-structured and labeled UI for editing profiles, with clear fields such as "Email," "Password," and "Name," ensuring that users can quickly understand what information is required.
+Checkbox-based availability selection simplifies the process of setting time preferences without requiring manual entry, reducing complexity.
+
+### 4. **Flexibility in Use**
+
+Features that we could implement in the future
+Integration with External Calendars:
+Allowing users to sync their availability with external calendar platforms (e.g., Google Calendar, Outlook) would provide more flexibility in managing schedules across different tools.
+
+Adaptive User Interface:
+Implementing a responsive design that adjusts the interface for different devices (e.g., desktop, tablet, mobile) ensures that the program is accessible on various platforms, enhancing flexibility.
+
 
 ### 6. **Low Physical Effort**
 
