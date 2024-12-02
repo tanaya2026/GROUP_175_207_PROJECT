@@ -162,9 +162,9 @@ Rules for Valid Feedback:
 
 **What to expect when submitting feedback**
 
-    1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
-    2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
-    3. Our team will maintain confidentiality of the feedback recieved.
+1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
+2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
+3. Our team will maintain confidentiality of the feedback recieved.
 
 <br/>
 
