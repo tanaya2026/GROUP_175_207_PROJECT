@@ -33,6 +33,7 @@ Many students struggle to find study partners who align with their courses and a
 - Those who value accountability in their study routines.
 - Individuals looking to expand their academic networks and make friends in your classes/program.
 
+<br/>
 
 ---
 
@@ -44,6 +45,8 @@ Many students struggle to find study partners who align with their courses and a
 4. [License](#license)
 5. [Feedback](#feedback)
 6. [Contributions](#contributions)
+
+<br/>
 
 ---
 
@@ -124,10 +127,28 @@ Once I have made an account, I want to be able to log into my account and see my
 
 <br/>
 
+---
+
+## Installation Instructions
+
+### Prerequisites
+- Software: Java 17
+- Packages: ?
+
+---
+
+## Usage Guide
+
+Below is a link to a brief YouTube video demonstrating the functionality of the Study Buddy Finder program.
+
+[Watch Demonstration](https://youtu.be/9_iOO7v0kOg)  
+
+---
+
 ## License
 This project is in the **public domain** under the [CC0 1.0 Universal (Public Domain Dedication)](./LICENSE).
 
-<br/>
+---
 
 ## Feedback
 
@@ -151,6 +172,8 @@ In the feedback form, the main questions will encompass:
 - **User experience**: Tell us how easy or difficult the project was to use.
 - **Additional comments**: Any other feedback you'd like to provide.
 
+<br/>
+
 **What We're Looking For i.e. what counts as valid feedback**
 
 Rules for Valid Feedback:
@@ -166,22 +189,6 @@ Rules for Valid Feedback:
 2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
 3. Our team will maintain confidentiality of the feedback recieved.
 
-<br/>
-
----
-
-### Usage Guide
-[Watch Demonstration](https://youtu.be/9_iOO7v0kOg)  
-
----
-
-## Installation Instructions
-
-### Prerequisites
-- Software: Java 17
-- Packages: ?
-
----
 
 ---
 
@@ -190,23 +197,5 @@ Rules for Valid Feedback:
 ### Our code will be closed for contribution
 - Version control was utilized during development via Github
 
----
-
-User stories:
-Team user story (core functionality):
-As a student, I want to be matched with a study buddy who is in the same course as me and is available during my study times, so that we can collaborate effectively and keep each other accountable.
-
-Tanaya:
-I want to be able to create an account and fill in my availability and personal information (such as name, courses, bio, etc.) and see a list of potential study buddy matches. I also want to be able to see the HomePage when the application is opened.
-
-Cooper:
-I want to be effectively matched with other students I can study with based on our common availability and shared courses.
-
-Jinbo:
-I want to be able to edit my profile/personal details, including name, availability, bio, etc.
-
-Alex:
-Of all study buddy matches with common availability, if no matches are found taking my same courses, I want to be able to expand my search to find other study buddies in my same program, even if we aren’t currently taking the same courses.
-
-Harris:
-Once I have made an account, I want to be able to log into my account and see my potential study buddy matches. I also want to be able to log out.
+<br/>
+<br/>
