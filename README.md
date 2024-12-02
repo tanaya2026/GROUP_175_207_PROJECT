@@ -200,10 +200,69 @@ Rules for Valid Feedback:
 
 ---
 
-## Contributions
+## Contributing to the Project
 
-### Our code will be closed for contribution
-- Version control was utilized during development via Github
+We welcome contributions to our project and value collaboration from the community. Please read the following guidelines to understand how to contribute effectively.
+
+## How to Contribute
+1. **Fork the Repository**:
+   - Navigate to the [GitHub repository](https://github.com/tanaya2026/GROUP_175_207_PROJECT.git).
+   - Click the "Fork" button in the top-right corner to create your copy of the repository.
+
+2. **Clone Your Fork**:
+   - Clone your fork to your local machine using:
+     ```bash
+     git clone https://github.com/your-username/GROUP_175_207_PROJECT.git
+     ```
+   - Replace `your-username` with your GitHub username.
+
+3. **Create a Branch**:
+   - Create a feature branch for your changes:
+     ```bash
+     git checkout -b feature/your-feature-name
+     ```
+
+4. **Make Changes**:
+   - Implement your changes in the new branch.
+   - Ensure your code follows the repository's coding standards.
+
+5. **Test Your Changes**:
+   - Run tests to ensure your changes work as intended and do not introduce regressions.
+
+6. **Submit a Pull Request**:
+   - Push your changes to your fork:
+     ```bash
+     git push origin feature/your-feature-name
+     ```
+   - Navigate to the main repository and create a pull request (PR) from your fork to the main branch.
+
+## Guidelines for Creating a Good Merge Request
+- **Descriptive Title and Description**:
+  Provide a meaningful title and describe the purpose of your changes in the PR description. Include references to any related issues.
+
+- **Adhere to Standards**:
+  Ensure your code adheres to the repository's coding standards and passes all tests.
+
+- **Keep Changes Minimal**:
+  Submit small, focused PRs that address a single feature or bug to make review easier.
+
+## Protocols for Reviewing Contributions
+1. **Initial Review**:
+   - All PRs are reviewed within 3 business days by one or more maintainers.
+   - Reviewers check for adherence to the project's goals, code quality, and potential impacts on existing functionality.
+
+2. **Feedback and Revisions**:
+   - If changes are needed, maintainers will leave comments on the PR.
+   - Contributors are expected to address feedback promptly and update the PR.
+
+3. **Final Approval and Merge**:
+   - Once all feedback is resolved, the PR is approved and merged into the main branch.
+   - Contributors are credited for their work in the project's change log.
+
+## Closing Contributions
+If contributions are closed, this section will state:  
+*"At this time, we are not accepting external contributions to the project."*
+
 
 <br/>
 <br/>
