@@ -23,6 +23,8 @@ public class Main {
                 .addLoginView()
                 .addLoggedInView()
                 .addDisplayMatchesUseCase()
+                .addEditProfileView()
+                .addEditProfileUseCase()
                 .addLoginUseCase()
                 .addLogoutUseCase()
                 .addChangePasswordUseCase()

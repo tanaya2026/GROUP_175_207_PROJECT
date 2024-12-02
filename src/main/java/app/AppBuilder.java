@@ -10,6 +10,8 @@ import data_access.DataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.edit_profile.EditProfileController;
+import interface_adapter.edit_profile.EditProfilePresenter;
 import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.display_matches.DisplayMatchesController;
 import interface_adapter.display_matches.DisplayMatchesPresenter;
@@ -29,6 +31,9 @@ import interface_adapter.view_profile.ViewProfileViewModel;
 import use_case.display_matches.DisplayMatchesInputBoundary;
 import use_case.display_matches.DisplayMatchesInteractor;
 import use_case.display_matches.DisplayMatchesOutputBoundary;
+import use_case.edit_profile.EditProfileInputBoundary;
+import use_case.edit_profile.EditProfileInteractor;
+import use_case.edit_profile.EditProfileOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -73,6 +78,8 @@ public class AppBuilder {
     private LoginView loginView;
     private ViewProfileViewModel viewProfileViewModel;
     private ViewProfileView viewprofileview;
+    private EditProfileView editProfileView1;
+    private EditProfileViewModel editProfileViewModel1;
 
 
     public AppBuilder() {
@@ -250,6 +257,22 @@ public class AppBuilder {
 
         final LogoutController logoutController = new LogoutController(logoutInteractor);
         loggedInView.setLogoutController(logoutController);
+        return this;
+    }
+
+    public AppBuilder addEditProfileView() {
+        editProfileViewModel = new EditProfileViewModel();
+
+        editProfileView = new EditProfileView(controller);
+        cardPanel.add(editProfileView, editProfileView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addEditProfileUseCase() {
+        EditProfileOutputBoundary editProfileOutputBoundary = new EditProfilePresenter(viewManagerModel, editProfileViewModel);
+        EditProfileInputBoundary editProfileInteractor = new EditProfileInteractor(dataAccessObject, editProfileOutputBoundary);
+        EditProfileController controller = new EditProfileController(editProfileInteractor);
+        editProfileView = new EditProfileView(controller);
         return this;
     }
 
