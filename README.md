@@ -99,6 +99,73 @@ Many students struggle to find study partners who align with their courses and a
 
 This program is ideal for students who value structured, collaborative study sessions and want a tool to simplify finding compatible study partners. The integration of scheduling and academic data ensures the matches are both relevant and practical.
 
+Below are our project's user stories, along with who in our team was primarily responsible for each.
+
+<br/>
+
+**User Stories** <br/><br/>
+**Team user story (core functionality):** <br/>
+As a student, I want to be matched with a study buddy who is in the same course as me and is available during my study times, so that we can collaborate effectively and keep each other accountable.
+
+**Tanaya:** <br/>
+I want to be able to create an account and fill in personal information (such as name, courses, bio, etc.) and view the profiles of potential study buddy matches. I also want to be able to view the HomePage when the application is opened.
+
+**Cooper:** <br/>
+I want to be effectively matched with other students I can study with based on our common availability and shared courses.
+
+**Jinbo:** <br/>
+I want to be able to edit my profile/personal details, including name, availability, bio, etc.
+
+**Alex:** <br/>
+Of all study buddy matches with common availability, if no matches are found taking my same courses, I want to be able to expand my search to find other study buddies in my same program, even if we aren’t currently taking the same courses.
+
+**Harris:** <br/>
+Once I have made an account, I want to be able to log into my account and see my potential study buddy matches. I also want to be able to log out.
+
+<br/>
+
+## License
+This project is in the **public domain** under the [CC0 1.0 Universal (Public Domain Dedication)](./LICENSE).
+
+<br/>
+
+## Feedback
+
+We value your feedback on our application Study Buddy Finder! Whether you have suggestions for improvements, found a bug, or want to share your thoughts, suggestions, we’d love to hear from you!
+
+**How to Provide Feedback**
+
+You can share your feedback in the following ways:
+1. **Fill out our feedback form**: (https://forms.gle/GZGMxP4RrLb5YGH19)
+2. **Email us directly**: tanaya.datar@mail.utoronto.ca
+
+<br/>
+
+**Main topics we aim to cover in the feedback form**
+
+In the feedback form, the main questions will encompass:
+
+- **General feedback**: Share your thoughts about the project.
+- **Feature suggestions**: Recommend new features or improvements.
+- **Bug reports**: Let us know if something isn’t working as expected.
+- **User experience**: Tell us how easy or difficult the project was to use.
+- **Additional comments**: Any other feedback you'd like to provide.
+
+**What We're Looking For i.e. what counts as valid feedback**
+
+Rules for Valid Feedback:
+1. The comments and suggeestions must pertain to our application.
+2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
+3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
+4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
+5. Please state your feedback in a positive and constructive manner while being respectful.
+
+**What to expect when submitting feedback**
+
+    1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
+    2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
+    3. Our team will maintain confidentiality of the feedback recieved.
+
 <br/>
 
 ---
