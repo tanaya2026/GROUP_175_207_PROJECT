@@ -40,6 +40,22 @@ This principle ensures that designs accommodate users with varying physical abil
   - **Keyboard and Assistive Technology Support**: Ensure that all functionalities are accessible via keyboard navigation and compatible with screen readers.
   - **Cross-Platform Deployment**: Expand the project to run on multiple platforms, including web and mobile applications, to reach a wider audience.
  
+### 3. **Equitable Use**
+
+This principle ensures that the design is useful and marketable to people with diverse abilities.
+
+- **Simple Interface**:
+  - As the application can be used by any laptop or tablet device regardless of brand it provides equitable use.
+  - The application does not segregate or stigmatize users based on any difference and only provides you with matches based on people with similar courses and time availabilities as you.  
+
+- **Current Limitations**:
+  - The project requires the Java application on a computer making it limited in equitable use for all as most people do not have Java installed.
+  - The project requires you to download/fork from GitHub which also limits accessibility.
+  - The project is limited to UofT students.
+  
+- **Future Enhancements**:
+  - Cross-Platform Deployment for greater accessibility, not just limited to app stores and such, but for users that struggle with standard desktop and mobile applications.
+  - Universality of the program by making it a general program for university students outside of UofT or even for anyone that isn't a university student, but wants to find someone to study with.
 
 ### 6. **Low Physical Effort**
 
