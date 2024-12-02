@@ -54,22 +54,22 @@ Allowing users to sync their availability with external calendar platforms (e.g.
 Adaptive User Interface:
 Implementing a responsive design that adjusts the interface for different devices (e.g., desktop, tablet, mobile) ensures that the program is accessible on various platforms, enhancing flexibility.
 
-### 5.**Equitable Use**
+### 5. **Equitable Use**
 
 This principle ensures that the design is useful and marketable to people with diverse abilities.
 
 - **Demonstration of Equitable Use**:
- - As the application can be used by any laptop regardless of brand, software, or OS it provides equitable use.
- - The application does not segregate or stigmatize users based on any difference and only provides you with matches based on people with similar courses and time availabilities as you. 
+  - As the application can be used by any laptop regardless of brand, software, or OS it provides equitable use.
+  - The application does not segregate or stigmatize users based on any difference and only provides you with matches based on people with similar courses and time availabilities as you. 
 
 - **Current Limitations**:
- - The project requires the Java application on a computer making it limited in equitable use for all as most people do not have Java installed.
- - The project requires you to download/fork from GitHub which also limits accessibility.
- - The project is limited to UofT students.
+  - The project requires the Java application on a computer making it limited in equitable use for all as most people do not have Java installed.
+  - The project requires you to download/fork from GitHub which also limits accessibility.
+  - The project is limited to UofT students.
 
 - **Future-Enhancements**:
- - Cross Platform Deployment for greater accessibility, not just limited to app stores and such, but for users that struggle with standard desktop and mobile applications.
- - Universality of the program by making it a general program for university students outside of UofT or even for anyone that isn't a university student, but wants to find someone to study with.
+  - Cross Platform Deployment for greater accessibility, not just limited to app stores and such, but for users that struggle with standard desktop and mobile applications.
+  - Universality of the program by making it a general program for university students outside of UofT or even for anyone that isn't a university student, but wants to find someone to study with.
 
 ### 6. **Low Physical Effort**
 
