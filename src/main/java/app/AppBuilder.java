@@ -78,8 +78,6 @@ public class AppBuilder {
     private LoginView loginView;
     private ViewProfileViewModel viewProfileViewModel;
     private ViewProfileView viewprofileview;
-    private EditProfileView editProfileView1;
-    private EditProfileViewModel editProfileViewModel1;
 
 
     public AppBuilder() {
@@ -262,8 +260,7 @@ public class AppBuilder {
 
     public AppBuilder addEditProfileView() {
         editProfileViewModel = new EditProfileViewModel();
-
-        editProfileView = new EditProfileView(controller);
+        editProfileView = new EditProfileView(editProfileViewModel);  // Pass ViewModel instead of controller
         cardPanel.add(editProfileView, editProfileView.getViewName());
         return this;
     }
@@ -272,7 +269,7 @@ public class AppBuilder {
         EditProfileOutputBoundary editProfileOutputBoundary = new EditProfilePresenter(viewManagerModel, editProfileViewModel);
         EditProfileInputBoundary editProfileInteractor = new EditProfileInteractor(dataAccessObject, editProfileOutputBoundary);
         EditProfileController controller = new EditProfileController(editProfileInteractor);
-        editProfileView = new EditProfileView(controller);
+        editProfileView.setController(controller);  // Set controller after creation
         return this;
     }
 
