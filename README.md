@@ -138,9 +138,9 @@ Once I have made an account, I want to be able to log into my account and see my
 - Packages: Maven 3.9+
    - Installation instructions for Maven in IntelliJ: https://www.jetbrains.com/help/idea/maven-support.html 
 - Libraries: JSON, Java Swing
-   - Guide for JSON in IntelliJ: https://www.jetbrains.com/help/idea/json.html 
+   - Guide for installing packages in IntelliJ with JSON as an example: https://www.jetbrains.com/help/idea/json.html 
 
-**OS Requirements**
+**OS Requirements**: 
 The application has no OS requirements and will work on any OS system.
 
 ---
