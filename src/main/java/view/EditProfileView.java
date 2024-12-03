@@ -1,16 +1,18 @@
 package view;
 
-import interface_adapter.edit_profile.EditProfileController;
-import interface_adapter.edit_profile.EditProfileViewModel;
-import entity.Course;
-import entity.Timeslot;
+import java.awt.*;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import entity.Course;
+import entity.Timeslot;
+import interface_adapter.edit_profile.EditProfileController;
+import interface_adapter.edit_profile.EditProfileViewModel;
 
 public class EditProfileView extends JFrame {
     public final static String viewName = "edit profile";
@@ -163,11 +165,21 @@ public class EditProfileView extends JFrame {
     }
 
     private void updateFields() {
-        if (viewModel.getEmail() != null) emailField.setText(viewModel.getEmail());
-        if (viewModel.getPassword() != null) passwordField.setText(viewModel.getPassword());
-        if (viewModel.getName() != null) nameField.setText(viewModel.getName());
-        if (viewModel.getBio() != null) bioField.setText(viewModel.getBio());
-        if (viewModel.getProgram() != null) programField.setText(viewModel.getProgram());
+        if (viewModel.getEmail() != null) {
+            emailField.setText(viewModel.getEmail());
+        }
+        if (viewModel.getPassword() != null) {
+            passwordField.setText(viewModel.getPassword());
+        }
+        if (viewModel.getName() != null) {
+            nameField.setText(viewModel.getName());
+        }
+        if (viewModel.getBio() != null) {
+            bioField.setText(viewModel.getBio());
+        }
+        if (viewModel.getProgram() != null) {
+            programField.setText(viewModel.getProgram());
+        }
 
         // Update courses field
         if (viewModel.getCourses() != null) {
