@@ -1,13 +1,14 @@
 package view;
 
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-
 import java.awt.*;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
 import javax.swing.*;
+
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
 
 public class LoginView extends JPanel implements PropertyChangeListener {
 
