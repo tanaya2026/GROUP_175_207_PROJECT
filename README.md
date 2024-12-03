@@ -33,6 +33,7 @@ Many students struggle to find study partners who align with their courses and a
 - Those who value accountability in their study routines.
 - Individuals looking to expand their academic networks and make friends in your classes/program.
 
+<br/>
 
 ---
 
@@ -44,6 +45,8 @@ Many students struggle to find study partners who align with their courses and a
 4. [License](#license)
 5. [Feedback](#feedback)
 6. [Contributions](#contributions)
+
+<br/>
 
 ---
 
@@ -97,7 +100,9 @@ Many students struggle to find study partners who align with their courses and a
 
 <br/>
 
-This program is ideal for students who value structured, collaborative study sessions and want a tool to simplify finding compatible study partners. The integration of scheduling and academic data ensures the matches are both relevant and practical. Below are our project's user stories, along with who in our team was primarily responsible for each.
+This program is ideal for students who value structured, collaborative study sessions and want a tool to simplify finding compatible study partners. The integration of scheduling and academic data ensures the matches are both relevant and practical.
+
+Below are our project's user stories, along with who in our team was primarily responsible for each.
 
 <br/>
 
@@ -122,10 +127,36 @@ Once I have made an account, I want to be able to log into my account and see my
 
 <br/>
 
+---
+
+## Installation Instructions
+
+**Instructions and Prerequesits**
+- Software: Java 17 (JDK 17+), IntelliJ
+   - As A student you can use https://www.jetbrains.com/shop/eform/students and create a InellliJ Ultimate account for free with official installation instructions here: https://www.jetbrains.com/help/idea/installation-guide.html
+   - The application requires Java 17+ to run so you use the following link as a guide: https://www.jetbrains.com/help/idea/sdk.html#add_global_sdk
+- Packages: Maven 3.9+
+   - Installation instructions for Maven in IntelliJ: https://www.jetbrains.com/help/idea/maven-support.html 
+- Libraries: JSON, Java Swing
+   - Guide for installing packages in IntelliJ with JSON as an example: https://www.jetbrains.com/help/idea/json.html 
+
+**OS Requirements**: 
+The application has no OS requirements and will work on any OS system.
+
+---
+
+## Usage Guide
+
+Below is a link to a brief YouTube video demonstrating the functionality of the Study Buddy Finder program.
+
+[Watch Demonstration](https://youtu.be/9_iOO7v0kOg)  
+
+---
+
 ## License
 This project is in the **public domain** under the [CC0 1.0 Universal (Public Domain Dedication)](./LICENSE).
 
-<br/>
+---
 
 ## Feedback
 
@@ -149,44 +180,89 @@ In the feedback form, the main questions will encompass:
 - **User experience**: Tell us how easy or difficult the project was to use.
 - **Additional comments**: Any other feedback you'd like to provide.
 
-**What We're Looking For i.e. what counts as valid feedback**
-
-  Rules for Valid Feedback:
-    1. The comments and suggeestions must pertain to our application.
-    2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
-    3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
-    4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
-    5. Please state your feedback in a positive and constructive manner while being respectful.
-
-  **What to expect when submitting feedback**
-
-    1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
-    2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
-    3. Our team will maintain confidentiality of the feedback recieved.
-
 <br/>
 
+**What We're Looking For i.e. what counts as valid feedback**
+
+Rules for Valid Feedback:
+1. The comments and suggeestions must pertain to our application.
+2. The suggestions have to been within the scope of the abilities and resources of a 2nd year Computer Science Student.
+3. If reporting an issue, please include information about the issue like error messages and screenshots if possible.
+4. Avoid vague statesments, for example "This could be improved", instead use statements like "This can be improved by xyz[state a reason]"
+5. Please state your feedback in a positive and constructive manner while being respectful.
+
+**What to expect when submitting feedback**
+
+1. Our team will read the feedback and reach out if required within 48 hours of submissions of feedback.
+2. Our team will try our best to implement the suggestions and **WILL** fix any reported bugs.
+3. Our team will maintain confidentiality of the feedback recieved.
+
+
 ---
 
-### Usage Guide
+## Contributing to the Project
 
-[Watch Demonstration](https://youtube.com/tutorial-link)  
+We welcome contributions to our project and value collaboration from the community. Please read the following guidelines to understand how to contribute effectively.
+
+## How to Contribute
+1. **Fork the Repository**:
+   - Navigate to the [GitHub repository](https://github.com/tanaya2026/GROUP_175_207_PROJECT.git).
+   - Click the "Fork" button in the top-right corner to create your copy of the repository.
+
+2. **Clone Your Fork**:
+   - Clone your fork to your local machine using:
+     ```bash
+     git clone https://github.com/your-username/GROUP_175_207_PROJECT.git
+     ```
+   - Replace `your-username` with your GitHub username.
+
+3. **Create a Branch**:
+   - Create a feature branch for your changes:
+     ```bash
+     git checkout -b feature/your-feature-name
+     ```
+
+4. **Make Changes**:
+   - Implement your changes in the new branch.
+   - Ensure your code follows the repository's coding standards.
+
+5. **Test Your Changes**:
+   - Run tests to ensure your changes work as intended and do not introduce regressions.
+
+6. **Submit a Pull Request**:
+   - Push your changes to your fork:
+     ```bash
+     git push origin feature/your-feature-name
+     ```
+   - Navigate to the main repository and create a pull request (PR) from your fork to the main branch.
+
+## Guidelines for Creating a Good Merge Request
+- **Descriptive Title and Description**:
+  Provide a meaningful title and describe the purpose of your changes in the PR description. Include references to any related issues.
+
+- **Adhere to Standards**:
+  Ensure your code adheres to the repository's coding standards and passes all tests.
+
+- **Keep Changes Minimal**:
+  Submit small, focused PRs that address a single feature or bug to make review easier.
+
+## Protocols for Reviewing Contributions
+1. **Initial Review**:
+   - All PRs are reviewed within 3 business days by one or more maintainers.
+   - Reviewers check for adherence to the project's goals, code quality, and potential impacts on existing functionality.
+
+2. **Feedback and Revisions**:
+   - If changes are needed, maintainers will leave comments on the PR.
+   - Contributors are expected to address feedback promptly and update the PR.
+
+3. **Final Approval and Merge**:
+   - Once all feedback is resolved, the PR is approved and merged into the main branch.
+   - Contributors are credited for their work in the project's change log.
+
+## Closing Contributions
+If contributions are closed, this section will state:  
+*"At this time, we are not accepting external contributions to the project."*
 
 
----
-
-## Installation Instructions
-
-### Prerequisites
-- Software: Java 17
-- Packages: ?
-
----
-
----
-
-## Contributions
-
-### Our code will be closed for contribution
-- Version control was utilized during development via Github
-
+<br/>
+<br/>

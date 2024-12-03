@@ -7,28 +7,17 @@ public class SignupOutputData {
 
     private final String username;
 
-    private final boolean useCaseFailed;
-
-    public SignupOutputData(String username, boolean useCaseFailed) {
+    public SignupOutputData(String username) {
         this.username = username;
-        this.useCaseFailed = useCaseFailed;
     }
 
     /**
      * Getter function for SignUpData.
+     *
      * @return username the Username.
      */
 
     public String getUsername() {
         return username;
-    }
-
-    /**
-     * Getter function for SignUpData.
-     * @return password the password.
-     */
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
     }
 }

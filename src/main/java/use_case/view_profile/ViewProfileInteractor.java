@@ -22,17 +22,20 @@ public class ViewProfileInteractor implements ViewProfileInputBoundary {
 
     @Override
     public void execute(ViewProfileInputData viewprofileInputData) {
-        // get a List of Users the current User has matched with
+        // Extract the Users who the current User has matched with.
         final DataAccessObject dataAccessObject = new DataAccessObject();
         User currentUser = dataAccessObject.getUserByUsername(dataAccessObject.getCurrentUsername());
         Map<User, List<Timeslot>> matches = currentUser.getMatches();
+        // Loop through the matches of the current User, and create a list of Users.
         Set<User> onlyusers = matches.keySet();
         List<User> users = null;
         for (User user : onlyusers) {
             users = new ArrayList<User>();
             users.add(user);
         }
+        // Inject that Data into ViewProfileOutputData
         final ViewprofileOutputData viewprofileOutputData = new ViewprofileOutputData(users);
+        // Pass the OutputData to the Presenter
         viewprofilePresenter.prepareSuccessView(viewprofileOutputData);
 
     }

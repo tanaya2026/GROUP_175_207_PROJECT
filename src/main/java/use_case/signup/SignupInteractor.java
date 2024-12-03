@@ -21,6 +21,7 @@ public class SignupInteractor implements SignupInputBoundary {
 
     @Override
     public void execute(SignupInputData signupInputData) {
+        // Create a User from the SignUpInput Data
         final User user = userFactory.create(signupInputData.getUsername(),
                 signupInputData.getEmail(),
                 signupInputData.getPassword(),
@@ -30,10 +31,12 @@ public class SignupInteractor implements SignupInputBoundary {
                 signupInputData.getBio(),
                 signupInputData.getAvaliablity(),
                 signupInputData.getSlotifyService());
-
+        // Save the User's information/ User Object
         userDataAccessObject.save(user);
 
-        final SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
+        // Create a SignupOutputData object, and pass in the User's Name.
+        final SignupOutputData signupOutputData = new SignupOutputData(user.getName());
+        // Inject that Dats into the Presenter.
         userPresenter.prepareSuccessView(signupOutputData);
     }
 

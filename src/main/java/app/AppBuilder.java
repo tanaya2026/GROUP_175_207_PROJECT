@@ -171,17 +171,6 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the LoggedIn View to the application.
-     * @return this builder
-     */
-    public AppBuilder addLoggedInView() {
-        loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInViewModel);
-        cardPanel.add(loggedInView, loggedInView.getViewName());
-        return this;
-    }
-
-    /**
      * Adds the DisplayMatches Use Case to the application.
      * @return this builder
      */
@@ -216,7 +205,7 @@ public class AppBuilder {
      */
     public AppBuilder addLoginUseCase() {
         final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
-                loggedInViewModel, loginViewModel);
+                displayMatchesViewModel, loginViewModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(
                 dataAccessObject, loginOutputBoundary);
 
