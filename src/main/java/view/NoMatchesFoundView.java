@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import data_access.DataAccessObject;
-import interface_adapter.no_matches_found.NoMatchesFoundViewModel;
 import interface_adapter.no_matches_found.NoMatchesFoundController;
-import use_case.display_matches.NoMatchesFoundInteractor;
+import interface_adapter.no_matches_found.NoMatchesFoundViewModel;
+import use_case.no_matches_found.NoMatchesFoundInteractor;
 
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings", "checkstyle:SingleSpaceSeparator"})
 public class NoMatchesFoundView     extends JPanel {
     private final NoMatchesFoundViewModel viewModel;
     private final NoMatchesFoundController controller;
