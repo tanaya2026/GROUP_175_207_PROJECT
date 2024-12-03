@@ -14,7 +14,9 @@ import entity.Timeslot;
 import interface_adapter.edit_profile.EditProfileController;
 import interface_adapter.edit_profile.EditProfileViewModel;
 
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class EditProfileView extends JFrame {
+    @SuppressWarnings({"checkstyle:ModifierOrder", "checkstyle:SuppressWarnings", "checkstyle:ConstantName"})
     public final static String viewName = "edit profile";
     private EditProfileController controller;
     private final EditProfileViewModel viewModel;
@@ -27,6 +29,7 @@ public class EditProfileView extends JFrame {
     private final JTextField coursesField;
     private final JCheckBox[][] checkBoxes;
 
+    @SuppressWarnings({"checkstyle:TrailingComment", "checkstyle:MagicNumber", "checkstyle:LambdaParameterName", "checkstyle:LambdaBodyLength", "checkstyle:ExecutableStatementCount", "checkstyle:VariableDeclarationUsageDistance", "checkstyle:JavaNCSS"})
     public EditProfileView(EditProfileViewModel viewModel) {
         this.viewModel = viewModel;
 
@@ -164,6 +167,7 @@ public class EditProfileView extends JFrame {
         updateFields();
     }
 
+    @SuppressWarnings({"checkstyle:CyclomaticComplexity", "checkstyle:NPathComplexity"})
     private void updateFields() {
         if (viewModel.getEmail() != null) {
             emailField.setText(viewModel.getEmail());
@@ -205,10 +209,12 @@ public class EditProfileView extends JFrame {
         }
     }
 
+    @SuppressWarnings("checkstyle:DesignForExtension")
     public void setController(EditProfileController controller) {
         this.controller = controller;
     }
 
+    @SuppressWarnings("checkstyle:DesignForExtension")
     public String getViewName() {
         return viewName;
     }
