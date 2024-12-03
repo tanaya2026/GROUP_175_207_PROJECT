@@ -1,20 +1,20 @@
 package view;
 
-import interface_adapter.display_matches.DisplayMatchesController;
-import interface_adapter.display_matches.DisplayMatchesState;
-import interface_adapter.display_matches.DisplayMatchesViewModel;
-import interface_adapter.edit_profile.EditProfileController;
-import use_case.edit_profile.EditProfileInputBoundary;
-import use_case.edit_profile.EditProfileInputData;
-import interface_adapter.homepage.HomePageViewModel;
-import interface_adapter.view_profile.ViewProfileViewModel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
+
+import interface_adapter.display_matches.DisplayMatchesController;
+import interface_adapter.display_matches.DisplayMatchesState;
+import interface_adapter.display_matches.DisplayMatchesViewModel;
+import interface_adapter.edit_profile.EditProfileViewModel;
+import interface_adapter.homepage.HomePageViewModel;
+import use_case.edit_profile.EditProfileInputBoundary;
+import use_case.edit_profile.EditProfileInputData;
 
 public class DisplayMatchesView extends JPanel implements PropertyChangeListener {
 
@@ -90,8 +90,8 @@ public class DisplayMatchesView extends JPanel implements PropertyChangeListener
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(editButton)) {
                     final EditProfileInputBoundary interactor = new EditProfileInteractor();
-                    final EditProfileController editProfileController = new EditProfileController(interactor);
-                    final EditProfileView editProfileView = new EditProfileView(editProfileController);
+                    final EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
+                    final EditProfileView editProfileView = new EditProfileView(editProfileViewModel);
 
                     frame.getContentPane().removeAll();
                     // Add the new panel.
@@ -133,7 +133,7 @@ public class DisplayMatchesView extends JPanel implements PropertyChangeListener
 
     public class EditProfileInteractor implements EditProfileInputBoundary {
         @Override
-        public void editProfile(String username, EditProfileInputData inputData) {
+        public void editProfile(EditProfileInputData inputData) {
 
         }
     }
