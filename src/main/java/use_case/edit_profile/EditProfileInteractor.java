@@ -28,24 +28,31 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
             User user = dataAccessObject.getUserByUsername(currentUsername);
 
             // Check and update personal details
+            // Email
             if (inputData.getEmail() != null && !inputData.getEmail().equals(user.getEmail())) {
                 user.setEmail(inputData.getEmail());
             }
+            // Name
             if (inputData.getName() != null && !inputData.getName().equals(user.getName())) {
                 user.setName(inputData.getName());
             }
+            // Password
             if (inputData.getPassword() != null && !inputData.getPassword().equals(user.getPassword())) {
                 user.setPassword(inputData.getPassword());
             }
+            // Bio
             if (inputData.getBio() != null) user.setBio(inputData.getBio());
+            // Program of study
             if (inputData.getProgram() != null) user.setProgram(inputData.getProgram());
+            // Courses
             if (inputData.getCourses() != null) {
                 user.getCourses().clear();
                 user.addCourses(inputData.getCourses());
             }
 
+            // Time availability for match
             if (inputData.getAvailability() != null) {
-                // Delete an existing schedule
+                // Delete an existing schedule since we cannot directly edit schedule so we need to create another relevant one
                 dataAccessObject.deleteSlotifyScheduler(user.getSchedulerID());
 
                 // Create a new schedule

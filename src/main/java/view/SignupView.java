@@ -27,6 +27,7 @@ import interface_adapter.signup.SignupViewModel;
  * The View for the Signup Use Case.
  */
 
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class SignupView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "sign up";
