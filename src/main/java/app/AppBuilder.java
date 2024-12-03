@@ -16,6 +16,8 @@ import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.display_matches.DisplayMatchesController;
 import interface_adapter.display_matches.DisplayMatchesPresenter;
 import interface_adapter.display_matches.DisplayMatchesViewModel;
+import interface_adapter.homepage.HomePageController;
+import interface_adapter.homepage.HomePagePresenter;
 import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
@@ -34,6 +36,9 @@ import use_case.display_matches.DisplayMatchesOutputBoundary;
 import use_case.edit_profile.EditProfileInputBoundary;
 import use_case.edit_profile.EditProfileInteractor;
 import use_case.edit_profile.EditProfileOutputBoundary;
+import use_case.home_page.HomepageInputBoundary;
+import use_case.home_page.HomepageInteractor;
+import use_case.home_page.HomepageOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -101,13 +106,11 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addHomePageUseCase() {
-        final SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel,
-                signupViewModel, displayMatchesViewModel);
-        final SignupInputBoundary userSignupInteractor = new SignupInteractor(
-                dataAccessObject, signupOutputBoundary, userFactory);
+        final HomepageOutputBoundary homepageOutputBoundary = new HomePagePresenter(viewManagerModel,
+                signupViewModel, homePageViewModel);
+        final HomepageInputBoundary userHomepageInteractor = new HomepageInteractor(homepageOutputBoundary);
 
-        final SignupController controller = new SignupController(userSignupInteractor);
-        signupView.setSignupController(controller);
+        final HomePageController controller = new HomePageController(userHomepageInteractor);
         return this;
     }
 
