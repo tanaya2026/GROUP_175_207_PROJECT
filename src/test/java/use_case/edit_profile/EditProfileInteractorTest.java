@@ -10,7 +10,7 @@ import java.util.*;
 
 /// This is the test code for interactor (Edit Profile) and it achieves 100% in the mirrored version of this project
 /// with minimum data access and entities for simplicity
-public class Main {
+public class EditProfileInteractorTest {
     public static void main(String[] args) {
         // Setup Test Environment
         TestEditProfileDataAccess dataAccess = new TestEditProfileDataAccess();
