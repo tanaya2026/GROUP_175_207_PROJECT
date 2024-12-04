@@ -10,20 +10,18 @@ import data_access.DataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.edit_profile.EditProfileController;
-import interface_adapter.edit_profile.EditProfilePresenter;
-import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.display_matches.DisplayMatchesController;
 import interface_adapter.display_matches.DisplayMatchesPresenter;
 import interface_adapter.display_matches.DisplayMatchesViewModel;
+import interface_adapter.edit_profile.EditProfileController;
+import interface_adapter.edit_profile.EditProfilePresenter;
+import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.homepage.HomePageController;
 import interface_adapter.homepage.HomePagePresenter;
 import interface_adapter.homepage.HomePageViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.logout.LogoutController;
-import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
@@ -52,10 +50,9 @@ import use_case.view_profile.ViewProfileInputBoundary;
 import use_case.view_profile.ViewProfileInteractor;
 import use_case.view_profile.ViewProfileOutputBoundry;
 import view.*;
-import view.LoginView; // TODO: ADD THIS VIEW
 import view.HomePageView;
+import view.LoginView;
 import view.SignupView;
-
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of CA architecture; piece by piece.
